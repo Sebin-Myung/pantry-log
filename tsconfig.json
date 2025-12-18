@@ -3,15 +3,19 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./app-example/*"],
+      "@assets/*": ["./assets/*"],
+      "@shared": ["./shared_1"],
+      "@shared/*": ["./shared_1/*"],
+      "@entities": ["./entities_2"],
+      "@entities/*": ["./entities_2/*"],
+      "@features": ["./features_3"],
+      "@features/*": ["./features_3/*"],
+      "@widgets": ["./widgets_4"],
+      "@widgets/*": ["./widgets_4/*"],
+      "@pages": ["./pages_5"],
+      "@pages/*": ["./pages_5/*"]
     }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
 }

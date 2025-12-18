@@ -7,9 +7,9 @@ export default function Index() {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      }}>
+      <Text>안녕하세요</Text>
+      <Text>Hello</Text>
     </View>
   );
 }

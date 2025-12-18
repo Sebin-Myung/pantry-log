@@ -1,5 +1,31 @@
-import { Stack } from "expo-router";
+import { useFonts } from "expo-font";
+import { SplashScreen, Stack } from "expo-router";
+import { useEffect } from "react";
+import { Providers } from "./providers/Providers";
+
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  return <Stack />;
+  const [loaded, error] = useFonts({
+    "Pretendard-Regular": require("../assets/fonts/Pretendard-Regular.otf"),
+    "Pretendard-Medium": require("../assets/fonts/Pretendard-Medium.otf"),
+    "Pretendard-SemiBold": require("../assets/fonts/Pretendard-SemiBold.otf"),
+    "Pretendard-Bold": require("../assets/fonts/Pretendard-Bold.otf"),
+  });
+
+  useEffect(() => {
+    if (loaded || error) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded, error]);
+
+  if (!loaded && !error) {
+    return null;
+  }
+
+  return (
+    <Providers>
+      <Stack />
+    </Providers>
+  );
 }
