@@ -8,4 +8,5 @@ export const ROUTES: { [key in RouteKey]: Href } = {
   tabFrozen: "/frozen",
   tabFridge: "/fridge",
   tabPantry: "/pantry",
+  addIngredient: "/ingredient/add",
 };
