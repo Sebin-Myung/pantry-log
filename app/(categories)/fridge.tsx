@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 
-export default function Index() {
+export default function FridgeCategory() {
   return (
     <View
       style={{
@@ -8,8 +8,7 @@ export default function Index() {
         justifyContent: "center",
         alignItems: "center",
       }}>
-      <Text>안녕하세요</Text>
-      <Text>Hello</Text>
+      <Text>냉장</Text>
     </View>
   );
 }

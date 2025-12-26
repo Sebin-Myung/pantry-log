@@ -25,7 +25,9 @@ export default function RootLayout() {
 
   return (
     <Providers>
-      <Stack />
+      <Stack>
+        <Stack.Screen name="(categories)" options={{ title: "PantryLog" }} />
+      </Stack>
     </Providers>
   );
 }
