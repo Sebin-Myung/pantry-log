@@ -26,7 +26,7 @@ export default function RootLayout() {
   return (
     <Providers>
       <Stack>
-        <Stack.Screen name="(categories)" options={{ title: "PantryLog" }} />
+        <Stack.Screen name="(tabs)" options={{ title: "PantryLog" }} />
       </Stack>
     </Providers>
   );
