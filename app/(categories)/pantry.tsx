@@ -8,7 +8,7 @@ export default function PantryCategory() {
         justifyContent: "center",
         alignItems: "center",
       }}>
-      <Text>상온</Text>
+      <Text>실온</Text>
     </View>
   );
 }
