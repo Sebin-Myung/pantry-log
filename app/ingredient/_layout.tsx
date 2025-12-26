@@ -2,8 +2,8 @@ import { Stack } from "expo-router";
 
 export default function IngredientLayout() {
   return (
-    <Stack>
-      <Stack.Screen name="add" />
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="add" options={{ headerShown: true, title: "재료 추가" }} />
     </Stack>
   );
 }

@@ -27,15 +27,19 @@ export default function RootLayout() {
 
   return (
     <Providers>
-      <Stack
-        screenOptions={{
-          headerRight: () => (
-            <LinkButton href={ROUTES.addIngredient}>
-              <MaterialCommunityIcons name="plus" size={24} color="black" />
-            </LinkButton>
-          ),
-        }}>
-        <Stack.Screen name="(tabs)" options={{ title: "PantryLog" }} />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen
+          name="(tabs)"
+          options={{
+            title: "PantryLog",
+            headerShown: true,
+            headerRight: () => (
+              <LinkButton href={ROUTES.addIngredient}>
+                <MaterialCommunityIcons name="plus" size={24} color="black" />
+              </LinkButton>
+            ),
+          }}
+        />
       </Stack>
     </Providers>
   );
