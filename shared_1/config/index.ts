@@ -1,1 +1,1 @@
-export { RouteKey, ROUTES } from "./routes";
+export { ROUTES } from "./routes";
