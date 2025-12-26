@@ -1,3 +1,4 @@
+import { Href, Link } from "expo-router";
 import { Pressable } from "react-native";
 
 type BasePressableProps = React.ComponentProps<typeof Pressable>;
@@ -19,5 +20,13 @@ export function Button({ style, ...props }: BasePressableProps) {
       ]}
       {...props}
     />
+  );
+}
+
+export function LinkButton({ href, ...props }: BasePressableProps & { href: Href }) {
+  return (
+    <Link href={href} asChild>
+      <Button {...props} />
+    </Link>
   );
 }
