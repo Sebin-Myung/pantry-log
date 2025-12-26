@@ -1,4 +1,5 @@
-import { Href, Link } from "expo-router";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { Href, Link, useRouter } from "expo-router";
 import { Pressable } from "react-native";
 
 type BasePressableProps = React.ComponentProps<typeof Pressable>;
@@ -28,5 +29,15 @@ export function LinkButton({ href, ...props }: BasePressableProps & { href: Href
     <Link href={href} asChild>
       <Button {...props} />
     </Link>
+  );
+}
+
+export function BackButton(props: BasePressableProps) {
+  const router = useRouter();
+
+  return (
+    <Button onPress={() => router.back()} {...props}>
+      <MaterialCommunityIcons name="arrow-left" size={24} color="black" />
+    </Button>
   );
 }
