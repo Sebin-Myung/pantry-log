@@ -37,7 +37,7 @@ export function AppThemeProvider({ children }: { children: React.ReactNode }) {
     colors: {
       primary: appTheme.colors.primary,
       background: appTheme.colors.background,
-      card: appTheme.colors.tertiary,
+      card: appTheme.colors.primary,
       text: appTheme.colors.text,
       border: appTheme.colors.secondary,
       notification: appTheme.colors.accentDark,
