@@ -1,13 +1,16 @@
-import { useTheme } from "@shared";
+import { IUseTextInput, useTextInput, useTheme } from "@shared";
 import { TextInput as BaseTextInput } from "react-native";
 
 export type BaseTextInputProps = React.ComponentProps<typeof BaseTextInput>;
 
-export function TextInput({ style, ...props }: BaseTextInputProps) {
+export function TextInput({ initialValue, value, setValue, style, ...props }: BaseTextInputProps & IUseTextInput) {
   const theme = useTheme();
+  const { value: valueText, onChangeText } = useTextInput({ initialValue, value, setValue });
 
   return (
     <BaseTextInput
+      value={valueText}
+      onChangeText={onChangeText}
       style={[
         {
           alignSelf: "stretch",
