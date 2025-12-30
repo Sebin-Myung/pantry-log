@@ -13,6 +13,9 @@ export const LightColors: AppColor = {
 
   white: "rgb(255, 255, 255)", // #ffffff
   black: "rgb(0, 0, 0)", // #000000
+  lightGray: "rgb(240, 240, 240)", // #f0f0f0
+  gray: "rgb(200, 200, 200)", // #c8c8c8
+  darkGray: "rgb(100, 100, 100)", // #646464
 };
 
 // 추후 설정 예정

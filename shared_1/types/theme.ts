@@ -11,6 +11,9 @@ export interface AppColor {
 
   white: string;
   black: string;
+  lightGray: string;
+  gray: string;
+  darkGray: string;
 }
 
 export interface AppTheme extends Omit<ReactNavigation.Theme, "colors"> {
