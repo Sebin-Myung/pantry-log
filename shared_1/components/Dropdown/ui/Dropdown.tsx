@@ -1,6 +1,7 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { OverlayModal } from "@shared";
 import { useTheme } from "@shared/providers";
-import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import {
   DropdownContext,
   DropdownContextProps,
@@ -35,10 +36,9 @@ function DropdownRoot<T>({ children, placeholder = "", onValueChange, ...props }
             style={styles.icon}
           />
         </Pressable>
-        <Modal visible={isOpen} transparent animationType="fade" onRequestClose={closeDropdown}>
-          <Pressable style={styles.overlay} onPress={closeDropdown} />
+        <OverlayModal visible={isOpen} onRequestClose={closeDropdown}>
           <ScrollView style={styles.itemContainer}>{children}</ScrollView>
-        </Modal>
+        </OverlayModal>
       </View>
     </DropdownContext.Provider>
   );
@@ -81,10 +81,6 @@ const styles = StyleSheet.create({
   },
   label: { fontSize: 20, flexShrink: 1 },
   icon: { flexShrink: 0 },
-  overlay: {
-    flex: 1,
-    backgroundColor: "rgba(0,0,0,0.25)",
-  },
   itemContainer: {
     position: "absolute",
     maxHeight: "80%",
