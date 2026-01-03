@@ -1,7 +1,6 @@
+import { StorageLocation, StorageLocationKorean, StorageLocations } from "@entities";
 import { LabelValue } from "@shared";
 import { SetStateAction, useEffect } from "react";
-import { StorageLocationKorean, StorageLocations } from "./constants";
-import { StorageLocation } from "./types";
 
 export interface IUseStorageLocationRadioButton {
   initialValue?: StorageLocation;
