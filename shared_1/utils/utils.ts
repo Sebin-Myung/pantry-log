@@ -28,3 +28,10 @@ export const applyAlpha = (color: string, alpha: number) => {
   // fallback: return original color
   return color;
 };
+
+export const onlyPositiveFloat = (value: string) => {
+  return value
+    .replace(/[^0-9.]/g, "") // 숫자 + .
+    .replace(/(\..*)\./g, "$1") // 소수점 1개만
+    .replace(/^0+(?=\d)/, ""); // 앞자리 0 제거
+};

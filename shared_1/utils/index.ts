@@ -1,1 +1,1 @@
-export { applyAlpha } from "./utils";
+export { applyAlpha, onlyPositiveFloat } from "./utils";

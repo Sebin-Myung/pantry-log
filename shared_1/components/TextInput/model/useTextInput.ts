@@ -3,7 +3,7 @@ import { useEffect } from "react";
 export interface IUseTextInput {
   initialValue?: string;
   value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  setValue: (text: string) => void;
 }
 
 export function useTextInput({ initialValue, value, setValue }: IUseTextInput) {
