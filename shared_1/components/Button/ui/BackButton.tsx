@@ -1,5 +1,6 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { BasePressableProps, useBackButton } from "../model";
+import { BasePressableProps } from "../model/types";
+import { useBackButton } from "../model/useBackButton";
 import { Button } from "./Button";
 
 export function BackButton(props: BasePressableProps) {

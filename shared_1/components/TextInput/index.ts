@@ -1,2 +1,3 @@
-export * from "./model";
-export * from "./ui";
+export { TextInput } from "./ui/TextInput";
+
+export { IUseTextInput, useTextInput } from "./model/useTextInput";

@@ -1,5 +1,5 @@
 import { Pressable } from "react-native";
-import { BasePressableProps } from "../model";
+import { BasePressableProps } from "../model/types";
 
 export function Button({ style, ...props }: BasePressableProps) {
   return (

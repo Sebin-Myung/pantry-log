@@ -1,1 +1,1 @@
-export * from "./ui";
+export { OverlayModal } from "./ui/OverlayModal";

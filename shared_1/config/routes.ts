@@ -2,7 +2,7 @@ import { Href } from "expo-router";
 
 export type RouteKey = "home" | "tabAll" | "tabFrozen" | "tabFridge" | "tabPantry" | "addIngredient";
 
-export const ROUTES: { [key in RouteKey]: Href } = {
+export const ROUTES: Record<RouteKey, Href> = {
   home: "/",
   tabAll: "/",
   tabFrozen: "/frozen",

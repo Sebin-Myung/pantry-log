@@ -1,7 +1,8 @@
-import { applyAlpha } from "@shared";
-import { useTheme } from "@shared/providers";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { RadioButtonContext, RadioButtonGroupProps, RadioButtonItemProps, useRadioButtonContext } from "../model";
+import { useTheme } from "../../..//providers/AppThemeProvider";
+import { applyAlpha } from "../../../utils";
+import { RadioButtonContext, useRadioButtonContext } from "../model/context";
+import { RadioButtonGroupProps, RadioButtonItemProps } from "../model/type";
 
 function RadioButtonGroup<T>({ children, ...props }: RadioButtonGroupProps<T>) {
   return (

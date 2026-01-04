@@ -1,7 +1,11 @@
 import { ThemeProvider } from "@react-navigation/native";
-import { AppTheme, DarkColors, Fonts, LightColors } from "@shared";
 import { createContext, useContext } from "react";
 import { useColorScheme } from "react-native";
+import { AppColor, DarkColors, Fonts, LightColors } from "../styles";
+
+interface AppTheme extends Omit<ReactNavigation.Theme, "colors"> {
+  colors: AppColor;
+}
 
 const fonts: AppTheme["fonts"] = {
   regular: {

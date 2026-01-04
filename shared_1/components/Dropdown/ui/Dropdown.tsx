@@ -1,15 +1,10 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { OverlayModal } from "@shared";
-import { useTheme } from "@shared/providers";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import {
-  DropdownContext,
-  DropdownContextProps,
-  DropdownItemProps,
-  DropdownProps,
-  useDropdown,
-  useDropdownContext,
-} from "../model";
+import { useTheme } from "../../../providers/AppThemeProvider";
+import { OverlayModal } from "../../Modal/ui/OverlayModal";
+import { DropdownContext, useDropdownContext } from "../model/context";
+import { DropdownContextProps, DropdownItemProps, DropdownProps } from "../model/type";
+import { useDropdown } from "../model/useDropdown";
 
 function DropdownRoot<T>({ children, placeholder = "", onValueChange, ...props }: DropdownProps<T>) {
   const { isOpen, openDropdown, closeDropdown, onItemClick } = useDropdown({ onValueChange });

@@ -1,5 +1,5 @@
-import { LabelValue, OnChange } from "@shared";
 import { PropsWithChildren } from "react";
+import { LabelValue, OnChange } from "../../../types";
 
 export interface DropdownContextProps<T> {
   label?: string;

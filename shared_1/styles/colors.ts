@@ -1,4 +1,20 @@
-import { AppColor } from "@shared";
+export interface AppColor {
+  primary: string;
+  secondary: string;
+  tertiary: string;
+  accent: string;
+  accentDark: string;
+
+  background: string;
+  text: string;
+  textSecondary: string;
+
+  white: string;
+  black: string;
+  lightGray: string;
+  gray: string;
+  darkGray: string;
+}
 
 export const LightColors: AppColor = {
   primary: "rgb(159, 166, 119)", // #9fa677

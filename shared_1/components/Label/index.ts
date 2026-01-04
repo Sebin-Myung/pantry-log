@@ -1,1 +1,1 @@
-export * from "./ui";
+export { Label } from "./ui/Label";
