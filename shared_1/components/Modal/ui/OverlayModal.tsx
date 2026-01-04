@@ -1,8 +1,8 @@
-import { Modal, Pressable } from "react-native";
+import { Modal, Pressable, ScrollView, StyleProp, View, ViewStyle } from "react-native";
 
 type BaseModalProps = React.ComponentProps<typeof Modal>;
 
-export function OverlayModal({ onRequestClose, children, ...props }: BaseModalProps) {
+function OverlayModal({ onRequestClose, children, ...props }: BaseModalProps) {
   return (
     <Modal transparent animationType="fade" onRequestClose={onRequestClose} {...props}>
       <Pressable
@@ -16,3 +16,42 @@ export function OverlayModal({ onRequestClose, children, ...props }: BaseModalPr
     </Modal>
   );
 }
+
+function OverlayModalContainer({
+  mode = "view",
+  style,
+  children,
+}: React.PropsWithChildren<{ mode?: "scroll" | "view"; style?: StyleProp<ViewStyle> }>) {
+  const Component = mode === "view" ? View : ScrollView;
+
+  return (
+    <Component
+      style={[
+        {
+          position: "absolute",
+          maxHeight: "80%",
+          left: 20,
+          right: 20,
+          top: "50%",
+          transform: [{ translateY: "-50%" }],
+          backgroundColor: "#fff",
+          borderRadius: 10,
+
+          // iOS shadow
+          shadowColor: "#000",
+          shadowOpacity: 0.15,
+          shadowRadius: 10,
+          shadowOffset: { width: 0, height: 4 },
+
+          // Android shadow
+          elevation: 6,
+        },
+        style,
+      ]}>
+      {children}
+    </Component>
+  );
+}
+
+OverlayModal.Container = OverlayModalContainer;
+export { OverlayModal };
