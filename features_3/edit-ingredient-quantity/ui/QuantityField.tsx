@@ -1,6 +1,6 @@
 import { Dropdown, RadioButton, TextInput } from "@shared";
 import { View } from "react-native";
-import { IUseQuantityField, useQuantityField } from "../model";
+import { IUseQuantityField, useQuantityField } from "../model/useQuantityField";
 
 export function QuantityField(props: IUseQuantityField) {
   const { isQuantityEnabled, value, units, onQuantityOptionChange, onQuantityAmountChange, onQuantityUnitChange } =
