@@ -2,15 +2,22 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useTheme } from "../../../providers/AppThemeProvider";
+import { Button } from "../../Button/ui/Button";
 import { OverlayModal } from "../../Modal/ui/OverlayModal";
 import { IUseDatePicker, useDatePicker } from "../model/useDatePicker";
 
-export function DatePicker({ placeholder = "날짜 선택", ...props }: IUseDatePicker & { placeholder?: string }) {
-  const { date, tempDate, isOpen, openModal, cancelModal, confirmModal, onDateChange } = useDatePicker(props);
+interface DatePickerProps extends IUseDatePicker {
+  placeholder?: string;
+  resetable?: boolean;
+}
+
+export function DatePicker({ placeholder = "날짜 선택", resetable, ...props }: DatePickerProps) {
+  const { date, tempDate, isOpen, openModal, cancelModal, confirmModal, onDateChange, resetDate } =
+    useDatePicker(props);
   const theme = useTheme();
 
   return (
-    <View>
+    <View style={styles.container}>
       <Pressable
         onPress={openModal}
         accessibilityRole="button"
@@ -26,6 +33,11 @@ export function DatePicker({ placeholder = "날짜 선택", ...props }: IUseDate
           style={styles.icon}
         />
       </Pressable>
+      {resetable && (
+        <Button style={styles.icon} onPress={resetDate}>
+          <MaterialCommunityIcons name="calendar-remove-outline" size={24} color={theme.colors.accentDark} />
+        </Button>
+      )}
       {isOpen && (
         <OverlayModal visible={isOpen} onRequestClose={cancelModal}>
           <OverlayModal.Container style={styles.modalContainer}>
@@ -46,9 +58,14 @@ export function DatePicker({ placeholder = "날짜 선택", ...props }: IUseDate
 }
 
 const styles = StyleSheet.create({
-  trigger: {
+  container: {
     flexDirection: "row",
-    alignSelf: "stretch",
+    gap: 10,
+    alignItems: "center",
+  },
+  trigger: {
+    flex: 1,
+    flexDirection: "row",
     width: "100%",
     height: 50,
     padding: 10,
