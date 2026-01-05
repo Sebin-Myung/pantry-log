@@ -12,6 +12,7 @@ export interface Ingredient {
   name: string;
   storageLocation: StorageLocation;
   brand: string | null;
+  purchaseSource: string | null;
   quantity: QuantityUnit | null;
   purchaseDate: string; // ISO date string
   productionDate: string | null; // ISO date string
