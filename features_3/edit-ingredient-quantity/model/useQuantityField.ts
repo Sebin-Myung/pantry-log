@@ -1,6 +1,6 @@
 import { QuantityUnit, QuantityUnitKorean, QuantityUnits } from "@entities";
 import { LabelValue, onlyPositiveFloat } from "@shared";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export type QuantityFieldType = {
   amount?: string;
@@ -13,18 +13,19 @@ export interface IUseQuantityField {
   setValue: (value?: QuantityFieldType) => void;
 }
 
+const defautValue: QuantityFieldType = { amount: "" };
+
 export function useQuantityField({ initialValue, value, setValue }: IUseQuantityField) {
   const quantityUnitLabelValues: LabelValue<QuantityUnit>[] = QuantityUnits.map((unit) => ({
     label: QuantityUnitKorean[unit],
     value: unit,
   }));
 
-  const [isQuantityEnabled, setIsQuantityEnabled] = useState<boolean>(true);
-
   const onQuantityOptionChange = (enabled: boolean) => {
-    setIsQuantityEnabled(enabled);
     if (!enabled) {
       setValue(undefined);
+    } else {
+      setValue(defautValue);
     }
   };
 
@@ -37,8 +38,6 @@ export function useQuantityField({ initialValue, value, setValue }: IUseQuantity
     const selected = quantityUnitLabelValues.find((item) => item.value === unit);
     if (selected) {
       setValue({ amount: value?.amount, unit: selected });
-    } else {
-      setValue(undefined);
     }
   };
 
@@ -50,7 +49,7 @@ export function useQuantityField({ initialValue, value, setValue }: IUseQuantity
   }, [initialValue]);
 
   return {
-    isQuantityEnabled,
+    isQuantityEnabled: !!value,
     value,
     units: quantityUnitLabelValues,
     onQuantityOptionChange,
