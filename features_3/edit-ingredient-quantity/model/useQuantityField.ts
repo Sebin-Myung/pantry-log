@@ -2,17 +2,15 @@ import { QuantityUnit, QuantityUnitKorean, QuantityUnits } from "@entities";
 import { LabelValue, onlyPositiveFloat } from "@shared";
 import { useEffect, useState } from "react";
 
-export type QuantityFieldType =
-  | {
-      amount?: string;
-      unit?: LabelValue<QuantityUnit>;
-    }
-  | undefined;
+export type QuantityFieldType = {
+  amount?: string;
+  unit?: LabelValue<QuantityUnit>;
+};
 
 export interface IUseQuantityField {
   initialValue?: { amount: number; unit: QuantityUnit };
-  value: QuantityFieldType;
-  setValue: React.Dispatch<React.SetStateAction<QuantityFieldType>>;
+  value?: QuantityFieldType;
+  setValue: (value?: QuantityFieldType) => void;
 }
 
 export function useQuantityField({ initialValue, value, setValue }: IUseQuantityField) {
@@ -31,14 +29,14 @@ export function useQuantityField({ initialValue, value, setValue }: IUseQuantity
   };
 
   const onQuantityAmountChange = (amount: string) => {
-    setValue((prev) => ({ ...prev, amount: onlyPositiveFloat(amount) }));
+    setValue({ amount: onlyPositiveFloat(amount), unit: value?.unit });
   };
 
-  const onQuantityUnitChange = (value: unknown) => {
-    const unit = value as QuantityUnit;
+  const onQuantityUnitChange = (unitValue: unknown) => {
+    const unit = unitValue as QuantityUnit;
     const selected = quantityUnitLabelValues.find((item) => item.value === unit);
     if (selected) {
-      setValue((prev) => ({ ...prev, unit: selected }));
+      setValue({ amount: value?.amount, unit: selected });
     } else {
       setValue(undefined);
     }

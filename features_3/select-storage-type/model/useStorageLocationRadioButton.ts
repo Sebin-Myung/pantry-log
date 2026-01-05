@@ -1,11 +1,11 @@
 import { StorageLocation, StorageLocationKorean, StorageLocations } from "@entities";
 import { LabelValue } from "@shared";
-import { SetStateAction, useEffect } from "react";
+import { useEffect } from "react";
 
 export interface IUseStorageLocationRadioButton {
   initialValue?: StorageLocation;
   selectedLocation?: LabelValue<StorageLocation>;
-  setSelectedLocation: React.Dispatch<SetStateAction<LabelValue<StorageLocation> | undefined>>;
+  setSelectedLocation: (location?: LabelValue<StorageLocation>) => void;
 }
 
 export function useStorageLocationRadioButton({
