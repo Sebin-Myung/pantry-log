@@ -1,7 +1,7 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { LinkButton, ROUTES } from "@shared";
+import { IconButton, ROUTES } from "@shared";
 import { useFonts } from "expo-font";
-import { SplashScreen, Stack } from "expo-router";
+import { Link, SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 import { Providers } from "./_providers";
 
@@ -34,9 +34,11 @@ export default function RootLayout() {
             title: "PantryLog",
             headerShown: true,
             headerRight: () => (
-              <LinkButton href={ROUTES.addIngredient}>
-                <MaterialCommunityIcons name="plus" size={24} color="black" />
-              </LinkButton>
+              <Link href={ROUTES.addIngredient} asChild>
+                <IconButton>
+                  <MaterialCommunityIcons name="plus" size={24} color="black" />
+                </IconButton>
+              </Link>
             ),
           }}
         />
