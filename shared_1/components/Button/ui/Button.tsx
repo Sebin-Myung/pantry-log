@@ -24,6 +24,7 @@ function Button({ variant = "primary", style, children, ...props }: ButtonProps)
             alignSelf: "stretch",
             opacity: pressed ? 0.3 : 1,
           },
+          props.disabled && { opacity: 0.5 },
           typeof style === "function"
             ? style({
                 pressed,
