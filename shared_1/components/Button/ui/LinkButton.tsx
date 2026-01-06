@@ -1,11 +1,11 @@
 import { Href, Link } from "expo-router";
 import { BasePressableProps } from "../model/types";
-import { Button } from "./Button";
+import { IconButton } from "./IconButton";
 
 export function LinkButton({ href, ...props }: BasePressableProps & { href: Href }) {
   return (
     <Link href={href} asChild>
-      <Button {...props} />
+      <IconButton {...props} />
     </Link>
   );
 }

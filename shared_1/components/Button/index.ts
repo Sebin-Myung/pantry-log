@@ -1,5 +1,5 @@
 export { BackButton } from "./ui/BackButton";
-export { Button } from "./ui/Button";
+export { IconButton } from "./ui/IconButton";
 export { LinkButton } from "./ui/LinkButton";
 
 export { BasePressableProps } from "./model/types";

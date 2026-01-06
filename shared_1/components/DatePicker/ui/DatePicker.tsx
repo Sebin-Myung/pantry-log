@@ -2,7 +2,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useTheme } from "../../../providers/AppThemeProvider";
-import { Button } from "../../Button/ui/Button";
+import { IconButton } from "../../Button/ui/IconButton";
 import { OverlayModal } from "../../Modal/ui/OverlayModal";
 import { IUseDatePicker, useDatePicker } from "../model/useDatePicker";
 
@@ -34,9 +34,9 @@ export function DatePicker({ placeholder = "날짜 선택", resetable, ...props 
         />
       </Pressable>
       {resetable && (
-        <Button style={styles.icon} onPress={resetDate}>
+        <IconButton style={styles.icon} onPress={resetDate}>
           <MaterialCommunityIcons name="calendar-remove-outline" size={24} color={theme.colors.accentDark} />
-        </Button>
+        </IconButton>
       )}
       {isOpen && (
         <OverlayModal visible={isOpen} onRequestClose={cancelModal}>

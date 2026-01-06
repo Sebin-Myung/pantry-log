@@ -1,7 +1,7 @@
 import { Pressable } from "react-native";
 import { BasePressableProps } from "../model/types";
 
-export function Button({ style, ...props }: BasePressableProps) {
+export function IconButton({ style, ...props }: BasePressableProps) {
   return (
     <Pressable
       hitSlop={8}
