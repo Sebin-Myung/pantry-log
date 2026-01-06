@@ -7,7 +7,7 @@ export function IconButton({ style, ...props }: BasePressableProps) {
       hitSlop={8}
       style={({ pressed }) => [
         {
-          opacity: pressed ? 0.3 : 1,
+          opacity: pressed ? 0.8 : 1,
         },
         typeof style === "function"
           ? style({
