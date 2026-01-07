@@ -18,6 +18,9 @@ const addIngredient = (item: Ingredient) => {
 
   if (!ids.includes(item.id)) {
     setIds([...ids, item.id]);
+  } else {
+    // 이미 존재하는 ID인 경우 덮어쓰기 방지
+    throw new Error(`Ingredient with id ${item.id} already exists.`);
   }
 
   storage.set(itemKey(item.id), JSON.stringify(item));
@@ -30,7 +33,7 @@ const getIngredient = (id: string): Ingredient | null => {
 
 const updateIngredient = (id: string, partial: Partial<Ingredient>) => {
   const current = getIngredient(id);
-  if (!current) return;
+  if (!current) throw new Error(`Ingredient with id ${id} does not exist.`);
 
   const updated = { ...current, ...partial };
   storage.set(itemKey(id), JSON.stringify(updated));
