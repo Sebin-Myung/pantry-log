@@ -28,7 +28,7 @@ const getIngredient = (id: string): Ingredient | null => {
   return raw ? JSON.parse(raw) : null;
 };
 
-const upgateIngredient = (id: string, partial: Partial<Ingredient>) => {
+const updateIngredient = (id: string, partial: Partial<Ingredient>) => {
   const current = getIngredient(id);
   if (!current) return;
 
@@ -52,7 +52,7 @@ export const ingredientStorage = {
   setIds,
   addIngredient,
   getIngredient,
-  upgateIngredient,
+  updateIngredient,
   removeIngredient,
   getAllIngredients,
 };
