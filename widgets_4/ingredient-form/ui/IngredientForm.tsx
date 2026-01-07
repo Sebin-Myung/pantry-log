@@ -1,5 +1,5 @@
 import { QuantityField, StorageLocationRadioButton } from "@features";
-import { DatePicker, Label, TextInput } from "@shared";
+import { Button, DatePicker, Label, TextInput } from "@shared";
 import { StyleSheet, View } from "react-native";
 import { IUseIngredientForm } from "../model/type";
 import { useIngredientForm } from "../model/useIngredientForm";
@@ -41,6 +41,9 @@ export function IngredientForm(props: IUseIngredientForm) {
       <Label text="소비기한">
         <DatePicker date={state.expirationDate} setDate={setField("expirationDate")} resetable />
       </Label>
+      <Button disabled={!isValid}>
+        <Button.Text>확인</Button.Text>
+      </Button>
     </View>
   );
 }
