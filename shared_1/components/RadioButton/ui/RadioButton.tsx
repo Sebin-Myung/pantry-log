@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useTheme } from "../../..//providers/AppThemeProvider";
-import { applyAlpha } from "../../../utils";
+import { applyAlpha } from "../../../lib/utils";
 import { RadioButtonContext, useRadioButtonContext } from "../model/context";
 import { RadioButtonGroupProps, RadioButtonItemProps } from "../model/type";
 

@@ -5,7 +5,7 @@ import { IUseIngredientForm } from "../model/type";
 import { useIngredientForm } from "../model/useIngredientForm";
 
 export function IngredientForm(props: IUseIngredientForm) {
-  const { state, setField, isValid } = useIngredientForm(props);
+  const { state, setField, isValid, onSubmit } = useIngredientForm(props);
 
   return (
     <View style={styles.container}>
@@ -41,7 +41,7 @@ export function IngredientForm(props: IUseIngredientForm) {
       <Label text="소비기한">
         <DatePicker date={state.expirationDate} setDate={setField("expirationDate")} resetable />
       </Label>
-      <Button disabled={!isValid}>
+      <Button disabled={!isValid} onPress={onSubmit}>
         <Button.Text>확인</Button.Text>
       </Button>
     </View>
