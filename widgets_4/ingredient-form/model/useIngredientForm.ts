@@ -51,7 +51,7 @@ export function useIngredientForm({ state, setState }: IUseIngredientForm) {
         imageUrl: null,
       });
 
-      router.push(ROUTES.home);
+      router.replace(ROUTES.home);
     } catch (error) {
       console.error(error);
     }
