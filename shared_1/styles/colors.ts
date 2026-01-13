@@ -14,6 +14,13 @@ export interface AppColor {
   lightGray: string;
   gray: string;
   darkGray: string;
+
+  frozen: string;
+  frozenLight: string;
+  fridge: string;
+  fridgeLight: string;
+  pantry: string;
+  pantryLight: string;
 }
 
 export const LightColors: AppColor = {
@@ -32,6 +39,13 @@ export const LightColors: AppColor = {
   lightGray: "rgb(240, 240, 240)", // #f0f0f0
   gray: "rgb(200, 200, 200)", // #c8c8c8
   darkGray: "rgb(100, 100, 100)", // #646464
+
+  frozen: "rgb(58, 88, 99)", // #3a5863
+  frozenLight: "rgb(220, 232, 235)", // #dce8eb
+  fridge: "rgb(74, 104, 55)", // #4a6837
+  fridgeLight: "rgb(228, 234, 214)", // #e4ead6
+  pantry: "rgb(132, 88, 46)", // #84582e
+  pantryLight: "rgb(245, 238, 226)", // #f5eee2
 };
 
 // 추후 설정 예정
