@@ -2,4 +2,4 @@ export { QuantityUnitKorean, QuantityUnits, StorageLocationKorean, StorageLocati
 export { ingredientStorage } from "./storage";
 export { useIngredientStore } from "./store";
 export { Ingredient, Quantity, QuantityUnit, StorageLocation } from "./types";
-export { getIngredientKeys, sortIngredients } from "./utils";
+export { getIngredientKeys, getQuantityString, sortIngredients } from "./utils";

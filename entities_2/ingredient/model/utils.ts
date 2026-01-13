@@ -1,5 +1,6 @@
 import { compareDateAsc } from "@shared";
-import { Ingredient } from "./types";
+import { QuantityUnitKorean } from "./constants";
+import { Ingredient, Quantity } from "./types";
 
 export const sortIngredients = (items: Ingredient[]) => {
   return [...items].sort((a, b) => {
@@ -22,4 +23,10 @@ export const sortIngredients = (items: Ingredient[]) => {
 
 export const getIngredientKeys = (items: Ingredient[]) => {
   return items.map((item) => item.id);
+};
+
+export const getQuantityString = (quantity: Quantity) => {
+  const { amount, unit } = quantity;
+  if (amount > 1000) return `${amount / 1000}k${QuantityUnitKorean[unit]}`;
+  return `${amount}${QuantityUnitKorean[unit]}`;
 };
