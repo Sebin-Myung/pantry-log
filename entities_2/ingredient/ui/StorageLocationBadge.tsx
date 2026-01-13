@@ -16,6 +16,7 @@ export function StorageLocationBadge({ location }: Props) {
         paddingVertical: 4,
         paddingHorizontal: 6,
         backgroundColor: theme.colors[`${location}Light`],
+        flexShrink: 0,
       }}>
       <Text style={{ color: theme.colors[location], fontSize: 12 }}>{StorageLocationKorean[location]}</Text>
     </View>
