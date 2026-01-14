@@ -1,5 +1,6 @@
-import { useTheme } from "@shared";
-import { StyleSheet, Text, View } from "react-native";
+import { ROUTE_FACTORIES, useTheme } from "@shared";
+import { useRouter } from "expo-router";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { getQuantityString, Ingredient } from "../model";
 import { StorageLocationBadge } from "./StorageLocationBadge";
 
@@ -15,10 +16,15 @@ export function IngredientListItem({
   expirationDate,
   imageUrl,
 }: Ingredient) {
+  const router = useRouter();
   const theme = useTheme();
 
+  const goToEditIngredient = () => {
+    router.push(ROUTE_FACTORIES.editIngredient(id));
+  };
+
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container} onPress={goToEditIngredient}>
       {/* {imageUrl && <Image style={{ ...styles.image, borderColor: theme.colors.gray }} />} */}
       <View style={styles.infoSection}>
         <View style={styles.title}>
@@ -83,7 +89,7 @@ export function IngredientListItem({
           </View>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
