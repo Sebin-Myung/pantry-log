@@ -1,4 +1,5 @@
 import { IngredientListItem, StorageLocation, useIngredientStore } from "@entities";
+import { EmptyLayout } from "@widgets";
 import { useMemo } from "react";
 import { ScrollView } from "react-native";
 
@@ -15,7 +16,7 @@ export function IngredientListPage({ storageLocation }: IngredientListPageProps)
     return ingredients.filter((i) => i.storageLocation === storageLocation);
   }, [ingredients, storageLocation]);
 
-  return (
+  return filteredIngredients.length > 0 ? (
     <ScrollView
       contentContainerStyle={{
         padding: 10,
@@ -25,5 +26,7 @@ export function IngredientListPage({ storageLocation }: IngredientListPageProps)
         <IngredientListItem key={item.id} {...item} />
       ))}
     </ScrollView>
+  ) : (
+    <EmptyLayout lines={["해당하는 재료가 없습니다.", "+버튼을 눌러 재료를 추가해보세요!"]} />
   );
 }
