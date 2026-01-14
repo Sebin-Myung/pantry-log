@@ -1,1 +1,1 @@
-export { AddIngredientPage } from "./AddIngredientPage";
+export { AddIngredientPage } from "./ui/AddIngredientPage";
