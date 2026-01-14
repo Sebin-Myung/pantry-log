@@ -1,7 +1,7 @@
-import { useIngredientStore } from "@entities";
+import { Ingredient } from "@entities";
 import { ROUTES } from "@shared";
 import { useRouter } from "expo-router";
-import { useMemo } from "react";
+import { useLayoutEffect, useMemo, useState } from "react";
 import { IngredientFormState, IUseIngredientForm } from "./type";
 
 interface ValidIngredientFormState
@@ -10,20 +10,27 @@ interface ValidIngredientFormState
   quantity?: Required<IngredientFormState["quantity"]>;
 }
 
-export function useIngredientForm({ state, setState }: IUseIngredientForm) {
+export function useIngredientForm({ initialState, onSubmit: onSubmitItem }: IUseIngredientForm) {
   const router = useRouter();
-  const addIngredient = useIngredientStore((state) => state.add);
+
+  const [formState, setFormState] = useState<IngredientFormState>({
+    name: "",
+    brand: "",
+    purchaseSource: "",
+    purchaseDate: new Date(),
+    quantity: { amount: "" },
+  });
 
   const setField =
     <K extends keyof IngredientFormState>(key: K) =>
     (value: IngredientFormState[K]) => {
-      setState((prevState) => ({
+      setFormState((prevState) => ({
         ...prevState,
         [key]: value,
       }));
     };
 
-  const isValidState = (state: IUseIngredientForm["state"]): state is ValidIngredientFormState => {
+  const isValidState = (state: IngredientFormState): state is ValidIngredientFormState => {
     return (
       !!state.location &&
       !!state.name &&
@@ -32,24 +39,28 @@ export function useIngredientForm({ state, setState }: IUseIngredientForm) {
     );
   };
 
-  const isValid = useMemo(() => isValidState(state), [state, isValidState]);
+  const isValid = useMemo(() => isValidState(formState), [formState, isValidState]);
 
   const onSubmit = () => {
-    if (!isValidState(state)) return;
+    if (!isValidState(formState)) return;
+
+    const newIngredient: Ingredient = {
+      id: initialState?.id ? initialState.id : new Date().getTime().toString(),
+      name: formState.name,
+      storageLocation: formState.location.value,
+      brand: formState.brand,
+      purchaseSource: formState.purchaseSource,
+      quantity: formState.quantity
+        ? { amount: Number(formState.quantity.amount), unit: formState.quantity.unit.value }
+        : null,
+      purchaseDate: formState.purchaseDate?.toISOString(),
+      productionDate: formState.productionDate?.toISOString() ?? null,
+      expirationDate: formState.expirationDate?.toISOString() ?? null,
+      imageUrl: null,
+    };
 
     try {
-      addIngredient({
-        id: new Date().getTime().toString(),
-        name: state.name,
-        storageLocation: state.location.value,
-        brand: state.brand,
-        purchaseSource: state.purchaseSource,
-        quantity: state.quantity ? { amount: Number(state.quantity.amount), unit: state.quantity.unit.value } : null,
-        purchaseDate: state.purchaseDate?.toISOString(),
-        productionDate: state.productionDate?.toISOString() ?? null,
-        expirationDate: state.expirationDate?.toISOString() ?? null,
-        imageUrl: null,
-      });
+      onSubmitItem(newIngredient);
 
       router.replace(ROUTES.home);
     } catch (error) {
@@ -57,5 +68,20 @@ export function useIngredientForm({ state, setState }: IUseIngredientForm) {
     }
   };
 
-  return { state, setField, isValid, onSubmit };
+  useLayoutEffect(() => {
+    if (!initialState) return;
+
+    const existedState: Partial<IngredientFormState> = {
+      name: initialState.name,
+      purchaseDate: new Date(initialState.purchaseDate),
+    };
+    if (initialState.brand) existedState.brand = initialState.brand;
+    if (initialState.purchaseSource) existedState.purchaseSource = initialState.purchaseSource;
+    if (initialState.productionDate) existedState.productionDate = new Date(initialState.productionDate);
+    if (initialState.expirationDate) existedState.expirationDate = new Date(initialState.expirationDate);
+
+    setFormState((prev) => ({ ...prev, ...existedState }));
+  }, [initialState]);
+
+  return { state: formState, setField, isValid, onSubmit };
 }

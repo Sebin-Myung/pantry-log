@@ -10,13 +10,21 @@ export function IngredientForm(props: IUseIngredientForm) {
   return (
     <View style={styles.container}>
       <Label text="보관 위치" required>
-        <StorageLocationRadioButton selectedLocation={state.location} setSelectedLocation={setField("location")} />
+        <StorageLocationRadioButton
+          initialValue={props.initialState?.storageLocation}
+          selectedLocation={state.location}
+          setSelectedLocation={setField("location")}
+        />
       </Label>
       <Label text="제품명" required>
         <TextInput value={state.name} setValue={setField("name")} placeholder="제품명을 입력해주세요." />
       </Label>
       <Label text="용량" required>
-        <QuantityField value={state.quantity} setValue={setField("quantity")} />
+        <QuantityField
+          initialValue={props.initialState?.quantity ?? undefined}
+          value={state.quantity}
+          setValue={setField("quantity")}
+        />
       </Label>
       <Label text="브랜드">
         <TextInput value={state.brand} setValue={setField("brand")} placeholder="브랜드를 입력해주세요." />
@@ -29,11 +37,7 @@ export function IngredientForm(props: IUseIngredientForm) {
         />
       </Label>
       <Label text="구매일자" required>
-        <DatePicker
-          date={state.purchaseDate}
-          setDate={setField("purchaseDate")}
-          initialDate={props.state.purchaseDate}
-        />
+        <DatePicker date={state.purchaseDate} setDate={setField("purchaseDate")} />
       </Label>
       <Label text="제조일자">
         <DatePicker date={state.productionDate} setDate={setField("productionDate")} resetable />

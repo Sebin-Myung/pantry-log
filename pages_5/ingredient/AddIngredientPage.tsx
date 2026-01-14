@@ -1,15 +1,9 @@
-import { IngredientForm, IngredientFormState } from "@widgets";
-import { useState } from "react";
+import { useAddIngredient } from "@features";
+import { IngredientForm } from "@widgets";
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from "react-native";
 
 export function AddIngredientPage() {
-  const [formState, setFormState] = useState<IngredientFormState>({
-    name: "",
-    brand: "",
-    purchaseSource: "",
-    purchaseDate: new Date(),
-    quantity: { amount: "" },
-  });
+  const { onSubmit } = useAddIngredient();
 
   return (
     <KeyboardAvoidingView
@@ -18,7 +12,7 @@ export function AddIngredientPage() {
       keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 0} // header 높이
     >
       <ScrollView contentContainerStyle={styles.container}>
-        <IngredientForm state={formState} setState={setFormState} />
+        <IngredientForm onSubmit={onSubmit} />
       </ScrollView>
     </KeyboardAvoidingView>
   );

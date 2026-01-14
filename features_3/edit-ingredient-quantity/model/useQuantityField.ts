@@ -1,6 +1,6 @@
 import { QuantityUnit, QuantityUnitKorean, QuantityUnits } from "@entities";
 import { LabelValue, onlyPositiveFloat } from "@shared";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 
 export type QuantityFieldType = {
   amount?: string;
@@ -41,7 +41,7 @@ export function useQuantityField({ initialValue, value, setValue }: IUseQuantity
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (initialValue) {
       onQuantityAmountChange(initialValue.amount.toString());
       onQuantityUnitChange(initialValue.unit);

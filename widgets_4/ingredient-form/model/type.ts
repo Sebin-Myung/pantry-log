@@ -1,4 +1,4 @@
-import { StorageLocation } from "@entities";
+import { Ingredient, StorageLocation } from "@entities";
 import { QuantityFieldType } from "@features";
 import { LabelValue } from "@shared";
 
@@ -14,6 +14,6 @@ export interface IngredientFormState {
 }
 
 export interface IUseIngredientForm {
-  state: IngredientFormState;
-  setState: React.Dispatch<React.SetStateAction<IngredientFormState>>;
+  initialState?: Ingredient;
+  onSubmit: (item: Ingredient) => void;
 }
