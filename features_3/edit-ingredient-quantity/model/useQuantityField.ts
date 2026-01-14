@@ -33,19 +33,22 @@ export function useQuantityField({ initialValue, value, setValue }: IUseQuantity
     setValue({ amount: onlyPositiveFloat(amount), unit: value?.unit });
   };
 
+  const getUnitLabelValueFromValue = (value: QuantityUnit) => {
+    return quantityUnitLabelValues.find((item) => item.value === value);
+  };
+
   const onQuantityUnitChange = (unitValue: unknown) => {
     const unit = unitValue as QuantityUnit;
-    const selected = quantityUnitLabelValues.find((item) => item.value === unit);
-    if (selected) {
-      setValue({ amount: value?.amount, unit: selected });
-    }
+    const selected = getUnitLabelValueFromValue(unit);
+
+    if (!selected) return;
+    setValue({ amount: value?.amount, unit: selected });
   };
 
   useLayoutEffect(() => {
-    if (initialValue) {
-      onQuantityAmountChange(initialValue.amount.toString());
-      onQuantityUnitChange(initialValue.unit);
-    }
+    if (!initialValue) return;
+
+    setValue({ amount: initialValue.amount.toString(), unit: getUnitLabelValueFromValue(initialValue.unit) });
   }, [initialValue]);
 
   return {
