@@ -1,12 +1,9 @@
+import { EditIngredientPage } from "@pages/ingredient/ui/EditIngredientPage";
 import { useLocalSearchParams } from "expo-router";
-import { Text, View } from "react-native";
 
-export default function EditIngredientPage() {
+export default function Page() {
   const { id } = useLocalSearchParams();
+  const ingredientId = Array.isArray(id) ? id[0] : id;
 
-  return (
-    <View>
-      <Text>edit ingredient: {id}</Text>
-    </View>
-  );
+  return <EditIngredientPage id={ingredientId} />;
 }
