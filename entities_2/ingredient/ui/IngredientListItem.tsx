@@ -1,8 +1,9 @@
-import { ROUTE_FACTORIES, useTheme } from "@shared";
-import { useRouter } from "expo-router";
+import { BasePressableProps, useTheme } from "@shared";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { getQuantityString, Ingredient } from "../model";
 import { StorageLocationBadge } from "./StorageLocationBadge";
+
+interface IngredientListItemProps extends Ingredient, Pick<BasePressableProps, "onPress" | "onLongPress"> {}
 
 export function IngredientListItem({
   id,
@@ -15,16 +16,13 @@ export function IngredientListItem({
   productionDate,
   expirationDate,
   imageUrl,
-}: Ingredient) {
-  const router = useRouter();
+  onPress,
+  onLongPress,
+}: IngredientListItemProps) {
   const theme = useTheme();
 
-  const goToEditIngredient = () => {
-    router.push(ROUTE_FACTORIES.editIngredient(id));
-  };
-
   return (
-    <Pressable style={styles.container} onPress={goToEditIngredient}>
+    <Pressable style={styles.container} onPress={onPress} onLongPress={onLongPress}>
       {/* {imageUrl && <Image style={{ ...styles.image, borderColor: theme.colors.gray }} />} */}
       <View style={styles.infoSection}>
         <View style={styles.title}>

@@ -1,4 +1,5 @@
-import { IngredientListItem, StorageLocation, useIngredientStore } from "@entities";
+import { StorageLocation, useIngredientStore } from "@entities";
+import { DeletableIngredientItem } from "@features";
 import { EmptyLayout } from "@widgets";
 import { useMemo } from "react";
 import { ScrollView } from "react-native";
@@ -23,7 +24,7 @@ export function IngredientListPage({ storageLocation }: IngredientListPageProps)
         gap: 10,
       }}>
       {filteredIngredients.map((item) => (
-        <IngredientListItem key={item.id} {...item} />
+        <DeletableIngredientItem key={item.id} {...item} />
       ))}
     </ScrollView>
   ) : (
