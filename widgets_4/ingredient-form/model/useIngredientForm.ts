@@ -1,4 +1,5 @@
 import { Ingredient } from "@entities";
+import { getQuantityUnitLabelValueFromValue } from "@features";
 import { ROUTES } from "@shared";
 import { useRouter } from "expo-router";
 import { useEffect, useMemo, useState } from "react";
@@ -79,6 +80,11 @@ export function useIngredientForm({ initialState, onSubmit: onSubmitItem }: IUse
     if (initialState.purchaseSource) existedState.purchaseSource = initialState.purchaseSource;
     if (initialState.productionDate) existedState.productionDate = new Date(initialState.productionDate);
     if (initialState.expirationDate) existedState.expirationDate = new Date(initialState.expirationDate);
+    if (initialState.quantity)
+      existedState.quantity = {
+        amount: initialState.quantity.amount.toString(),
+        unit: getQuantityUnitLabelValueFromValue(initialState.quantity.unit),
+      };
 
     setFormState((prev) => ({ ...prev, ...existedState }));
   }, [initialState]);
