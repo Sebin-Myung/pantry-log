@@ -4,6 +4,7 @@ import { Ingredient } from "./types";
 import { getIngredientKeys, sortIngredients } from "./utils";
 
 interface IUseIngredientStore {
+  isLoading: boolean;
   ingredients: Ingredient[];
   hydrate: () => void;
   add: (item: Ingredient) => void;
@@ -12,10 +13,11 @@ interface IUseIngredientStore {
 }
 
 export const useIngredientStore = create<IUseIngredientStore>((set, get) => ({
+  isLoading: true,
   ingredients: [],
   hydrate: () => {
     const list = ingredientStorage.getAllIngredients();
-    set({ ingredients: list });
+    set({ isLoading: false, ingredients: list });
   },
   add: (item: Ingredient) => {
     try {

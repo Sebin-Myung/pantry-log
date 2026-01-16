@@ -1,9 +1,12 @@
 import { IUseEditIngredient, useEditIngredient } from "@features";
+import { Loading } from "@shared";
 import { IngredientForm } from "@widgets";
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from "react-native";
 
 export function EditIngredientPage(props: IUseEditIngredient) {
   const { initialState, onSubmit } = useEditIngredient(props);
+
+  if (!initialState) return <Loading />;
 
   return (
     <KeyboardAvoidingView

@@ -1,5 +1,6 @@
 import { StorageLocation, useIngredientStore } from "@entities";
 import { DeletableIngredientItem } from "@features";
+import { Loading } from "@shared";
 import { EmptyLayout } from "@widgets";
 import { useMemo } from "react";
 import { ScrollView } from "react-native";
@@ -9,6 +10,7 @@ interface IngredientListPageProps {
 }
 
 export function IngredientListPage({ storageLocation }: IngredientListPageProps) {
+  const isLoading = useIngredientStore((state) => state.isLoading);
   const ingredients = useIngredientStore((state) => state.ingredients);
 
   const filteredIngredients = useMemo(() => {
@@ -16,6 +18,8 @@ export function IngredientListPage({ storageLocation }: IngredientListPageProps)
 
     return ingredients.filter((i) => i.storageLocation === storageLocation);
   }, [ingredients, storageLocation]);
+
+  if (isLoading) return <Loading />;
 
   return filteredIngredients.length > 0 ? (
     <ScrollView
