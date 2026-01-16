@@ -1,14 +1,13 @@
 import { DateTimePickerEvent } from "@react-native-community/datetimepicker";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export interface IUseDatePicker {
-  initialDate?: Date;
   date?: Date;
   setDate: (date?: Date) => void;
 }
 
-export function useDatePicker({ initialDate, date, setDate }: IUseDatePicker) {
-  const defaultDate = initialDate ?? new Date();
+export function useDatePicker({ date, setDate }: IUseDatePicker) {
+  const defaultDate = new Date();
 
   const [tempDate, setTempDate] = useState<Date>(defaultDate);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -34,15 +33,9 @@ export function useDatePicker({ initialDate, date, setDate }: IUseDatePicker) {
   };
 
   const resetDate = () => {
-    setDate(initialDate);
+    setDate(undefined);
     setTempDate(defaultDate);
   };
-
-  useEffect(() => {
-    if (initialDate) {
-      setDate(initialDate);
-    }
-  }, [initialDate]);
 
   return { date, tempDate, isOpen, openModal, cancelModal, confirmModal, onDateChange, resetDate };
 }
