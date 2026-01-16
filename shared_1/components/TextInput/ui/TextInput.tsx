@@ -4,9 +4,9 @@ import { IUseTextInput, useTextInput } from "../model/useTextInput";
 
 export type BaseTextInputProps = React.ComponentProps<typeof BaseTextInput>;
 
-export function TextInput({ initialValue, value, setValue, style, ...props }: BaseTextInputProps & IUseTextInput) {
+export function TextInput({ value, setValue, style, ...props }: BaseTextInputProps & IUseTextInput) {
   const theme = useTheme();
-  const { value: valueText, onChangeText } = useTextInput({ initialValue, value, setValue });
+  const { value: valueText, onChangeText } = useTextInput({ value, setValue });
 
   return (
     <BaseTextInput
