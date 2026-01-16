@@ -1,5 +1,5 @@
 import { Ingredient } from "@entities";
-import { getQuantityUnitLabelValueFromValue } from "@features";
+import { getQuantityUnitLabelValueFromValue, getStorageLocationLabelValueFromValue } from "@features";
 import { ROUTES } from "@shared";
 import { useRouter } from "expo-router";
 import { useEffect, useMemo, useState } from "react";
@@ -75,6 +75,7 @@ export function useIngredientForm({ initialState, onSubmit: onSubmitItem }: IUse
     const existedState: Partial<IngredientFormState> = {
       name: initialState.name,
       purchaseDate: new Date(initialState.purchaseDate),
+      location: getStorageLocationLabelValueFromValue(initialState.storageLocation),
     };
     if (initialState.brand) existedState.brand = initialState.brand;
     if (initialState.purchaseSource) existedState.purchaseSource = initialState.purchaseSource;

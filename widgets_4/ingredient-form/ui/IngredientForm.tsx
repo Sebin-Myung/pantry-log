@@ -10,11 +10,7 @@ export function IngredientForm(props: IUseIngredientForm) {
   return (
     <View style={styles.container}>
       <Label text="보관 위치" required>
-        <StorageLocationRadioButton
-          initialValue={props.initialState?.storageLocation}
-          selectedLocation={state.location}
-          setSelectedLocation={setField("location")}
-        />
+        <StorageLocationRadioButton selectedLocation={state.location} setSelectedLocation={setField("location")} />
       </Label>
       <Label text="제품명" required>
         <TextInput value={state.name} setValue={setField("name")} placeholder="제품명을 입력해주세요." />

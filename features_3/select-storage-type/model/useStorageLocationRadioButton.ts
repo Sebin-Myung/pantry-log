@@ -1,36 +1,24 @@
-import { StorageLocation, StorageLocationKorean, StorageLocations } from "@entities";
+import { StorageLocation } from "@entities";
 import { LabelValue } from "@shared";
-import { useEffect } from "react";
+import { STORAGE_LOCATION_LABEL_VALUES } from "./constants";
+import { getStorageLocationLabelValueFromValue } from "./utils";
 
 export interface IUseStorageLocationRadioButton {
-  initialValue?: StorageLocation;
   selectedLocation?: LabelValue<StorageLocation>;
   setSelectedLocation: (location?: LabelValue<StorageLocation>) => void;
 }
 
 export function useStorageLocationRadioButton({
-  initialValue,
   selectedLocation,
   setSelectedLocation,
 }: IUseStorageLocationRadioButton) {
-  const storageLocationLabelValues: LabelValue<StorageLocation>[] = StorageLocations.map((location) => ({
-    label: StorageLocationKorean[location],
-    value: location,
-  }));
-
   const onValueChange = (value: unknown) => {
     const location = value as StorageLocation;
-    const selected = storageLocationLabelValues.find((item) => item.value === location);
-    if (selected) {
-      setSelectedLocation(selected);
-    }
+    const selected = getStorageLocationLabelValueFromValue(location);
+
+    if (!selected) return;
+    setSelectedLocation(selected);
   };
 
-  useEffect(() => {
-    if (initialValue) {
-      onValueChange(initialValue);
-    }
-  }, [initialValue]);
-
-  return { items: storageLocationLabelValues, selectedLocation, onValueChange };
+  return { items: STORAGE_LOCATION_LABEL_VALUES, selectedLocation, onValueChange };
 }
