@@ -1,6 +1,6 @@
 import { StorageLocation, StorageLocationKorean, StorageLocations } from "@entities";
 import { LabelValue } from "@shared";
-import { useLayoutEffect } from "react";
+import { useEffect } from "react";
 
 export interface IUseStorageLocationRadioButton {
   initialValue?: StorageLocation;
@@ -26,7 +26,7 @@ export function useStorageLocationRadioButton({
     }
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (initialValue) {
       onValueChange(initialValue);
     }

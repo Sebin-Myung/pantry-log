@@ -3,7 +3,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { IconButton, ROUTES } from "@shared";
 import { useFonts } from "expo-font";
 import { Link, SplashScreen, Stack } from "expo-router";
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect } from "react";
 import { Providers } from "./_providers";
 
 SplashScreen.preventAutoHideAsync();
@@ -15,10 +15,9 @@ export default function RootLayout() {
     "Pretendard-SemiBold": require("../assets/fonts/Pretendard-SemiBold.otf"),
     "Pretendard-Bold": require("../assets/fonts/Pretendard-Bold.otf"),
   });
-
   const hydrate = useIngredientStore((state) => state.hydrate);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     hydrate();
   }, []);
 

@@ -1,7 +1,7 @@
 import { Ingredient } from "@entities";
 import { ROUTES } from "@shared";
 import { useRouter } from "expo-router";
-import { useLayoutEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { IngredientFormState, IUseIngredientForm } from "./type";
 
 interface ValidIngredientFormState
@@ -68,7 +68,7 @@ export function useIngredientForm({ initialState, onSubmit: onSubmitItem }: IUse
     }
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!initialState) return;
 
     const existedState: Partial<IngredientFormState> = {

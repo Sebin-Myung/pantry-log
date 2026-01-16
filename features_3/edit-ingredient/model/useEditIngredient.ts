@@ -1,6 +1,6 @@
 import { Ingredient, ingredientStorage, useIngredientStore } from "@entities";
 import { useBackButton } from "@shared";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert } from "react-native";
 
 export interface IUseEditIngredient extends Pick<Ingredient, "id"> {}
@@ -15,7 +15,7 @@ export function useEditIngredient({ id }: IUseEditIngredient) {
     updateIngredient(id, item);
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const storageIngredient = ingredientStorage.getIngredient(id);
 
     if (!storageIngredient) {
