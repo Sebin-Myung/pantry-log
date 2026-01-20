@@ -21,32 +21,51 @@ export const useIngredientStore = create<IUseIngredientStore>((set, get) => ({
   },
   add: (item: Ingredient) => {
     try {
+      const currentIngredients = get().ingredients;
+
+      // 중복 검사
+      currentIngredients.forEach((ingredient) => {
+        if (item.id === ingredient.id) throw new Error("DUPLICATED_ID");
+        if (item.name === ingredient.name) throw new Error("DUPLICATED_NAME");
+      });
+
+      const newIngredients = sortIngredients([...currentIngredients, item]);
+      const ingredientKeys = getIngredientKeys(newIngredients);
+
+      ingredientStorage.setIds(ingredientKeys);
       ingredientStorage.addIngredient(item);
-
-      const newItems = sortIngredients([...get().ingredients, item]);
-      const itemKeys = getIngredientKeys(newItems);
-
-      set({ ingredients: newItems });
-      ingredientStorage.setIds(itemKeys);
+      set({ ingredients: newIngredients });
     } catch (error) {
       console.error(error);
     }
   },
   update: (id: string, partial: Partial<Ingredient>) => {
     try {
-      ingredientStorage.updateIngredient(id, partial);
+      const currentIngredients = get().ingredients;
+      const currentIngredient = currentIngredients.find((ingredient) => ingredient.id === id);
 
-      const newItems = sortIngredients(get().ingredients.map((i) => (i.id === id ? { ...i, ...partial } : i)));
+      if (!currentIngredient) throw new Error("NOT_FOUND");
+
+      const newIngredient = { ...currentIngredient, ...partial };
+      const newItems = sortIngredients(
+        currentIngredients.map((ingredient) => (ingredient.id === id ? newIngredient : ingredient))
+      );
       const itemKeys = getIngredientKeys(newItems);
 
-      set({ ingredients: newItems });
+      ingredientStorage.updateIngredient(id, newIngredient);
       ingredientStorage.setIds(itemKeys);
+      set({ ingredients: newItems });
     } catch (error) {
       console.error(error);
     }
   },
   remove: (id: string) => {
+    const currentIngredients = get().ingredients;
+    const filteredIngredients = currentIngredients.filter((ingredient) => ingredient.id !== id);
+    const newIds = getIngredientKeys(filteredIngredients);
+
+    ingredientStorage.setIds(newIds);
     ingredientStorage.removeIngredient(id);
-    set({ ingredients: get().ingredients.filter((i) => i.id !== id) });
+    set({ ingredients: filteredIngredients });
   },
 }));
