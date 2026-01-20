@@ -1,12 +1,12 @@
 import { Ingredient, ingredientStorage, useIngredientStore } from "@entities";
-import { useBackButton } from "@shared";
+import { useRouterFunc } from "@shared";
 import { useEffect, useState } from "react";
 import { Alert } from "react-native";
 
 export interface IUseEditIngredient extends Pick<Ingredient, "id"> {}
 
 export function useEditIngredient({ id }: IUseEditIngredient) {
-  const { goBack } = useBackButton();
+  const { goBack } = useRouterFunc();
   const updateIngredient = useIngredientStore((state) => state.update);
 
   const [item, setItem] = useState<Ingredient>();

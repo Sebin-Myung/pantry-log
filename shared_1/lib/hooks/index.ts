@@ -1,0 +1,1 @@
+export { useRouterFunc } from "./useRouterFunc";

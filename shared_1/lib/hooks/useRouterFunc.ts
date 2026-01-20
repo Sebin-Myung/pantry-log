@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 
-export function useBackButton() {
+export function useRouterFunc() {
   const router = useRouter();
 
   const goBack = () => {
