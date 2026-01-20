@@ -1,7 +1,6 @@
-import { Ingredient, ingredientStorage, useIngredientStore } from "@entities";
+import { Ingredient, IngredientError, ingredientStorage, showIngredientError, useIngredientStore } from "@entities";
 import { useRouterFunc } from "@shared";
 import { useEffect, useState } from "react";
-import { Alert } from "react-native";
 
 export interface IUseEditIngredient extends Pick<Ingredient, "id"> {}
 
@@ -12,14 +11,21 @@ export function useEditIngredient({ id }: IUseEditIngredient) {
   const [item, setItem] = useState<Ingredient>();
 
   const onSubmit = (item: Ingredient) => {
-    updateIngredient(id, item);
+    try {
+      updateIngredient(id, item);
+    } catch (error) {
+      if (error instanceof IngredientError) {
+        showIngredientError({ error });
+      }
+      throw error;
+    }
   };
 
   useEffect(() => {
     const storageIngredient = ingredientStorage.getIngredient(id);
 
     if (!storageIngredient) {
-      Alert.alert("알림", "존재하지 않는 재료입니다.", [{ text: "확인", style: "default", onPress: goBack }]);
+      showIngredientError({ error: new IngredientError("INGREDIENT_NOT_FOUND"), onPress: goBack });
       return;
     }
 

@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { IngredientError, IngredientErrorCode } from "./error";
 import { ingredientStorage } from "./storage";
 import { Ingredient } from "./types";
 import { getIngredientKeys, sortIngredients } from "./utils";
@@ -20,44 +21,36 @@ export const useIngredientStore = create<IUseIngredientStore>((set, get) => ({
     set({ isLoading: false, ingredients: list });
   },
   add: (item: Ingredient) => {
-    try {
-      const currentIngredients = get().ingredients;
+    const currentIngredients = get().ingredients;
 
-      // 중복 검사
-      currentIngredients.forEach((ingredient) => {
-        if (item.id === ingredient.id) throw new Error("DUPLICATED_ID");
-        if (item.name === ingredient.name) throw new Error("DUPLICATED_NAME");
-      });
+    // 중복 검사
+    currentIngredients.forEach((ingredient) => {
+      if (item.id === ingredient.id) throw new IngredientError(IngredientErrorCode.DUPLICATED_ID);
+      if (item.name === ingredient.name) throw new IngredientError(IngredientErrorCode.DUPLICATED_NAME);
+    });
 
-      const newIngredients = sortIngredients([...currentIngredients, item]);
-      const ingredientKeys = getIngredientKeys(newIngredients);
+    const newIngredients = sortIngredients([...currentIngredients, item]);
+    const ingredientKeys = getIngredientKeys(newIngredients);
 
-      ingredientStorage.setIds(ingredientKeys);
-      ingredientStorage.addIngredient(item);
-      set({ ingredients: newIngredients });
-    } catch (error) {
-      console.error(error);
-    }
+    ingredientStorage.setIds(ingredientKeys);
+    ingredientStorage.addIngredient(item);
+    set({ ingredients: newIngredients });
   },
   update: (id: string, partial: Partial<Ingredient>) => {
-    try {
-      const currentIngredients = get().ingredients;
-      const currentIngredient = currentIngredients.find((ingredient) => ingredient.id === id);
+    const currentIngredients = get().ingredients;
+    const currentIngredient = currentIngredients.find((ingredient) => ingredient.id === id);
 
-      if (!currentIngredient) throw new Error("NOT_FOUND");
+    if (!currentIngredient) throw new IngredientError(IngredientErrorCode.NOT_FOUND);
 
-      const newIngredient = { ...currentIngredient, ...partial };
-      const newItems = sortIngredients(
-        currentIngredients.map((ingredient) => (ingredient.id === id ? newIngredient : ingredient))
-      );
-      const itemKeys = getIngredientKeys(newItems);
+    const newIngredient = { ...currentIngredient, ...partial };
+    const newItems = sortIngredients(
+      currentIngredients.map((ingredient) => (ingredient.id === id ? newIngredient : ingredient))
+    );
+    const itemKeys = getIngredientKeys(newItems);
 
-      ingredientStorage.updateIngredient(id, newIngredient);
-      ingredientStorage.setIds(itemKeys);
-      set({ ingredients: newItems });
-    } catch (error) {
-      console.error(error);
-    }
+    ingredientStorage.updateIngredient(id, newIngredient);
+    ingredientStorage.setIds(itemKeys);
+    set({ ingredients: newItems });
   },
   remove: (id: string) => {
     const currentIngredients = get().ingredients;

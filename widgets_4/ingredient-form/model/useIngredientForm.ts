@@ -64,9 +64,7 @@ export function useIngredientForm({ initialState, onSubmit: onSubmitItem }: IUse
       onSubmitItem(newIngredient);
 
       router.replace(ROUTES.home);
-    } catch (error) {
-      console.error(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {

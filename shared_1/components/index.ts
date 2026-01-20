@@ -1,3 +1,4 @@
+export * from "./alert";
 export * from "./Button";
 export * from "./DatePicker";
 export * from "./Dropdown";
