@@ -68,3 +68,18 @@ export const hasBatchim = (word: string) => {
   const lastChar = word[word.length - 1];
   return hasFinalConsonant(lastChar);
 };
+
+export const debounce = <T extends (...args: any[]) => void>(fn: T, delay?: number) => {
+  const timerDelay = delay ?? 300;
+  let timer: ReturnType<typeof setTimeout> | undefined;
+
+  return (...args: Parameters<T>) => {
+    if (timer) {
+      clearTimeout(timer);
+    }
+
+    timer = setTimeout(() => {
+      fn(...args);
+    }, timerDelay);
+  };
+};
