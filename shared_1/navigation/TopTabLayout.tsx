@@ -7,9 +7,9 @@ const { Navigator } = createMaterialTopTabNavigator();
 
 const MaterialTopTabs = withLayoutContext(Navigator);
 
-interface TopTabLayoutProps {}
+interface TopTabLayoutProps extends React.ComponentProps<typeof MaterialTopTabs> {}
 
-export function TopTabLayout({ children }: PropsWithChildren<TopTabLayoutProps>) {
+export function TopTabLayout({ children, screenOptions, ...props }: PropsWithChildren<TopTabLayoutProps>) {
   const theme = useTheme();
 
   return (
@@ -18,7 +18,9 @@ export function TopTabLayout({ children }: PropsWithChildren<TopTabLayoutProps>)
         tabBarLabelStyle: { fontSize: 16 },
         tabBarStyle: { backgroundColor: theme.colors.background },
         tabBarIndicatorStyle: { backgroundColor: theme.colors.primary },
-      }}>
+        ...screenOptions,
+      }}
+      {...props}>
       {children}
     </MaterialTopTabs>
   );

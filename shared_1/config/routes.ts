@@ -1,6 +1,14 @@
 import { Href } from "expo-router";
 
-type StaticRouteKey = "home" | "tabAll" | "tabFrozen" | "tabFridge" | "tabPantry" | "addIngredient";
+type StaticRouteKey =
+  | "home"
+  | "tabAll"
+  | "tabFrozen"
+  | "tabFridge"
+  | "tabPantry"
+  | "addIngredient"
+  | "cookingRecord"
+  | "recipe";
 type DynamicRouteKey = "editIngredient";
 
 export const ROUTES: Record<StaticRouteKey, Href> = {
@@ -10,6 +18,9 @@ export const ROUTES: Record<StaticRouteKey, Href> = {
   tabFridge: "/fridge",
   tabPantry: "/pantry",
   addIngredient: "/ingredient/add",
+
+  cookingRecord: "/cooking-record",
+  recipe: "/cooking-record/recipe",
 };
 
 export const ROUTE_FACTORIES: Record<DynamicRouteKey, (...args: any[]) => Href> = {

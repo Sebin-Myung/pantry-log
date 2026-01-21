@@ -1,8 +1,6 @@
 import { useIngredientStore } from "@entities";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { IconButton, ROUTES } from "@shared";
 import { useFonts } from "expo-font";
-import { Link, SplashScreen, Stack } from "expo-router";
+import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 import { Providers } from "./_providers";
 
@@ -33,21 +31,9 @@ export default function RootLayout() {
 
   return (
     <Providers>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen
-          name="(storage-location-tabs)"
-          options={{
-            title: "PantryLog",
-            headerShown: true,
-            headerRight: () => (
-              <Link href={ROUTES.addIngredient} asChild>
-                <IconButton>
-                  <MaterialCommunityIcons name="plus" size={24} color="black" />
-                </IconButton>
-              </Link>
-            ),
-          }}
-        />
+      <Stack screenOptions={{ headerTitle: "PantryLog" }}>
+        <Stack.Screen name="(main-tabs)" options={{ headerShown: true }} />
+        <Stack.Screen name="ingredient" options={{ headerShown: false }} />
       </Stack>
     </Providers>
   );
