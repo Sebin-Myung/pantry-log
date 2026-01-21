@@ -35,7 +35,7 @@ export default function RootLayout() {
     <Providers>
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen
-          name="(tabs)"
+          name="(storage-location-tabs)"
           options={{
             title: "PantryLog",
             headerShown: true,

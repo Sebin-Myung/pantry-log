@@ -6,7 +6,7 @@ const { Navigator } = createMaterialTopTabNavigator();
 
 const MaterialTopTabs = withLayoutContext(Navigator);
 
-export default function CategoryLayout() {
+export default function StorageLocationTabsLayout() {
   const theme = useTheme();
 
   return (
