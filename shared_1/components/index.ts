@@ -1,5 +1,6 @@
 export * from "./alert";
 export * from "./Button";
+export * from "./Calendar";
 export * from "./DatePicker";
 export * from "./Dropdown";
 export * from "./Label";
