@@ -46,19 +46,19 @@ export function Calendar({ highlightDays = [], ...props }: CalendarProps) {
                     backgroundColor: applyAlpha(theme.colors.accent, 0.3),
                   },
                 ]}>
-                <View style={[styles.cellCircle, isToday && { backgroundColor: theme.colors.text }]}>
+                <View
+                  style={[
+                    styles.cellCircle,
+                    isToday && { backgroundColor: theme.colors.text },
+                    isHighlighted && { borderWidth: 3, borderColor: theme.colors.accentDark },
+                  ]}>
                   <Text
                     style={[
-                      { fontSize: 16, color: theme.colors.text, textDecorationColor: theme.colors.text },
-                      isHighlighted && { textDecorationLine: "underline", textDecorationStyle: "solid" },
-                      isSunday && { color: "red", textDecorationColor: "red" },
-                      isSaturday && { color: "blue", textDecorationColor: "blue" },
+                      { fontSize: 16, color: theme.colors.text },
+                      isSunday && { color: "red" },
+                      isSaturday && { color: "blue" },
                       isSelected && { fontWeight: "bold" },
-                      isToday && {
-                        color: theme.colors.white,
-                        textDecorationColor: theme.colors.white,
-                        fontWeight: "bold",
-                      },
+                      isToday && { color: theme.colors.white, fontWeight: "bold" },
                       !cell.isCurrentMonth && { opacity: 0.3 },
                     ]}>
                     {cell.date.getDate()}
