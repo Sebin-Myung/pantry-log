@@ -17,6 +17,8 @@ export const useIngredientStore = create<IUseIngredientStore>((set, get) => ({
   isLoading: true,
   ingredients: [],
   hydrate: () => {
+    if (!get().isLoading) return;
+
     const list = ingredientStorage.getAllIngredients();
     set({ isLoading: false, ingredients: list });
   },
