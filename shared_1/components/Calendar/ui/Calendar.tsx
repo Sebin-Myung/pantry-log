@@ -1,6 +1,6 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { applyAlpha } from "../../../lib/utils";
+import { applyAlpha, padZero } from "../../../lib/utils";
 import { useTheme } from "../../../providers/AppThemeProvider";
 import { IconButton } from "../../Button/ui/IconButton";
 import { IUseCalendar, useCalendar } from "../model/useCalendar";
@@ -20,7 +20,7 @@ export function Calendar({ highlightDays = [], ...props }: CalendarProps) {
         <IconButton onPress={onPrevMonthClick}>
           <MaterialCommunityIcons name="chevron-left" size={24} color="black" />
         </IconButton>
-        <Text style={styles.month}>{`${year}.${String(month + 1).padStart(2, "0")}`}</Text>
+        <Text style={styles.month}>{`${year}.${padZero(month + 1)}`}</Text>
         <IconButton onPress={onNextMonthClick}>
           <MaterialCommunityIcons name="chevron-right" size={24} color="black" />
         </IconButton>

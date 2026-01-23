@@ -83,3 +83,7 @@ export const debounce = <T extends (...args: any[]) => void>(fn: T, delay?: numb
     }, timerDelay);
   };
 };
+
+export const padZero = (n: number, digit?: number) => {
+  return String(n).padStart(digit ?? 2, "0");
+};

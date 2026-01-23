@@ -1,3 +1,5 @@
+import { padZero } from "../../../lib/utils";
+
 export const getYearMonthDate = (date: Date) => {
   return { year: date.getFullYear(), month: date.getMonth(), date: date.getDate() };
 };
@@ -19,7 +21,7 @@ export const getLastDayOfMonth = (year: number, month: number) => {
 
 export const getDateFormat = (date: Date) => {
   const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, "0");
-  const d = String(date.getDate()).padStart(2, "0");
+  const m = padZero(date.getMonth() + 1);
+  const d = padZero(date.getDate());
   return `${y}-${m}-${d}`;
 };
