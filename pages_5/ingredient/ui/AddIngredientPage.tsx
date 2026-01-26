@@ -1,16 +1,13 @@
 import { useAddIngredient } from "@features";
+import { KeyboardAvoidingView } from "@shared";
 import { IngredientForm } from "@widgets";
-import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 
 export function AddIngredientPage() {
   const { onSubmit } = useAddIngredient();
 
   return (
-    <KeyboardAvoidingView
-      style={{ flex: 1 }}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 0} // header 높이
-    >
+    <KeyboardAvoidingView>
       <ScrollView contentContainerStyle={styles.container}>
         <IngredientForm onSubmit={onSubmit} />
       </ScrollView>
