@@ -1,29 +1,6 @@
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { IconButton, ROUTES, TopTabLayout } from "@shared";
-import { Link, useFocusEffect, useNavigation } from "expo-router";
-import { useCallback } from "react";
+import { TopTabLayout } from "@shared";
 
 export default function StorageLocationTabsLayout() {
-  const navigation = useNavigation();
-
-  useFocusEffect(
-    useCallback(() => {
-      navigation.getParent()?.setOptions({
-        headerRight: () => (
-          <Link href={ROUTES.addIngredient} asChild>
-            <IconButton>
-              <MaterialCommunityIcons name="plus" size={24} color="black" />
-            </IconButton>
-          </Link>
-        ),
-      });
-
-      return () => {
-        navigation.getParent()?.setOptions({ headerRight: undefined });
-      };
-    }, [])
-  );
-
   return (
     <TopTabLayout>
       <TopTabLayout.Screen name="index" options={{ title: "전체" }} />

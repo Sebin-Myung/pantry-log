@@ -1,6 +1,8 @@
 import { useIngredientStore } from "@entities";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { IconButton, ROUTES } from "@shared";
 import { useFonts } from "expo-font";
-import { SplashScreen, Stack } from "expo-router";
+import { Link, SplashScreen, Stack, usePathname } from "expo-router";
 import { useEffect } from "react";
 import { Providers } from "./_providers";
 
@@ -14,6 +16,21 @@ export default function RootLayout() {
     "Pretendard-Bold": require("../assets/fonts/Pretendard-Bold.otf"),
   });
   const hydrate = useIngredientStore((state) => state.hydrate);
+
+  const pathname = usePathname();
+
+  const createHeaderRight = () => {
+    if (["/", "/fridge", "/frozen", "/pantry"].includes(pathname)) {
+      return (
+        <Link href={ROUTES.addIngredient} asChild>
+          <IconButton>
+            <MaterialCommunityIcons name="plus" size={24} color="black" />
+          </IconButton>
+        </Link>
+      );
+    }
+    return null;
+  };
 
   useEffect(() => {
     hydrate();
@@ -31,7 +48,7 @@ export default function RootLayout() {
 
   return (
     <Providers>
-      <Stack screenOptions={{ headerTitle: "PantryLog" }}>
+      <Stack screenOptions={{ headerTitle: "PantryLog", headerRight: createHeaderRight }}>
         <Stack.Screen name="(main-tabs)" options={{ headerShown: true }} />
         <Stack.Screen name="ingredient" options={{ headerShown: false }} />
       </Stack>
