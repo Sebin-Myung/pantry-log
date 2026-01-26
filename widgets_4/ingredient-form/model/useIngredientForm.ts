@@ -1,12 +1,14 @@
 import { Ingredient } from "@entities";
 import { getQuantityUnitLabelValueFromValue, getStorageLocationLabelValueFromValue } from "@features";
 import { ROUTES } from "@shared";
+import { randomUUID } from "expo-crypto";
 import { useRouter } from "expo-router";
 import { useEffect, useMemo, useState } from "react";
 import { IngredientFormState, IUseIngredientForm } from "./type";
 
 interface ValidIngredientFormState
-  extends Omit<IngredientFormState, "location" | "quantity" | "purchaseDate">,
+  extends
+    Omit<IngredientFormState, "location" | "quantity" | "purchaseDate">,
     Required<Pick<IngredientFormState, "location" | "purchaseDate">> {
   quantity?: Required<IngredientFormState["quantity"]>;
 }
@@ -46,7 +48,7 @@ export function useIngredientForm({ initialState, onSubmit: onSubmitItem }: IUse
     if (!isValidState(formState)) return;
 
     const newIngredient: Ingredient = {
-      id: initialState?.id ? initialState.id : new Date().getTime().toString(),
+      id: initialState?.id ? initialState.id : randomUUID(),
       name: formState.name,
       storageLocation: formState.location.value,
       brand: formState.brand,
