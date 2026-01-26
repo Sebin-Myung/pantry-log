@@ -20,9 +20,9 @@ export default function RootLayout() {
   const pathname = usePathname();
 
   const createHeaderRight = () => {
-    if (["/", "/fridge", "/frozen", "/pantry", "/cooking-record/recipe"].includes(pathname)) {
+    if (["/", "/fridge", "/frozen", "/pantry", "/recipe"].includes(pathname)) {
       return (
-        <Link href={pathname === "/cooking-record/recipe" ? ROUTES.addRecipe : ROUTES.addIngredient} asChild>
+        <Link href={pathname === "/recipe" ? ROUTES.addRecipe : ROUTES.addIngredient} asChild>
           <IconButton>
             <MaterialCommunityIcons name="plus" size={24} color="black" />
           </IconButton>

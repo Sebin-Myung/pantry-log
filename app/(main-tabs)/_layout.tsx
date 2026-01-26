@@ -17,7 +17,7 @@ export default function MainTabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="cooking-record"
+        name="(record-tabs)"
         options={{
           title: "요리 기록",
           tabBarIcon: ({ color }) => <FontAwesome5 name="pencil-alt" size={24} color={color} />,

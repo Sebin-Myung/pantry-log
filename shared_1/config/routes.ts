@@ -21,7 +21,7 @@ export const ROUTES: Record<StaticRouteKey, Href> = {
   addIngredient: "/ingredient/add",
 
   cookingRecord: "/cooking-record",
-  recipe: "/cooking-record/recipe",
+  recipe: "/recipe",
   addRecipe: "/recipe/add",
 };
 
