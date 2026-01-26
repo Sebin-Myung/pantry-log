@@ -20,9 +20,9 @@ export default function RootLayout() {
   const pathname = usePathname();
 
   const createHeaderRight = () => {
-    if (["/", "/fridge", "/frozen", "/pantry"].includes(pathname)) {
+    if (["/", "/fridge", "/frozen", "/pantry", "/cooking-record/recipe"].includes(pathname)) {
       return (
-        <Link href={ROUTES.addIngredient} asChild>
+        <Link href={pathname === "/cooking-record/recipe" ? ROUTES.addRecipe : ROUTES.addIngredient} asChild>
           <IconButton>
             <MaterialCommunityIcons name="plus" size={24} color="black" />
           </IconButton>
@@ -51,6 +51,7 @@ export default function RootLayout() {
       <Stack screenOptions={{ headerTitle: "PantryLog", headerRight: createHeaderRight }}>
         <Stack.Screen name="(main-tabs)" options={{ headerShown: true }} />
         <Stack.Screen name="ingredient" options={{ headerShown: false }} />
+        <Stack.Screen name="recipe" options={{ headerShown: false }} />
       </Stack>
     </Providers>
   );
