@@ -28,8 +28,24 @@ export function RecipeIngredients(props: IUseRecipeIngredients) {
               gap: 10,
             }}>
             {ingredients.length > 1 && (
-              <IconButton style={{ position: "absolute", right: -10, top: -10 }} onPress={() => deleteRow(index)}>
-                <MaterialIcons name="cancel" size={28} color={theme.colors.accentDark} />
+              <IconButton
+                style={{
+                  position: "absolute",
+                  right: -10,
+                  top: -10,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: 28,
+                  height: 28,
+                }}
+                onPress={() => deleteRow(index)}>
+                <View style={{ borderRadius: "100%", backgroundColor: "white", width: 20, height: 20 }} />
+                <MaterialIcons
+                  name="cancel"
+                  size={28}
+                  color={theme.colors.accentDark}
+                  style={{ position: "absolute" }}
+                />
               </IconButton>
             )}
             <Label text="재료 이름" required>
