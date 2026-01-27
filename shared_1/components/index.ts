@@ -6,5 +6,6 @@ export * from "./Dropdown";
 export * from "./Label";
 export * from "./Loading";
 export * from "./Modal";
+export * from "./Notice";
 export * from "./RadioButton";
 export * from "./TextInput";

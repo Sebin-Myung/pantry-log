@@ -2,6 +2,7 @@ export interface AppColor {
   primary: string;
   secondary: string;
   tertiary: string;
+  accentLight: string;
   accent: string;
   accentDark: string;
 
@@ -27,6 +28,7 @@ export const LightColors: AppColor = {
   primary: "rgb(159, 166, 119)", // #9fa677
   secondary: "rgb(201, 204, 168)", // #c9cca8
   tertiary: "rgb(241, 232, 177)", // #f1e8b1
+  accentLight: "rgb(255, 232, 225)", // #ffe8e1
   accent: "rgb(247, 192, 176)", // #f7c0b0
   accentDark: "rgb(217, 127, 104)", // #d97f68
 
