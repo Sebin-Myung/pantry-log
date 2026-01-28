@@ -1,5 +1,5 @@
 import { IngredientSubmitItem } from "@entities";
-import { getQuantityUnitLabelValueFromValue, getStorageLocationLabelValueFromValue } from "@features";
+import { getQuantityUnitLabelValueFromValue, getStorageLocationLabelValueFromValue, isValidQuantity } from "@features";
 import { ROUTES } from "@shared";
 import { useRouter } from "expo-router";
 import { useEffect, useMemo, useState } from "react";
@@ -33,12 +33,7 @@ export function useIngredientForm({ initialState, onSubmit: onSubmitItem }: IUse
     };
 
   const isValidState = (state: IngredientFormState): state is ValidIngredientFormState => {
-    return (
-      !!state.location &&
-      !!state.name &&
-      !!state.purchaseDate &&
-      (!state.quantity || (Number(state.quantity.amount ?? "0") > 0 && !!state.quantity.unit))
-    );
+    return !!state.location && !!state.name && !!state.purchaseDate && isValidQuantity(state.quantity);
   };
 
   const isValid = useMemo(() => isValidState(formState), [formState, isValidState]);
