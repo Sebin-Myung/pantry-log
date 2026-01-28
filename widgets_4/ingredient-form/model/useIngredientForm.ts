@@ -1,7 +1,6 @@
-import { Ingredient } from "@entities";
+import { IngredientSubmitItem } from "@entities";
 import { getQuantityUnitLabelValueFromValue, getStorageLocationLabelValueFromValue } from "@features";
 import { ROUTES } from "@shared";
-import { randomUUID } from "expo-crypto";
 import { useRouter } from "expo-router";
 import { useEffect, useMemo, useState } from "react";
 import { IngredientFormState, IUseIngredientForm } from "./type";
@@ -47,8 +46,7 @@ export function useIngredientForm({ initialState, onSubmit: onSubmitItem }: IUse
   const onSubmit = () => {
     if (!isValidState(formState)) return;
 
-    const newIngredient: Ingredient = {
-      id: initialState?.id ? initialState.id : randomUUID(),
+    const newIngredient: IngredientSubmitItem = {
       name: formState.name,
       storageLocation: formState.location.value,
       brand: formState.brand,

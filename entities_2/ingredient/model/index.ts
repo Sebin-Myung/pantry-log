@@ -2,5 +2,5 @@ export { QuantityUnitKorean, QuantityUnits, StorageLocationKorean, StorageLocati
 export { IngredientError, IngredientErrorCode, IngredientErrorString } from "./error";
 export { ingredientStorage } from "./storage";
 export { useIngredientStore } from "./store";
-export { Ingredient, Quantity, QuantityUnit, StorageLocation } from "./types";
+export { Ingredient, IngredientSubmitItem, Quantity, QuantityUnit, StorageLocation } from "./types";
 export { getIngredientKeys, getQuantityString, sortIngredients } from "./utils";

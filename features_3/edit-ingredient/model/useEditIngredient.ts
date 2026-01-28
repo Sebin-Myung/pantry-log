@@ -1,4 +1,11 @@
-import { Ingredient, IngredientError, ingredientStorage, showIngredientError, useIngredientStore } from "@entities";
+import {
+  Ingredient,
+  IngredientError,
+  ingredientStorage,
+  IngredientSubmitItem,
+  showIngredientError,
+  useIngredientStore,
+} from "@entities";
 import { useRouterFunc } from "@shared";
 import { useEffect, useState } from "react";
 
@@ -10,7 +17,7 @@ export function useEditIngredient({ id }: IUseEditIngredient) {
 
   const [item, setItem] = useState<Ingredient>();
 
-  const onSubmit = (item: Ingredient) => {
+  const onSubmit = (item: IngredientSubmitItem) => {
     try {
       updateIngredient(id, item);
     } catch (error) {

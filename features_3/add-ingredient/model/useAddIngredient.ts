@@ -1,11 +1,12 @@
-import { Ingredient, IngredientError, showIngredientError, useIngredientStore } from "@entities";
+import { IngredientError, IngredientSubmitItem, showIngredientError, useIngredientStore } from "@entities";
+import { randomUUID } from "expo-crypto";
 
 export function useAddIngredient() {
   const addIngredient = useIngredientStore((state) => state.add);
 
-  const onSubmit = (item: Ingredient) => {
+  const onSubmit = (item: IngredientSubmitItem) => {
     try {
-      addIngredient(item);
+      addIngredient({ ...item, id: randomUUID() });
     } catch (error) {
       if (error instanceof IngredientError) {
         showIngredientError({ error });

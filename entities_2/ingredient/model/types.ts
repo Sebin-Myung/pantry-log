@@ -21,3 +21,5 @@ export interface Ingredient {
   // 추후에 이미지 기능 추가 시 활용
   imageUrl: string | null;
 }
+
+export type IngredientSubmitItem = Omit<Ingredient, "id">;
