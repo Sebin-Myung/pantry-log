@@ -20,8 +20,8 @@ export const ROUTES: Record<StaticRouteKey, Href> = {
   tabPantry: "/pantry",
   addIngredient: "/ingredient/add",
 
-  cookingRecord: "/cooking-record",
-  recipe: "/recipe",
+  cookingRecord: "/records/cooking-record",
+  recipe: "/records/recipe",
   addRecipe: "/recipe/add",
 };
 
