@@ -10,7 +10,7 @@ export type QuantityFieldType = {
 
 export interface IUseQuantityField {
   value?: QuantityFieldType;
-  setValue: (value?: QuantityFieldType) => void;
+  setValue: (value?: Partial<QuantityFieldType>) => void;
 }
 
 const defautValue: QuantityFieldType = { amount: "" };
@@ -25,7 +25,7 @@ export function useQuantityField({ value, setValue }: IUseQuantityField) {
   };
 
   const onQuantityAmountChange = (amount: string) => {
-    setValue({ amount: onlyPositiveFloat(amount), unit: value?.unit });
+    setValue({ amount: onlyPositiveFloat(amount) });
   };
 
   const onQuantityUnitChange = (unitValue: unknown) => {
@@ -33,7 +33,7 @@ export function useQuantityField({ value, setValue }: IUseQuantityField) {
     const selected = getQuantityUnitLabelValueFromValue(unit);
 
     if (!selected) return;
-    setValue({ amount: value?.amount, unit: selected });
+    setValue({ unit: selected });
   };
 
   return {

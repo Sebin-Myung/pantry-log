@@ -1,5 +1,10 @@
 import { IngredientSubmitItem } from "@entities";
-import { getQuantityUnitLabelValueFromValue, getStorageLocationLabelValueFromValue, isValidQuantity } from "@features";
+import {
+  getQuantityUnitLabelValueFromValue,
+  getStorageLocationLabelValueFromValue,
+  isValidQuantity,
+  QuantityFieldType,
+} from "@features";
 import { ROUTES } from "@shared";
 import { useRouter } from "expo-router";
 import { useEffect, useMemo, useState } from "react";
@@ -31,6 +36,13 @@ export function useIngredientForm({ initialState, onSubmit: onSubmitItem }: IUse
         [key]: value,
       }));
     };
+
+  const setQuantity = (value?: Partial<QuantityFieldType>) => {
+    setFormState((prevState) => ({
+      ...prevState,
+      quantity: value !== undefined ? { ...prevState.quantity, ...value } : value,
+    }));
+  };
 
   const isValidState = (state: IngredientFormState): state is ValidIngredientFormState => {
     return !!state.location && !!state.name && !!state.purchaseDate && isValidQuantity(state.quantity);
@@ -83,5 +95,5 @@ export function useIngredientForm({ initialState, onSubmit: onSubmitItem }: IUse
     setFormState((prev) => ({ ...prev, ...existedState }));
   }, [initialState]);
 
-  return { state: formState, setField, isValid, onSubmit };
+  return { state: formState, setField, setQuantity, isValid, onSubmit };
 }

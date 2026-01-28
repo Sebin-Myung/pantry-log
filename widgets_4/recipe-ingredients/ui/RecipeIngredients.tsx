@@ -13,7 +13,7 @@ export function RecipeIngredients(props: IUseRecipeIngredients) {
 
   return (
     <View style={{ gap: 10 }}>
-      {ingredients.map((item, index) => {
+      {ingredients.map((_, index) => {
         const { name, quantity, setName, setQuantity } = getRowProps(index);
 
         return (

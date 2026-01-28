@@ -1,3 +1,4 @@
+import { QuantityFieldType } from "@features";
 import { IUseRecipeIngredients, RecipeIngredientFieldType } from "./types";
 
 export const DEFAULT_RECIPE_INGREDIENT_ROW: RecipeIngredientFieldType = {
@@ -15,7 +16,15 @@ export function useRecipeIngredients({ ingredients, setIngredients }: IUseRecipe
         setIngredients((prev) => prev.map((item, idx) => (idx === index ? { ...item, [key]: value } : item)));
       };
 
-    return { name: row.name, quantity: row.quantity, setName: setField("name"), setQuantity: setField("quantity") };
+    const setQuantity = (value?: Partial<QuantityFieldType>) => {
+      setIngredients((prev) =>
+        prev.map((item, idx) =>
+          idx === index ? { ...item, quantity: value !== undefined ? { ...item.quantity, ...value } : value } : item,
+        ),
+      );
+    };
+
+    return { name: row.name, quantity: row.quantity, setName: setField("name"), setQuantity };
   };
 
   const addRow = () => {

@@ -5,7 +5,7 @@ import { IUseIngredientForm } from "../model/type";
 import { useIngredientForm } from "../model/useIngredientForm";
 
 export function IngredientForm(props: IUseIngredientForm) {
-  const { state, setField, isValid, onSubmit } = useIngredientForm(props);
+  const { state, setField, setQuantity, isValid, onSubmit } = useIngredientForm(props);
 
   return (
     <View style={styles.container}>
@@ -16,7 +16,7 @@ export function IngredientForm(props: IUseIngredientForm) {
         <TextInput value={state.name} setValue={setField("name")} placeholder="제품명을 입력해주세요." />
       </Label>
       <Label text="용량" required>
-        <QuantityField value={state.quantity} setValue={setField("quantity")} />
+        <QuantityField value={state.quantity} setValue={setQuantity} />
       </Label>
       <Label text="브랜드">
         <TextInput value={state.brand} setValue={setField("brand")} placeholder="브랜드를 입력해주세요." />
