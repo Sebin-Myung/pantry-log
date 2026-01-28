@@ -1,9 +1,5 @@
-import { Text, View } from "react-native";
+import { AddRecipePage } from "@pages";
 
-export default function AddRecipePage() {
-  return (
-    <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
-      <Text>레시피 추가</Text>
-    </View>
-  );
+export default function Page() {
+  return <AddRecipePage />;
 }
