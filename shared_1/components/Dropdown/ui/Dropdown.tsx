@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useTheme } from "../../../providers/AppThemeProvider";
 import { OverlayModal } from "../../Modal/ui/OverlayModal";
 import { DropdownContext, useDropdownContext } from "../model/context";
-import { DropdownContextProps, DropdownItemProps, DropdownProps } from "../model/type";
+import { DropdownContextProps, DropdownItemProps, DropdownProps } from "../model/types";
 import { useDropdown } from "../model/useDropdown";
 
 function DropdownRoot<T>({ children, placeholder = "", onValueChange, ...props }: DropdownProps<T>) {

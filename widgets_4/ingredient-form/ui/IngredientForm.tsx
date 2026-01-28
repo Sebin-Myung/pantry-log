@@ -1,7 +1,7 @@
 import { QuantityField, StorageLocationRadioButton } from "@features";
 import { Button, DatePicker, Label, TextInput } from "@shared";
 import { StyleSheet, View } from "react-native";
-import { IUseIngredientForm } from "../model/type";
+import { IUseIngredientForm } from "../model/types";
 import { useIngredientForm } from "../model/useIngredientForm";
 
 export function IngredientForm(props: IUseIngredientForm) {

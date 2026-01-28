@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { DropdownContextProps } from "./type";
+import { DropdownContextProps } from "./types";
 
 export const DropdownContext = createContext<DropdownContextProps<unknown>>({ onItemClick: (value) => {} });
 

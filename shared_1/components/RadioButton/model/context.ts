@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { RadioButtonGroupProps } from "./type";
+import { RadioButtonGroupProps } from "./types";
 
 export const RadioButtonContext = createContext<RadioButtonGroupProps<unknown>>({ onValueChange: (value) => {} });
 

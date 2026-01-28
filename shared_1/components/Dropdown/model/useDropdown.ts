@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IUseDropdown } from "./type";
+import { IUseDropdown } from "./types";
 
 export function useDropdown<T>({ onValueChange }: IUseDropdown<T>) {
   const [isOpen, setIsOpen] = useState(false);

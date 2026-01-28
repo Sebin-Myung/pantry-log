@@ -8,7 +8,7 @@ import {
 import { ROUTES } from "@shared";
 import { useRouter } from "expo-router";
 import { useEffect, useMemo, useState } from "react";
-import { IngredientFormState, IUseIngredientForm } from "./type";
+import { IngredientFormState, IUseIngredientForm } from "./types";
 
 interface ValidIngredientFormState
   extends
