@@ -1,4 +1,4 @@
-import { Ingredient, IngredientSubmitItem, StorageLocation } from "@entities";
+import { IngredientSubmitItem, StorageLocation } from "@entities";
 import { QuantityFieldType } from "@features";
 import { LabelValue } from "@shared";
 
@@ -14,6 +14,6 @@ export interface IngredientFormState {
 }
 
 export interface IUseIngredientForm {
-  initialState?: Ingredient;
+  initialState?: IngredientSubmitItem;
   onSubmit: (item: IngredientSubmitItem) => void;
 }
