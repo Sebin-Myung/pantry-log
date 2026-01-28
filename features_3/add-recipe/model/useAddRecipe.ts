@@ -1,6 +1,5 @@
-import { RecipeError, showRecipeError } from "@entities";
+import { RecipeError, RecipeSubmitItem, showRecipeError } from "@entities";
 import { useRecipeStore } from "@entities/recipe/model/store";
-import { RecipeSubmitItem } from "@entities/recipe/model/types";
 import { randomUUID } from "expo-crypto";
 
 export function useAddRecipe() {
