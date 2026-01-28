@@ -1,4 +1,5 @@
 export * from "./add-ingredient";
+export * from "./add-recipe";
 export * from "./delete-ingredient";
 export * from "./edit-ingredient";
 export * from "./edit-ingredient-quantity";

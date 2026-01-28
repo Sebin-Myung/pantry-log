@@ -9,3 +9,5 @@ export interface Recipe {
   name: string;
   ingredients: RecipeIngredient[];
 }
+
+export type RecipeSubmitItem = Omit<Recipe, "id" | "createdAt" | "updatedAt">;
