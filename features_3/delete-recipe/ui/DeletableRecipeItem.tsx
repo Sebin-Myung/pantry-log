@@ -1,13 +1,16 @@
 import { Recipe, RecipeListItem } from "@entities";
-import { hasBatchim } from "@shared";
+import { hasBatchim, ROUTE_FACTORIES } from "@shared";
+import { useRouter } from "expo-router";
 import { Alert } from "react-native";
 import { useDeleteRecipe } from "../model/useDeleteRecipe";
 
 export function DeletableRecipeItem(props: Recipe) {
+  const router = useRouter();
+
   const { onDeleteRecipe } = useDeleteRecipe();
 
   const goToEditRecipe = () => {
-    // 라우터 푸시
+    router.push(ROUTE_FACTORIES.editRecipe(props.id));
   };
 
   const onItemLongPress = () => {
