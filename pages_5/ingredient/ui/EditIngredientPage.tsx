@@ -1,7 +1,7 @@
 import { IUseEditIngredient, useEditIngredient } from "@features";
-import { Loading } from "@shared";
+import { KeyboardAvoidingView, Loading } from "@shared";
 import { IngredientForm } from "@widgets";
-import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 
 export function EditIngredientPage(props: IUseEditIngredient) {
   const { initialState, onSubmit } = useEditIngredient(props);
@@ -9,11 +9,7 @@ export function EditIngredientPage(props: IUseEditIngredient) {
   if (!initialState) return <Loading />;
 
   return (
-    <KeyboardAvoidingView
-      style={{ flex: 1 }}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 0} // header 높이
-    >
+    <KeyboardAvoidingView>
       <ScrollView contentContainerStyle={styles.container}>
         <IngredientForm initialState={initialState} onSubmit={onSubmit} />
       </ScrollView>
