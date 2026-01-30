@@ -45,8 +45,15 @@ export const useIngredientStore = create<IUseIngredientStore>((set, get) => ({
     if (!currentIngredient) throw new IngredientError(IngredientErrorCode.NOT_FOUND);
 
     const newIngredient = { ...currentIngredient, ...partial };
+
+    // 중복 검사
+    currentIngredients.forEach((ingredient) => {
+      if (id !== ingredient.id && newIngredient.name === ingredient.name)
+        throw new IngredientError(IngredientErrorCode.DUPLICATED_NAME);
+    });
+
     const newItems = sortIngredients(
-      currentIngredients.map((ingredient) => (ingredient.id === id ? newIngredient : ingredient))
+      currentIngredients.map((ingredient) => (ingredient.id === id ? newIngredient : ingredient)),
     );
     const itemKeys = getIngredientKeys(newItems);
 
