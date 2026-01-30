@@ -48,7 +48,7 @@ export default function RootLayout() {
 
   return (
     <Providers>
-      <Stack screenOptions={{ headerTitle: "PantryLog", headerRight: createHeaderRight }}>
+      <Stack screenOptions={{ headerTitle: "PantryLog", headerBackVisible: false, headerRight: createHeaderRight }}>
         <Stack.Screen name="(main-tabs)" options={{ headerShown: true }} />
         <Stack.Screen name="ingredient" options={{ headerShown: false }} />
         <Stack.Screen name="recipe" options={{ headerShown: false }} />
