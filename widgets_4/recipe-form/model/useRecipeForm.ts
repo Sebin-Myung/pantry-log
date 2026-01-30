@@ -1,5 +1,5 @@
 import { RecipeSubmitItem } from "@entities";
-import { isValidQuantity, QuantityFieldType } from "@features";
+import { getQuantityUnitLabelValueFromValue, isValidQuantity, QuantityFieldType } from "@features";
 import { ROUTES } from "@shared";
 import { useRouter } from "expo-router";
 import { useEffect, useMemo, useState } from "react";
@@ -45,7 +45,20 @@ export function useRecipeForm({ initialState, onSubmit: onSubmitItem }: IUseReci
   useEffect(() => {
     if (!initialState) return;
 
-    // 초기값 세팅 로직 추가
+    const newIngredients: RecipeFormState["ingredients"] = initialState.ingredients.map(({ name, quantity }) =>
+      quantity
+        ? {
+            name,
+            quantity: {
+              amount: quantity.amount.toString(),
+              unit: getQuantityUnitLabelValueFromValue(quantity.unit),
+            },
+          }
+        : { name },
+    );
+
+    setName(initialState.name);
+    setIngredients(newIngredients);
   }, [initialState]);
 
   return { name, setName, ingredients, setIngredients, isValid, onSubmit };
