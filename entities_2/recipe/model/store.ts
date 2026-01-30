@@ -45,6 +45,12 @@ export const useRecipeStore = create<IUseRecipeStore>((set, get) => ({
     if (!currentRecipe) throw new RecipeError(RecipeErrorCode.NOT_FOUND);
 
     const newRecipe = { ...currentRecipe, ...partial };
+
+    // 중복 검사
+    currentRecipes.forEach((recipe) => {
+      if (id !== recipe.id && newRecipe.name === recipe.name) throw new RecipeError(RecipeErrorCode.DUPLICATED_NAME);
+    });
+
     const newItems = sortRecipes(currentRecipes.map((recipe) => (recipe.id === id ? newRecipe : recipe)));
     const itemKeys = getRecipeKeys(newItems);
 
