@@ -1,4 +1,5 @@
 export * from "./alert";
+export * from "./Badge";
 export * from "./Button";
 export * from "./Calendar";
 export * from "./DatePicker";
