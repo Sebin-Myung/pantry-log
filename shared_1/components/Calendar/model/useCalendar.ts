@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { getFirstDayOfMonth, getLastDayOfMonth, getYearMonthDate } from "./utils";
+import { getFirstDayOfMonth, getLastDayOfMonth, getYearMonthDate } from "../../../lib/utils";
 
 interface CalendarCell {
   date: Date;

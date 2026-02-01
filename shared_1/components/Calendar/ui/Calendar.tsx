@@ -1,10 +1,9 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { applyAlpha, padZero } from "../../../lib/utils";
+import { applyAlpha, getDateFormat, isSameDate, padZero } from "../../../lib/utils";
 import { useTheme } from "../../../providers/AppThemeProvider";
 import { IconButton } from "../../Button/ui/IconButton";
 import { IUseCalendar, useCalendar } from "../model/useCalendar";
-import { getDateFormat, isSameDate } from "../model/utils";
 
 interface CalendarProps extends IUseCalendar {
   highlightDays?: string[]; // YYYY-MM-DD
