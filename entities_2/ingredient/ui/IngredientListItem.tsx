@@ -1,6 +1,7 @@
-import { BasePressableProps, useTheme } from "@shared";
+import { Badge, BasePressableProps, calculateDday, useTheme } from "@shared";
+import { useMemo } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { getQuantityString, Ingredient } from "../model";
+import { ExpiryStatus, getExpiryStatus, getQuantityString, Ingredient } from "../model";
 import { StorageLocationBadge } from "./StorageLocationBadge";
 
 interface IngredientListItemProps extends Ingredient, Pick<BasePressableProps, "onPress" | "onLongPress"> {}
@@ -21,11 +22,41 @@ export function IngredientListItem({
 }: IngredientListItemProps) {
   const theme = useTheme();
 
+  const expiryStatus = getExpiryStatus(expirationDate);
+
+  const expiryStatusColor = useMemo(() => {
+    if (expiryStatus === null) return null;
+
+    switch (expiryStatus) {
+      case ExpiryStatus.APPROACHING:
+        return { backgroundColor: theme.colors.accentLight, color: "#3A2E2A", borderColor: "#E6C7BE" };
+      case ExpiryStatus.IMMINENT:
+        return { backgroundColor: theme.colors.accent, color: "#2F2522", borderColor: "#E0A392" };
+      case ExpiryStatus.EXPIRED:
+        return { backgroundColor: theme.colors.accentDark, color: "#2B1E1A", borderColor: "#BF6A56" };
+    }
+  }, [expiryStatus]);
+
   return (
-    <Pressable style={styles.container} onPress={onPress} onLongPress={onLongPress}>
+    <Pressable
+      style={[
+        styles.container,
+        expiryStatus !== null && {
+          boxShadow: "none",
+          borderColor: expiryStatusColor!.borderColor,
+          borderWidth: 1.5,
+        },
+      ]}
+      onPress={onPress}
+      onLongPress={onLongPress}>
       {/* {imageUrl && <Image style={{ ...styles.image, borderColor: theme.colors.gray }} />} */}
       <View style={styles.infoSection}>
         <View style={styles.title}>
+          {expiryStatus !== null && (
+            <Badge backgroundColor={expiryStatusColor!.backgroundColor} color={expiryStatusColor!.color}>
+              {calculateDday(new Date(expirationDate!))}
+            </Badge>
+          )}
           <StorageLocationBadge location={storageLocation} />
           <Text numberOfLines={1} ellipsizeMode="tail" style={styles.name}>
             {name}

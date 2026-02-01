@@ -1,6 +1,6 @@
-import { compareDateAsc } from "@shared";
+import { calculateDday, compareDateAsc } from "@shared";
 import { QuantityUnitKorean } from "./constants";
-import { Ingredient, Quantity } from "./types";
+import { ExpiryStatus, Ingredient, Quantity } from "./types";
 
 export const sortIngredients = (items: Ingredient[]) => {
   return [...items].sort((a, b) => {
@@ -29,4 +29,18 @@ export const getQuantityString = (quantity: Quantity) => {
   const { amount, unit } = quantity;
   if (amount > 1000) return `${amount / 1000}k${QuantityUnitKorean[unit]}`;
   return `${amount}${QuantityUnitKorean[unit]}`;
+};
+
+export const getExpiryStatus = (expirationDate: Ingredient["expirationDate"]): ExpiryStatus | null => {
+  if (!expirationDate) return null;
+
+  const dDay = calculateDday(new Date(expirationDate));
+
+  if (dDay.startsWith("D+")) return ExpiryStatus.EXPIRED;
+
+  const diffDay = Number(dDay.replace("D-", ""));
+
+  if (dDay === "D-Day" || diffDay <= 3) return ExpiryStatus.IMMINENT;
+  else if (diffDay <= 7) return ExpiryStatus.APPROACHING;
+  return null;
 };

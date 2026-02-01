@@ -23,3 +23,9 @@ export interface Ingredient {
 }
 
 export type IngredientSubmitItem = Omit<Ingredient, "id">;
+
+export enum ExpiryStatus {
+  APPROACHING, // ≤ 7 days
+  IMMINENT, // ≤ 3 days
+  EXPIRED, // < 0 day
+}

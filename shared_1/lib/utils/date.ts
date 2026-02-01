@@ -33,3 +33,26 @@ export const getDateFormat = (date: Date) => {
   const d = padZero(date.getDate());
   return `${y}-${m}-${d}`;
 };
+
+export const normalizeDate = (date: Date) => {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+};
+
+export const calculateDday = (targetDate: Date) => {
+  const today = normalizeDate(new Date());
+  const target = normalizeDate(targetDate);
+
+  // 시간 차이 (ms)
+  const diffTime = target.getTime() - today.getTime();
+
+  // 날짜 차이
+  const diffDay = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  if (diffDay > 0) {
+    return `D-${diffDay}`;
+  } else if (diffDay === 0) {
+    return "D-Day";
+  } else {
+    return `D+${Math.abs(diffDay)}`;
+  }
+};
