@@ -8,6 +8,7 @@ type StaticRouteKey =
   | "tabPantry"
   | "addIngredient"
   | "cookingRecord"
+  | "addCookingRecord"
   | "recipe"
   | "addRecipe";
 type DynamicRouteKey = "editIngredient" | "editRecipe";
@@ -21,6 +22,7 @@ export const ROUTES: Record<StaticRouteKey, Href> = {
   addIngredient: "/ingredient/add",
 
   cookingRecord: "/records/cooking-record",
+  addCookingRecord: "/cooking-record/add",
   recipe: "/records/recipe",
   addRecipe: "/recipe/add",
 };
