@@ -5,7 +5,7 @@ import { IUseRecipeForm } from "../model/types";
 import { useRecipeForm } from "../model/useRecipeForm";
 
 export function RecipeForm(props: IUseRecipeForm) {
-  const { name, setName, ingredients, setIngredients, isValid, onSubmit } = useRecipeForm(props);
+  const { name, setName, ingredients, setIngredients, isValid, isSubmitting, onSubmit } = useRecipeForm(props);
 
   return (
     <View style={styles.container}>
@@ -15,7 +15,7 @@ export function RecipeForm(props: IUseRecipeForm) {
       <Label text="사용한 재료" required>
         <RecipeIngredients ingredients={ingredients} setIngredients={setIngredients} />
       </Label>
-      <Button disabled={!isValid} onPress={onSubmit}>
+      <Button disabled={!isValid} isSubmitting={isSubmitting} onPress={onSubmit}>
         <Button.Text>확인</Button.Text>
       </Button>
     </View>

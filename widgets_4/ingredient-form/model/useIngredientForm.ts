@@ -5,7 +5,7 @@ import {
   isValidQuantity,
   QuantityFieldType,
 } from "@features";
-import { ROUTES } from "@shared";
+import { ROUTES, useSubmit } from "@shared";
 import { useRouter } from "expo-router";
 import { useEffect, useMemo, useState } from "react";
 import { IngredientFormState, IUseIngredientForm } from "./types";
@@ -19,6 +19,7 @@ interface ValidIngredientFormState
 
 export function useIngredientForm({ initialState, onSubmit: onSubmitItem }: IUseIngredientForm) {
   const router = useRouter();
+  const { isSubmitting, handleSubmit } = useSubmit();
 
   const [formState, setFormState] = useState<IngredientFormState>({
     name: "",
@@ -50,29 +51,32 @@ export function useIngredientForm({ initialState, onSubmit: onSubmitItem }: IUse
 
   const isValid = useMemo(() => isValidState(formState), [formState, isValidState]);
 
-  const onSubmit = () => {
-    if (!isValidState(formState)) return;
+  const onSubmit = () =>
+    handleSubmit(async () => {
+      if (!isValidState(formState)) return;
 
-    const newIngredient: IngredientSubmitItem = {
-      name: formState.name,
-      storageLocation: formState.location.value,
-      brand: formState.brand,
-      purchaseSource: formState.purchaseSource,
-      quantity: formState.quantity
-        ? { amount: Number(formState.quantity.amount), unit: formState.quantity.unit.value }
-        : null,
-      purchaseDate: formState.purchaseDate?.toISOString(),
-      productionDate: formState.productionDate?.toISOString() ?? null,
-      expirationDate: formState.expirationDate?.toISOString() ?? null,
-      imageUrl: null,
-    };
+      const newIngredient: IngredientSubmitItem = {
+        name: formState.name,
+        storageLocation: formState.location.value,
+        brand: formState.brand,
+        purchaseSource: formState.purchaseSource,
+        quantity: formState.quantity
+          ? { amount: Number(formState.quantity.amount), unit: formState.quantity.unit.value }
+          : null,
+        purchaseDate: formState.purchaseDate?.toISOString(),
+        productionDate: formState.productionDate?.toISOString() ?? null,
+        expirationDate: formState.expirationDate?.toISOString() ?? null,
+        imageUrl: null,
+      };
 
-    try {
-      onSubmitItem(newIngredient);
+      try {
+        onSubmitItem(newIngredient);
 
-      router.replace(ROUTES.home);
-    } catch (error) {}
-  };
+        router.replace(ROUTES.home);
+      } catch (error) {
+        throw error;
+      }
+    });
 
   useEffect(() => {
     if (!initialState) return;
@@ -95,5 +99,5 @@ export function useIngredientForm({ initialState, onSubmit: onSubmitItem }: IUse
     setFormState((prev) => ({ ...prev, ...existedState }));
   }, [initialState]);
 
-  return { state: formState, setField, setQuantity, isValid, onSubmit };
+  return { state: formState, setField, setQuantity, isValid, isSubmitting, onSubmit };
 }
