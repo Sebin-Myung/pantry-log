@@ -2,7 +2,11 @@ import { Dropdown, RadioButton, TextInput } from "@shared";
 import { View } from "react-native";
 import { IUseQuantityField, useQuantityField } from "../model/useQuantityField";
 
-export function QuantityField(props: IUseQuantityField) {
+interface QuantityFieldProps extends IUseQuantityField {
+  unitDisabled?: boolean;
+}
+
+export function QuantityField({ unitDisabled, ...props }: QuantityFieldProps) {
   const { isQuantityEnabled, value, units, onQuantityOptionChange, onQuantityAmountChange, onQuantityUnitChange } =
     useQuantityField(props);
 
@@ -27,7 +31,8 @@ export function QuantityField(props: IUseQuantityField) {
               placeholder="단위 선택"
               label={value?.unit?.label}
               value={value?.unit?.value}
-              onValueChange={onQuantityUnitChange}>
+              onValueChange={onQuantityUnitChange}
+              disabled={unitDisabled}>
               {units.map((item, index) => (
                 <Dropdown.Item
                   key={item.value}
