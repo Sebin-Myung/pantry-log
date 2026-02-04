@@ -5,4 +5,5 @@ export * from "./delete-recipe";
 export * from "./edit-ingredient";
 export * from "./edit-ingredient-quantity";
 export * from "./edit-recipe";
+export * from "./select-recipe";
 export * from "./select-storage-type";
