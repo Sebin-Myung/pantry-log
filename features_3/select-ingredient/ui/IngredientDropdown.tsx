@@ -1,7 +1,12 @@
+import { Ingredient } from "@entities";
 import { Dropdown } from "@shared";
 import { IUseIngredientDropdown, useIngredientDropdown } from "../model/useIngredientDropdown";
 
-export function IngredientDropdown(props: IUseIngredientDropdown) {
+interface IngredientDropdownProps extends IUseIngredientDropdown {
+  disabledIngredientIds?: Ingredient["id"][];
+}
+
+export function IngredientDropdown({ disabledIngredientIds = [], ...props }: IngredientDropdownProps) {
   const { isLoading, ingredientLabelValues, selectedIngredient, onIngredientChange } = useIngredientDropdown(props);
 
   const isEmpty = !isLoading && ingredientLabelValues.length === 0;
@@ -19,6 +24,7 @@ export function IngredientDropdown(props: IUseIngredientDropdown) {
           label={item.label}
           value={item.value}
           isLast={index === ingredientLabelValues.length - 1}
+          disabled={disabledIngredientIds.includes(item.value.id)}
         />
       ))}
     </Dropdown.Root>
