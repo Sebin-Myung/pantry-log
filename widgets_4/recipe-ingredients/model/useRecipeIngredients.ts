@@ -1,4 +1,7 @@
-import { QuantityFieldType } from "@features";
+import { Ingredient } from "@entities";
+import { getQuantityUnitLabelValueFromValue, QuantityFieldType } from "@features";
+import { LabelValue } from "@shared";
+import { useMemo, useState } from "react";
 import { IUseRecipeIngredients, RecipeIngredientFieldType } from "./types";
 
 export const DEFAULT_RECIPE_INGREDIENT_ROW: RecipeIngredientFieldType = {
@@ -6,7 +9,9 @@ export const DEFAULT_RECIPE_INGREDIENT_ROW: RecipeIngredientFieldType = {
   quantity: { amount: "" },
 };
 
-export function useRecipeIngredients({ ingredients, setIngredients }: IUseRecipeIngredients) {
+export function useRecipeIngredients({ inputType = "input", ingredients, setIngredients }: IUseRecipeIngredients) {
+  const [selectedIngredients, setSelectedIngredients] = useState<(LabelValue<Ingredient> | undefined)[]>([]);
+
   const getRowProps = (index: number) => {
     const row = ingredients[index];
 
@@ -18,14 +23,66 @@ export function useRecipeIngredients({ ingredients, setIngredients }: IUseRecipe
 
     const setQuantity = (value?: Partial<QuantityFieldType>) => {
       setIngredients((prev) =>
-        prev.map((item, idx) =>
-          idx === index ? { ...item, quantity: value !== undefined ? { ...item.quantity, ...value } : value } : item,
-        ),
+        prev.map((item, idx) => {
+          if (idx !== index) return item;
+          if (value === undefined) return { ...item, quantity: value };
+          return { ...item, quantity: { ...item.quantity, ...value } };
+        }),
       );
     };
 
-    return { name: row.name, quantity: row.quantity, setName: setField("name"), setQuantity };
+    if (inputType === "input")
+      return { name: row.name, quantity: row.quantity, setName: setField("name"), setQuantity };
+
+    const selectedIngredient = selectedIngredients[index];
+    const existedAmount = selectedIngredient?.value.quantity?.amount;
+    const existedUnit = selectedIngredient?.value.quantity?.unit;
+
+    const setSelectedIngredient = (ingredient?: LabelValue<Ingredient>) => {
+      setSelectedIngredients((prev) => {
+        const newIngredients = [...prev];
+        newIngredients[index] = ingredient;
+        return newIngredients;
+      });
+
+      const newExistedUnit = ingredient?.value.quantity?.unit;
+      if (row.quantity !== undefined) {
+        setQuantity({
+          amount: "",
+          unit: newExistedUnit ? getQuantityUnitLabelValueFromValue(newExistedUnit) : undefined,
+        });
+      }
+    };
+
+    const setRestrictedQuantity = (value?: Partial<QuantityFieldType>) => {
+      setIngredients((prev) =>
+        prev.map((item, idx) => {
+          if (idx !== index) return item;
+          if (value === undefined) return { ...item, quantity: value };
+
+          let quantity = { ...item.quantity, ...value };
+
+          if (existedAmount) quantity.amount = Math.min(Number(quantity.amount), existedAmount).toString();
+          if (existedUnit) quantity.unit = getQuantityUnitLabelValueFromValue(existedUnit);
+
+          return { ...item, quantity };
+        }),
+      );
+    };
+
+    return {
+      selectedIngredient,
+      setSelectedIngredient,
+      quantity: row.quantity,
+      setQuantity: setRestrictedQuantity,
+      unitDisabled: !!existedUnit,
+    };
   };
+
+  const disabledIngredientIds = useMemo(
+    () => selectedIngredients.map((item) => item?.value.id).filter((id): id is Ingredient["id"] => !!id),
+    [selectedIngredients],
+  );
 
   const addRow = () => {
     setIngredients((prev) => [...prev, DEFAULT_RECIPE_INGREDIENT_ROW]);
@@ -35,5 +92,5 @@ export function useRecipeIngredients({ ingredients, setIngredients }: IUseRecipe
     setIngredients((prev) => prev.filter((item, idx) => idx !== index));
   };
 
-  return { ingredients, getRowProps, addRow, deleteRow };
+  return { ingredients, getRowProps, disabledIngredientIds, addRow, deleteRow };
 }

@@ -6,6 +6,7 @@ export interface RecipeIngredientFieldType {
 }
 
 export interface IUseRecipeIngredients {
+  inputType?: "input" | "dropdown";
   ingredients: RecipeIngredientFieldType[];
   setIngredients: React.Dispatch<React.SetStateAction<RecipeIngredientFieldType[]>>;
 }

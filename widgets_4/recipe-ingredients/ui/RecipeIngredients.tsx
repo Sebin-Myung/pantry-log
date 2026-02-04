@@ -1,20 +1,24 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { QuantityField } from "@features";
+import { IngredientDropdown, QuantityField } from "@features";
 import { Button, IconButton, Label, TextInput, useTheme } from "@shared";
 import { View } from "react-native";
 import { IUseRecipeIngredients } from "../model/types";
 import { useRecipeIngredients } from "../model/useRecipeIngredients";
 
-export function RecipeIngredients(props: IUseRecipeIngredients) {
+export function RecipeIngredients({ inputType = "input", ...props }: IUseRecipeIngredients) {
   const theme = useTheme();
 
-  const { ingredients, getRowProps, addRow, deleteRow } = useRecipeIngredients(props);
+  const { ingredients, getRowProps, addRow, deleteRow, disabledIngredientIds } = useRecipeIngredients({
+    inputType,
+    ...props,
+  });
 
   return (
     <View style={{ gap: 10 }}>
       {ingredients.map((_, index) => {
-        const { name, quantity, setName, setQuantity } = getRowProps(index);
+        const { name, quantity, setName, setQuantity, selectedIngredient, setSelectedIngredient, unitDisabled } =
+          getRowProps(index);
 
         return (
           <View
@@ -49,10 +53,18 @@ export function RecipeIngredients(props: IUseRecipeIngredients) {
               </IconButton>
             )}
             <Label text="재료 이름" required>
-              <TextInput value={name} setValue={setName} placeholder="재료의 이름을 입력해주세요." />
+              {inputType === "input" ? (
+                <TextInput value={name!} setValue={setName!} placeholder="재료의 이름을 입력해주세요." />
+              ) : (
+                <IngredientDropdown
+                  selectedIngredient={selectedIngredient}
+                  setSelectedIngredient={setSelectedIngredient!}
+                  disabledIngredientIds={disabledIngredientIds}
+                />
+              )}
             </Label>
             <Label text="재료 용량" required>
-              <QuantityField value={quantity} setValue={setQuantity} />
+              <QuantityField value={quantity} setValue={setQuantity} unitDisabled={unitDisabled} />
             </Label>
           </View>
         );
