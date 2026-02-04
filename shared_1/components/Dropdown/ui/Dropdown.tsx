@@ -43,7 +43,7 @@ function DropdownRoot<T>({ children, placeholder = "", disabled, onValueChange, 
   );
 }
 
-function DropdownItem<T>({ label, value, isLast }: DropdownItemProps<T>) {
+function DropdownItem<T>({ label, value, disabled, isLast }: DropdownItemProps<T>) {
   const { value: selectedValue, onItemClick } = useDropdownContext();
   const theme = useTheme();
 
@@ -51,11 +51,16 @@ function DropdownItem<T>({ label, value, isLast }: DropdownItemProps<T>) {
 
   return (
     <Pressable
+      disabled={disabled}
       onPress={() => onItemClick(value)}
       accessibilityRole="menuitem"
-      accessibilityState={{ selected }}
-      style={{ ...styles.item, ...(isLast ? {} : { borderBottomWidth: 1, borderBottomColor: theme.colors.gray }) }}>
-      <Text numberOfLines={1} ellipsizeMode="tail" style={styles.label}>
+      accessibilityState={{ selected, disabled }}
+      style={[
+        styles.item,
+        !isLast && { borderBottomWidth: 1, borderBottomColor: theme.colors.gray },
+        disabled && { backgroundColor: theme.colors.lightGray },
+      ]}>
+      <Text numberOfLines={1} ellipsizeMode="tail" style={[styles.label, disabled && { color: theme.colors.gray }]}>
         {label}
       </Text>
     </Pressable>

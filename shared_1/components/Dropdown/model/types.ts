@@ -20,5 +20,6 @@ export type DropdownProps<T> = PropsWithChildren<
 >;
 
 export interface DropdownItemProps<T> extends LabelValue<T> {
+  disabled?: boolean;
   isLast?: boolean;
 }

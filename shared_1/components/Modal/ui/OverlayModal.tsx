@@ -36,6 +36,7 @@ function OverlayModalContainer({
           transform: [{ translateY: "-50%" }],
           backgroundColor: "#fff",
           borderRadius: 10,
+          overflow: "hidden",
 
           // iOS shadow
           shadowColor: "#000",
