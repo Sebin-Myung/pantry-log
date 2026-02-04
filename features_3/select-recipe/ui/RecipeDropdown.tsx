@@ -8,7 +8,7 @@ export function RecipeDropdown(props: IUseRecipeDropdown) {
 
   return (
     <Dropdown.Root
-      placeholder={isEmpty ? "저장한 레시피가 없습니다." : "레시피를 선택하세요."}
+      placeholder={isEmpty ? "등록한 레시피가 없습니다." : "레시피를 선택하세요."}
       label={selectedRecipe?.label}
       value={selectedRecipe?.value}
       onValueChange={onRecipeChange}
