@@ -1,13 +1,20 @@
 import { useTheme } from "@shared/providers";
-import { Pressable, Text } from "react-native";
+import { ActivityIndicator, Pressable, Text } from "react-native";
 import { ButtonContext, useButtonContext } from "../model/context";
 import { BasePressableProps, ButtonVariant } from "../model/types";
 
+const ButtonTextColor: Record<ButtonVariant, string> = {
+  primary: "white",
+  secondary: "white",
+  tertiary: "black",
+};
+
 interface ButtonProps extends BasePressableProps {
   variant?: ButtonVariant;
+  isSubmitting?: boolean;
 }
 
-function Button({ variant = "primary", style, children, ...props }: ButtonProps) {
+function Button({ variant = "primary", isSubmitting, style, children, disabled, ...props }: ButtonProps) {
   const theme = useTheme();
 
   return (
@@ -24,7 +31,7 @@ function Button({ variant = "primary", style, children, ...props }: ButtonProps)
             alignSelf: "stretch",
             opacity: pressed ? 0.8 : 1,
           },
-          props.disabled && { opacity: 0.5 },
+          disabled && { opacity: 0.5 },
           typeof style === "function"
             ? style({
                 pressed,
@@ -32,8 +39,9 @@ function Button({ variant = "primary", style, children, ...props }: ButtonProps)
               })
             : style,
         ]}
+        disabled={disabled || isSubmitting}
         {...props}>
-        {children}
+        {isSubmitting ? <ActivityIndicator size="small" color={ButtonTextColor[variant]} /> : children}
       </Pressable>
     </ButtonContext.Provider>
   );
@@ -48,7 +56,7 @@ function ButtonText({ style, children, ...props }: BaseTextProps) {
     <Text
       style={[
         {
-          color: variant === "tertiary" ? "black" : "white",
+          color: ButtonTextColor[variant],
           fontSize: 20,
           fontWeight: "600",
         },
