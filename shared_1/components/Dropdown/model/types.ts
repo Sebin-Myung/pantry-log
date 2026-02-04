@@ -14,6 +14,7 @@ export interface IUseDropdown<T> {
 export type DropdownProps<T> = PropsWithChildren<
   {
     placeholder?: string;
+    disabled?: boolean;
   } & Omit<DropdownContextProps<T>, "onItemClick"> &
     IUseDropdown<T>
 >;

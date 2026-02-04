@@ -6,7 +6,7 @@ import { DropdownContext, useDropdownContext } from "../model/context";
 import { DropdownContextProps, DropdownItemProps, DropdownProps } from "../model/types";
 import { useDropdown } from "../model/useDropdown";
 
-function DropdownRoot<T>({ children, placeholder = "", onValueChange, ...props }: DropdownProps<T>) {
+function DropdownRoot<T>({ children, placeholder = "", disabled, onValueChange, ...props }: DropdownProps<T>) {
   const { isOpen, openDropdown, closeDropdown, onItemClick } = useDropdown({ onValueChange });
   const theme = useTheme();
 
@@ -16,12 +16,16 @@ function DropdownRoot<T>({ children, placeholder = "", onValueChange, ...props }
         <Pressable
           onPress={openDropdown}
           accessibilityRole="button"
-          accessibilityState={{ expanded: isOpen }}
-          style={{ ...styles.container, borderColor: theme.colors.gray }}>
+          accessibilityState={{ expanded: isOpen, disabled }}
+          disabled={disabled}
+          style={[
+            { ...styles.container, borderColor: theme.colors.gray },
+            disabled && { backgroundColor: theme.colors.lightGray },
+          ]}>
           <Text
             numberOfLines={1}
             ellipsizeMode="tail"
-            style={{ ...styles.label, ...(!props.label ? { color: theme.colors.gray } : {}) }}>
+            style={[styles.label, !props.label && { color: theme.colors.gray }]}>
             {props.label ?? placeholder}
           </Text>
           <MaterialCommunityIcons
