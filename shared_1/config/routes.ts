@@ -1,4 +1,4 @@
-import { Href } from "expo-router";
+import { Href, Route } from "expo-router";
 
 type StaticRouteKey =
   | "home"
@@ -13,7 +13,7 @@ type StaticRouteKey =
   | "addRecipe";
 type DynamicRouteKey = "editIngredient" | "editRecipe";
 
-export const ROUTES: Record<StaticRouteKey, Href> = {
+export const ROUTES: Record<StaticRouteKey, Route> = {
   home: "/",
   tabAll: "/",
   tabFrozen: "/frozen",
