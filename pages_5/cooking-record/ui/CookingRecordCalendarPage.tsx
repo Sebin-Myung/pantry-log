@@ -1,0 +1,36 @@
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { Calendar, IconButton, ROUTES, useTheme } from "@shared";
+import { Link } from "expo-router";
+import { ScrollView, Text, View } from "react-native";
+import { useCookingRecordCalendarPage } from "../model/useCookingRecordCalendarPage";
+
+export function CookingRecordCalendarPage() {
+  const theme = useTheme();
+
+  const { selectedDate, setSelectedDate, year, month, date } = useCookingRecordCalendarPage();
+
+  return (
+    <View style={{ flex: 1 }}>
+      <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} highlightDays={[]} />
+      <View
+        style={{
+          borderTopWidth: 1,
+          borderBottomWidth: 1,
+          borderColor: theme.colors.gray,
+          paddingVertical: 12,
+          paddingHorizontal: 16,
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}>
+        <Text style={{ fontSize: 16, fontWeight: "600" }}>{`${year}년 ${month + 1}월 ${date}일`}</Text>
+        <Link href={ROUTES.addCookingRecord} asChild>
+          <IconButton>
+            <MaterialCommunityIcons name="plus" size={24} color="black" />
+          </IconButton>
+        </Link>
+      </View>
+      <ScrollView style={{ flex: 1 }}></ScrollView>
+    </View>
+  );
+}
