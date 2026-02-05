@@ -13,7 +13,7 @@ export function RecipeForm(props: IUseRecipeForm) {
         <TextInput value={name} setValue={setName} placeholder="레시피의 이름을 입력해주세요." />
       </Label>
       <Label text="사용한 재료" required>
-        <RecipeIngredients ingredients={ingredients} setIngredients={setIngredients} />
+        <RecipeIngredients inputType="input" ingredients={ingredients} setIngredients={setIngredients} />
       </Label>
       <Button disabled={!isValid} isSubmitting={isSubmitting} onPress={onSubmit}>
         <Button.Text>확인</Button.Text>

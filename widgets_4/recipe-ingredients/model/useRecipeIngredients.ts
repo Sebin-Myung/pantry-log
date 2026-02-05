@@ -1,16 +1,17 @@
 import { Ingredient } from "@entities";
 import { getQuantityUnitLabelValueFromValue, QuantityFieldType } from "@features";
 import { LabelValue } from "@shared";
-import { useMemo, useState } from "react";
-import { IUseRecipeIngredients, RecipeIngredientFieldType } from "./types";
+import { RecipeIngredientFieldType, RecipeIngredientsDropdownProps, UseRecipeIngredientsProps } from "./types";
 
 export const DEFAULT_RECIPE_INGREDIENT_ROW: RecipeIngredientFieldType = {
   name: "",
   quantity: { amount: "" },
 };
 
-export function useRecipeIngredients({ inputType = "input", ingredients, setIngredients }: IUseRecipeIngredients) {
-  const [selectedIngredients, setSelectedIngredients] = useState<(LabelValue<Ingredient> | undefined)[]>([]);
+export function useRecipeIngredients(props: UseRecipeIngredientsProps) {
+  const { ingredients, setIngredients } = props;
+  const isDropdownType = (props: UseRecipeIngredientsProps): props is RecipeIngredientsDropdownProps =>
+    props.inputType === "dropdown";
 
   const getRowProps = (index: number) => {
     const row = ingredients[index];
@@ -18,11 +19,13 @@ export function useRecipeIngredients({ inputType = "input", ingredients, setIngr
     const setField =
       <K extends keyof RecipeIngredientFieldType>(key: K) =>
       (value: RecipeIngredientFieldType[K]) => {
-        setIngredients((prev) => prev.map((item, idx) => (idx === index ? { ...item, [key]: value } : item)));
+        setIngredients((prev: UseRecipeIngredientsProps["ingredients"]) =>
+          prev.map((item, idx) => (idx === index ? { ...item, [key]: value } : item)),
+        );
       };
 
     const setQuantity = (value?: Partial<QuantityFieldType>) => {
-      setIngredients((prev) =>
+      setIngredients((prev: UseRecipeIngredientsProps["ingredients"]) =>
         prev.map((item, idx) => {
           if (idx !== index) return item;
           if (value === undefined) return { ...item, quantity: value };
@@ -31,19 +34,17 @@ export function useRecipeIngredients({ inputType = "input", ingredients, setIngr
       );
     };
 
-    if (inputType === "input")
+    if (!isDropdownType(props))
       return { name: row.name, quantity: row.quantity, setName: setField("name"), setQuantity };
 
-    const selectedIngredient = selectedIngredients[index];
+    const selectedIngredient = props.ingredients[index].selectedIngredient;
     const existedAmount = selectedIngredient?.value.quantity?.amount;
     const existedUnit = selectedIngredient?.value.quantity?.unit;
 
     const setSelectedIngredient = (ingredient?: LabelValue<Ingredient>) => {
-      setSelectedIngredients((prev) => {
-        const newIngredients = [...prev];
-        newIngredients[index] = ingredient;
-        return newIngredients;
-      });
+      props.setIngredients((prev) =>
+        prev.map((item, idx) => (idx === index ? { ...item, selectedIngredient: ingredient } : item)),
+      );
 
       setField("name")(ingredient?.label ?? "");
 
@@ -57,7 +58,7 @@ export function useRecipeIngredients({ inputType = "input", ingredients, setIngr
     };
 
     const setRestrictedQuantity = (value?: Partial<QuantityFieldType>) => {
-      setIngredients((prev) =>
+      props.setIngredients((prev) =>
         prev.map((item, idx) => {
           if (idx !== index) return item;
           if (value === undefined) return { ...item, quantity: value };
@@ -81,17 +82,16 @@ export function useRecipeIngredients({ inputType = "input", ingredients, setIngr
     };
   };
 
-  const disabledIngredientIds = useMemo(
-    () => selectedIngredients.map((item) => item?.value.id).filter((id): id is Ingredient["id"] => !!id),
-    [selectedIngredients],
-  );
+  const disabledIngredientIds = !isDropdownType(props)
+    ? []
+    : props.ingredients.map((item) => item.selectedIngredient?.value.id).filter((id): id is Ingredient["id"] => !!id);
 
   const addRow = () => {
-    setIngredients((prev) => [...prev, DEFAULT_RECIPE_INGREDIENT_ROW]);
+    setIngredients((prev: UseRecipeIngredientsProps["ingredients"]) => [...prev, DEFAULT_RECIPE_INGREDIENT_ROW]);
   };
 
   const deleteRow = (index: number) => {
-    setIngredients((prev) => prev.filter((item, idx) => idx !== index));
+    setIngredients((prev: UseRecipeIngredientsProps["ingredients"]) => prev.filter((_, idx) => idx !== index));
   };
 
   return { ingredients, getRowProps, disabledIngredientIds, addRow, deleteRow };

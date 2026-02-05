@@ -3,10 +3,10 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { IngredientDropdown, QuantityField } from "@features";
 import { Button, IconButton, Label, TextInput, useTheme } from "@shared";
 import { View } from "react-native";
-import { IUseRecipeIngredients } from "../model/types";
+import { UseRecipeIngredientsProps } from "../model/types";
 import { useRecipeIngredients } from "../model/useRecipeIngredients";
 
-export function RecipeIngredients({ inputType = "input", ...props }: IUseRecipeIngredients) {
+export function RecipeIngredients({ inputType, ...props }: UseRecipeIngredientsProps) {
   const theme = useTheme();
 
   const { ingredients, getRowProps, addRow, deleteRow, disabledIngredientIds } = useRecipeIngredients({
