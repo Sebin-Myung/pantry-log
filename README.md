@@ -1,50 +1,73 @@
-# Welcome to your Expo app 👋
+# PantryLog
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+간단한 개인 식재료 관리 모바일 앱 (Expo + React Native + TypeScript)
 
-## Get started
+## 소개
 
-1. Install dependencies
+PantryLog는 가정의 재료를 추가하고, 보관 위치별로 관리하며, 요리 기록과 레시피를 함께 관리할 수 있는 경량 앱입니다.
 
-   ```bash
-   npm install
-   ```
+## 빠른 시작
 
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+1. 의존성 설치
 
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. 개발 서버 실행
 
-## Learn more
+```bash
+npx expo start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+3. Android/iOS 시뮬레이터에서 앱을 실행하세요.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## 주요 기술 스택
 
-## Join the community
+- Expo
+- React Native
+- TypeScript
+- 파일 기반 라우팅 (Expo Router)
 
-Join our community of developers creating universal apps.
+## 개발 팁
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- 스토어/로컬 저장소 초기화: 엔티티 폴더의 `model/storage.ts` 혹은 `use...Store.hydrate` 호출 확인
+- 라우트 상수는 `shared/.../routes`에서 관리
+- 새로운 페이지/레이아웃은 `app/` 폴더에 파일 기반으로 추가
+
+## 폴더 구조 원칙 — Feature-Sliced Design (FSD)
+
+이 프로젝트는 Feature-Sliced Design(FSD) 원칙을 기본으로 구성되어 있습니다. FSD는 코드베이스를 책임(계층)과 기능(슬라이스)으로 나누어 확장성과 유지보수성을 높입니다. 이 저장소에서는 다음 레이어를 사용합니다:
+
+- `app/` — 라우팅과 페이지 레이아웃(프레젠테이션 진입점)
+- `pages/` — (웹/페이지별 진입점이 있는 경우) 페이지 묶음
+- `entities/` — 독립적인 도메인 엔티티(데이터 타입, 저장소, 영속화 로직)
+- `features/` — 비즈니스 기능(엔티티와 UI를 조합하여 동작을 구현)
+- `widgets/` — 재사용 가능한 UI 블록(폼, 리스트, 카드 등)
+- `shared/` — 전역 유틸리티, 스타일, 상수, 설정
+
+폴더/슬라이스별 권장 구조(예시):
+
+`entities/ingredient/`
+
+- `index.ts` — public export
+- `model/` — 상태관리, storage, 타입
+- `ui/` — 엔티티 관련 재사용 컴포넌트
+
+`features/add-ingredient/`
+
+- `index.ts` — feature의 public API
+- `ui/` — 페이지/모달 등 feature의 UI
+- `model/` — feature 전용 상태나 훅
+
+`widgets/ingredient-form/`
+
+- `ui/IngredientForm.tsx`
+- `index.ts`
+
+간단한 가이드라인:
+
+- 각 슬라이스는 `index.ts`를 통해 외부로 노출하세요(바렐 파일).
+- UI(`ui/`)와 상태/비즈니스 로직(`model/`)을 분리합니다.
+- 다른 슬라이스를 참조할 때는 슬라이스 루트(예: `entities/ingredient`)를 통해 가져오고, 내부 경로(심층 경로)는 피합니다.
+- 공통 유틸/스타일은 `shared/`에 두어 중복을 줄입니다.
