@@ -6,3 +6,5 @@ export interface CookingRecord extends Pick<Recipe, "name" | "ingredients"> {
   updatedAt: string; // ISO date string
   cookedAt: string; // YYYY-MM-DD
 }
+
+export type CookingRecordSubmitItem = Omit<CookingRecord, "id" | "createdAt" | "updatedAt">;
