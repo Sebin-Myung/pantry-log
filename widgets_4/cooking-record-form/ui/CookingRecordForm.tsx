@@ -12,7 +12,7 @@ export function CookingRecordForm(props: IUseCookingRecordForm) {
     cookedAt,
     setCookedAt,
     selectedRecipe,
-    setSelectedRecipe,
+    onRecipeItemClick,
     ingredients,
     setIngredients,
     unappliedIngredients,
@@ -31,7 +31,7 @@ export function CookingRecordForm(props: IUseCookingRecordForm) {
         <DatePicker date={cookedAt} setDate={setCookedAt} />
       </Label>
       <Label text="레시피 불러오기">
-        <RecipeDropdown selectedRecipe={selectedRecipe} setSelectedRecipe={setSelectedRecipe} />
+        <RecipeDropdown selectedRecipe={selectedRecipe} setSelectedRecipe={onRecipeItemClick} />
       </Label>
       <Label text="사용한 재료" required>
         {/** 불러온 레시피 중 반영되지 않은 재료들 */}
