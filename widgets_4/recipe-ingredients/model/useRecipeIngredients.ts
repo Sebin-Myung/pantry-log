@@ -45,6 +45,8 @@ export function useRecipeIngredients({ inputType = "input", ingredients, setIngr
         return newIngredients;
       });
 
+      setField("name")(ingredient?.label ?? "");
+
       const newExistedUnit = ingredient?.value.quantity?.unit;
       if (row.quantity !== undefined) {
         setQuantity({
