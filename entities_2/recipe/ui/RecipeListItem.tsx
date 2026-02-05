@@ -1,7 +1,7 @@
-import { getQuantityString } from "@entities/ingredient";
 import Entypo from "@expo/vector-icons/Entypo";
 import { BasePressableProps, useTheme } from "@shared";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { getQuantityString } from "../../ingredient";
 import { Recipe } from "../model";
 
 interface RecipeListItemProps

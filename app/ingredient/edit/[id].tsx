@@ -1,4 +1,4 @@
-import { EditIngredientPage } from "@pages/ingredient/ui/EditIngredientPage";
+import { EditIngredientPage } from "@pages";
 import { useLocalSearchParams } from "expo-router";
 
 export default function Page() {
