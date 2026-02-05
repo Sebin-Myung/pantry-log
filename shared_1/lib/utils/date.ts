@@ -27,6 +27,11 @@ export const getLastDayOfMonth = (year: number, month: number) => {
   return new Date(year, month + 1, 0);
 };
 
+/**
+ *
+ * @param date
+ * @returns yyyy-mm-dd
+ */
 export const getDateFormat = (date: Date) => {
   const y = date.getFullYear();
   const m = padZero(date.getMonth() + 1);
