@@ -5,11 +5,11 @@
     "paths": {
       "@/*": ["./app-example/*"],
       "@assets/*": ["./assets/*"],
-      "@shared": ["./shared_1"],
-      "@entities": ["./entities_2"],
-      "@features": ["./features_3"],
-      "@widgets": ["./widgets_4"],
-      "@pages": ["./pages_5"]
+      "@shared": ["./shared"],
+      "@entities": ["./entities"],
+      "@features": ["./features"],
+      "@widgets": ["./widgets"],
+      "@pages": ["./pages"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]

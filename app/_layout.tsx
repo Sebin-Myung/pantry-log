@@ -1,9 +1,9 @@
-import { useIngredientStore } from "@entities";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { IconButton, ROUTES } from "@shared";
 import { useFonts } from "expo-font";
 import { Link, SplashScreen, Stack, usePathname } from "expo-router";
 import { useEffect } from "react";
+import { useIngredientStore } from "../entities";
 import { Providers } from "./_providers";
 
 SplashScreen.preventAutoHideAsync();

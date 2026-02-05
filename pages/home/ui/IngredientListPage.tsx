@@ -1,0 +1,37 @@
+import { Loading } from "@shared";
+import { useMemo } from "react";
+import { ScrollView } from "react-native";
+import { StorageLocation, useIngredientStore } from "../../../entities";
+import { DeletableIngredientItem } from "../../../features";
+import { EmptyLayout } from "../../../widgets";
+
+interface IngredientListPageProps {
+  storageLocation?: StorageLocation;
+}
+
+export function IngredientListPage({ storageLocation }: IngredientListPageProps) {
+  const isLoading = useIngredientStore((state) => state.isLoading);
+  const ingredients = useIngredientStore((state) => state.ingredients);
+
+  const filteredIngredients = useMemo(() => {
+    if (!storageLocation) return ingredients;
+
+    return ingredients.filter((i) => i.storageLocation === storageLocation);
+  }, [ingredients, storageLocation]);
+
+  if (isLoading) return <Loading />;
+
+  return filteredIngredients.length > 0 ? (
+    <ScrollView
+      contentContainerStyle={{
+        padding: 10,
+        gap: 10,
+      }}>
+      {filteredIngredients.map((item) => (
+        <DeletableIngredientItem key={item.id} {...item} />
+      ))}
+    </ScrollView>
+  ) : (
+    <EmptyLayout lines={["해당하는 재료가 없습니다.", "+버튼을 눌러 재료를 추가해보세요!"]} />
+  );
+}
