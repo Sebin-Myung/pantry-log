@@ -69,6 +69,10 @@ export function useCookingRecordForm({ initialState, onSubmit: onSubmitItem }: I
     setUnappliedIngredients(newUnappliedIngredients);
   };
 
+  const onUnappliedIngredientDelete = (index: number) => {
+    setUnappliedIngredients((prev) => prev.filter((_, i) => i !== index));
+  };
+
   const isValidState = (state: CookingRecordFormState): state is ValidCookingRecordFormState => {
     return (
       !!state.name &&
@@ -119,7 +123,7 @@ export function useCookingRecordForm({ initialState, onSubmit: onSubmitItem }: I
     ingredients,
     setIngredients,
     unappliedIngredients,
-    setUnappliedIngredients,
+    onUnappliedIngredientDelete,
     isValid,
     isSubmitting,
     onSubmit,
