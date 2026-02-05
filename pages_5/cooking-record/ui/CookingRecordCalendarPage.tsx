@@ -1,5 +1,5 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { Calendar, IconButton, ROUTES, useTheme } from "@shared";
+import { Calendar, getDateFormat, IconButton, ROUTES, useTheme } from "@shared";
 import { Link } from "expo-router";
 import { ScrollView, Text, View } from "react-native";
 import { useCookingRecordCalendarPage } from "../model/useCookingRecordCalendarPage";
@@ -24,7 +24,7 @@ export function CookingRecordCalendarPage() {
           justifyContent: "space-between",
         }}>
         <Text style={{ fontSize: 16, fontWeight: "600" }}>{`${year}년 ${month + 1}월 ${date}일`}</Text>
-        <Link href={ROUTES.addCookingRecord} asChild>
+        <Link href={`${ROUTES.addCookingRecord}?date=${getDateFormat(selectedDate)}`} asChild>
           <IconButton>
             <MaterialCommunityIcons name="plus" size={24} color="black" />
           </IconButton>

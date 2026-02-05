@@ -110,7 +110,11 @@ export function useCookingRecordForm({ initialState, onSubmit: onSubmitItem }: I
   useEffect(() => {
     if (!initialState) return;
 
-    // initialState 반영
+    if (initialState.name) setName(initialState.name);
+    if (initialState.cookedAt) setCookedAt(new Date(initialState.cookedAt));
+    if (initialState.ingredients) {
+      // ingredients 수정 필요
+    }
   }, [initialState]);
 
   return {

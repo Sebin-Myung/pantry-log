@@ -8,6 +8,6 @@ export interface CookingRecordFormState {
 }
 
 export interface IUseCookingRecordForm {
-  initialState?: CookingRecordSubmitItem;
+  initialState?: Partial<CookingRecordSubmitItem>;
   onSubmit: (item: CookingRecordSubmitItem) => void;
 }
