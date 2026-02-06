@@ -7,11 +7,11 @@ import { useCookingRecordCalendarPage } from "../model/useCookingRecordCalendarP
 export function CookingRecordCalendarPage() {
   const theme = useTheme();
 
-  const { selectedDate, setSelectedDate, year, month, date } = useCookingRecordCalendarPage();
+  const { selectedDate, setSelectedDate, year, month, date, recordedDates } = useCookingRecordCalendarPage();
 
   return (
     <View style={{ flex: 1 }}>
-      <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} highlightDays={[]} />
+      <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} highlightDays={recordedDates} />
       <View
         style={{
           borderTopWidth: 1,
