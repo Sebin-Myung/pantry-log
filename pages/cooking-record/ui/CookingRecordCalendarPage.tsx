@@ -1,5 +1,7 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { DeletableCookingRecordItem } from "@features";
 import { Calendar, getDateFormat, IconButton, ROUTES, useTheme } from "@shared";
+import { EmptyLayout } from "@widgets";
 import { Link } from "expo-router";
 import { ScrollView, Text, View } from "react-native";
 import { useCookingRecordCalendarPage } from "../model/useCookingRecordCalendarPage";
@@ -7,7 +9,8 @@ import { useCookingRecordCalendarPage } from "../model/useCookingRecordCalendarP
 export function CookingRecordCalendarPage() {
   const theme = useTheme();
 
-  const { selectedDate, setSelectedDate, year, month, date, recordedDates } = useCookingRecordCalendarPage();
+  const { selectedDate, setSelectedDate, year, month, date, recordedDates, cookingRecords } =
+    useCookingRecordCalendarPage();
 
   return (
     <View style={{ flex: 1 }}>
@@ -30,7 +33,15 @@ export function CookingRecordCalendarPage() {
           </IconButton>
         </Link>
       </View>
-      <ScrollView style={{ flex: 1 }}></ScrollView>
+      {cookingRecords.length === 0 ? (
+        <EmptyLayout lines={["해당 날짜에 등록한 요리 기록이 없습니다."]} />
+      ) : (
+        <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: 10, gap: 10 }}>
+          {cookingRecords.map((record) => (
+            <DeletableCookingRecordItem key={record.id} {...record} />
+          ))}
+        </ScrollView>
+      )}
     </View>
   );
 }
