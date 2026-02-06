@@ -1,5 +1,5 @@
 import { CookingRecord, RecipeListItem } from "@entities";
-import { hasBatchim } from "@shared";
+import { hasBatchim, ROUTE_FACTORIES } from "@shared";
 import { useRouter } from "expo-router";
 import { Alert } from "react-native";
 import { IUseDeleteCookingRecord, useDeleteCookingRecord } from "../model/useDeleteCookingRecord";
@@ -12,7 +12,7 @@ export function DeletableCookingRecordItem({ onDelete, ...props }: DeletableCook
   const { onDeleteCookingRecord } = useDeleteCookingRecord({ onDelete });
 
   const goToEditCookingRecord = () => {
-    // router.push(ROUTE_FACTORIES.editCookingRecord(props.id));
+    router.push(ROUTE_FACTORIES.editCookingRecord(props.id));
   };
 
   const onItemLongPress = () => {
