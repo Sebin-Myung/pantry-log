@@ -10,6 +10,7 @@ import {
 export function useAddCookingRecord() {
   const ingredients = useIngredientStore((state) => state.ingredients);
   const updateIngredient = useIngredientStore((state) => state.update);
+  const removeIngredient = useIngredientStore((state) => state.remove);
 
   const onSubmit = (item: CookingRecordSubmitItem) => {
     try {
@@ -22,13 +23,19 @@ export function useAddCookingRecord() {
         if (!storedIngredient) return;
         if (!ingredientItem.quantity || !storedIngredient.quantity) return;
 
-        updateIngredient(storedIngredient.id, {
-          ...storedIngredient,
-          quantity: {
-            amount: storedIngredient.quantity.amount - ingredientItem.quantity.amount,
-            unit: storedIngredient.quantity.unit,
-          },
-        });
+        const newAmount = storedIngredient.quantity.amount - ingredientItem.quantity.amount;
+
+        if (newAmount > 0) {
+          updateIngredient(storedIngredient.id, {
+            ...storedIngredient,
+            quantity: {
+              amount: newAmount,
+              unit: storedIngredient.quantity.unit,
+            },
+          });
+        } else {
+          removeIngredient(storedIngredient.id);
+        }
       });
     } catch (error) {
       if (error instanceof CookingRecordError) {
