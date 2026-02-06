@@ -1,8 +1,11 @@
 import { CookingRecord, cookingRecordRepository } from "@entities";
 import { getDateFormat, getYearMonthDate } from "@shared";
+import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 
 export function useCookingRecordCalendarPage() {
+  const { date: dateParams } = useLocalSearchParams<{ date?: string }>();
+
   const [recordedDates, setRecordedDates] = useState<string[]>([]);
   const [cookingRecords, setCookingRecords] = useState<CookingRecord[]>([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -38,6 +41,12 @@ export function useCookingRecordCalendarPage() {
   useEffect(() => {
     setCookingRecords(getCookingRecords());
   }, [selectedDate]);
+
+  useEffect(() => {
+    if (!dateParams) return;
+
+    setSelectedDate(new Date(dateParams));
+  }, [dateParams]);
 
   return { selectedDate, setSelectedDate, year, month, date, recordedDates, cookingRecords, refetchDatas };
 }

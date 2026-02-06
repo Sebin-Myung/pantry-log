@@ -101,7 +101,7 @@ export function useCookingRecordForm({ initialState, onSubmit: onSubmitItem }: I
       try {
         onSubmitItem(newCookingRecord);
 
-        router.replace(ROUTES.cookingRecord);
+        router.replace(`${ROUTES.cookingRecord}?date=${getDateFormat(state.cookedAt)}`);
       } catch (error) {
         throw error;
       }
