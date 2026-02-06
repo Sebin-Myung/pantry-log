@@ -9,7 +9,7 @@ import { useCookingRecordCalendarPage } from "../model/useCookingRecordCalendarP
 export function CookingRecordCalendarPage() {
   const theme = useTheme();
 
-  const { selectedDate, setSelectedDate, year, month, date, recordedDates, cookingRecords } =
+  const { selectedDate, setSelectedDate, year, month, date, recordedDates, cookingRecords, refetchDatas } =
     useCookingRecordCalendarPage();
 
   return (
@@ -38,7 +38,7 @@ export function CookingRecordCalendarPage() {
       ) : (
         <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: 10, gap: 10 }}>
           {cookingRecords.map((record) => (
-            <DeletableCookingRecordItem key={record.id} {...record} />
+            <DeletableCookingRecordItem key={record.id} {...record} onDelete={refetchDatas} />
           ))}
         </ScrollView>
       )}
