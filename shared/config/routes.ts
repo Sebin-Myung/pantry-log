@@ -11,7 +11,7 @@ type StaticRouteKey =
   | "addCookingRecord"
   | "recipe"
   | "addRecipe";
-type DynamicRouteKey = "editIngredient" | "editRecipe";
+type DynamicRouteKey = "editIngredient" | "editCookingRecord" | "editRecipe";
 
 export const ROUTES: Record<StaticRouteKey, Route> = {
   home: "/",
@@ -29,5 +29,6 @@ export const ROUTES: Record<StaticRouteKey, Route> = {
 
 export const ROUTE_FACTORIES: Record<DynamicRouteKey, (...args: any[]) => Href> = {
   editIngredient: (id: string) => `/ingredient/edit/${id}`,
+  editCookingRecord: (id: string) => `/cooking-record/edit/${id}`,
   editRecipe: (id: string) => `/recipe/edit/${id}`,
 };

@@ -8,6 +8,10 @@ export default function CookingRecordLayout() {
         name="add"
         options={{ headerShown: true, title: "요리 기록 추가", headerLeft: () => <BackButton /> }}
       />
+      <Stack.Screen
+        name="edit/[id]"
+        options={{ headerShown: true, title: "요리 기록 수정", headerLeft: () => <BackButton /> }}
+      />
     </Stack>
   );
 }
