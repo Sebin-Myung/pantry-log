@@ -10,7 +10,7 @@ export function EditRecipePage(props: IUseEditRecipe) {
 
   return (
     <KeyboardAvoidingView>
-      <ScrollView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         <RecipeForm initialState={initialState} onSubmit={onSubmit} />
       </ScrollView>
     </KeyboardAvoidingView>
