@@ -1,13 +1,6 @@
+import { Recipe, RecipeError, recipeStorage, RecipeSubmitItem, showRecipeError, useRecipeStore } from "@entities";
 import { useRouterFunc } from "@shared";
 import { useEffect, useState } from "react";
-import {
-  Recipe,
-  RecipeError,
-  recipeStorage,
-  RecipeSubmitItem,
-  showRecipeError,
-  useRecipeStore,
-} from "../../../entities";
 
 export interface IUseEditRecipe extends Pick<Recipe, "id"> {}
 

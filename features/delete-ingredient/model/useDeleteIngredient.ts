@@ -1,4 +1,4 @@
-import { Ingredient, useIngredientStore } from "../../../entities";
+import { Ingredient, useIngredientStore } from "@entities";
 
 export function useDeleteIngredient() {
   const removeIngredient = useIngredientStore((state) => state.remove);

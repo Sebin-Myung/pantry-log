@@ -1,4 +1,4 @@
-import { CookingRecordSubmitItem } from "../../../entities";
+import { CookingRecordSubmitItem } from "@entities";
 import { RecipeIngredientFieldType } from "../../recipe-ingredients";
 
 export interface CookingRecordFormState {

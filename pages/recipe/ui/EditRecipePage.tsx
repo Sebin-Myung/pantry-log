@@ -1,7 +1,7 @@
+import { IUseEditRecipe, useEditRecipe } from "@features";
 import { KeyboardAvoidingView, Loading } from "@shared";
+import { RecipeForm } from "@widgets";
 import { ScrollView, StyleSheet } from "react-native";
-import { IUseEditRecipe, useEditRecipe } from "../../../features";
-import { RecipeForm } from "../../../widgets";
 
 export function EditRecipePage(props: IUseEditRecipe) {
   const { initialState, onSubmit } = useEditRecipe(props);

@@ -1,6 +1,6 @@
+import { Ingredient, useIngredientStore } from "@entities";
 import { LabelValue } from "@shared";
 import { useEffect, useMemo } from "react";
-import { Ingredient, useIngredientStore } from "../../../entities";
 import { getIngredientLabelValueFromValue } from "./utils";
 
 export interface IUseIngredientDropdown {

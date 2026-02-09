@@ -1,7 +1,7 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { applyAlpha, getDateFormat, isSameDate, padZero } from "../../../lib/utils";
-import { useTheme } from "../../../providers/AppThemeProvider";
+import { useTheme } from "../../../providers";
 import { IconButton } from "../../Button/ui/IconButton";
 import { IUseCalendar, useCalendar } from "../model/useCalendar";
 

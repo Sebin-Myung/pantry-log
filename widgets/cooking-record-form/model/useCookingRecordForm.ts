@@ -1,8 +1,8 @@
+import { CookingRecordSubmitItem, Recipe, RecipeIngredient, useIngredientStore } from "@entities";
+import { getQuantityUnitLabelValueFromValue, isValidQuantity, QuantityFieldType } from "@features";
 import { getDateFormat, LabelValue, ROUTES, useSubmit } from "@shared";
 import { useRouter } from "expo-router";
 import { useEffect, useMemo, useState } from "react";
-import { CookingRecordSubmitItem, Recipe, RecipeIngredient, useIngredientStore } from "../../../entities";
-import { getQuantityUnitLabelValueFromValue, isValidQuantity, QuantityFieldType } from "../../../features";
 import { DEFAULT_RECIPE_INGREDIENT_ROW, RecipeIngredientDropdownType } from "../../recipe-ingredients";
 import { CookingRecordFormState, IUseCookingRecordForm } from "./types";
 

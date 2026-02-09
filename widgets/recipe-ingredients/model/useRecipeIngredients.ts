@@ -1,6 +1,6 @@
+import { Ingredient } from "@entities";
+import { getQuantityUnitLabelValueFromValue, QuantityFieldType } from "@features";
 import { LabelValue } from "@shared";
-import { Ingredient } from "../../../entities";
-import { getQuantityUnitLabelValueFromValue, QuantityFieldType } from "../../../features";
 import { RecipeIngredientFieldType, RecipeIngredientsDropdownProps, UseRecipeIngredientsProps } from "./types";
 
 export const DEFAULT_RECIPE_INGREDIENT_ROW: RecipeIngredientFieldType = {

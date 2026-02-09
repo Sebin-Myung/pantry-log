@@ -1,5 +1,5 @@
 import { ActivityIndicator, Pressable, Text } from "react-native";
-import { useTheme } from "../../../providers/AppThemeProvider";
+import { useTheme } from "../../../providers";
 import { ButtonContext, useButtonContext } from "../model/context";
 import { BasePressableProps, ButtonVariant } from "../model/types";
 

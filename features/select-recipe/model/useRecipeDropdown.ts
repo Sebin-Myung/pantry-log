@@ -1,6 +1,6 @@
+import { Recipe, useRecipeStore } from "@entities";
 import { LabelValue } from "@shared";
 import { useEffect, useMemo } from "react";
-import { Recipe, useRecipeStore } from "../../../entities";
 import { getRecipeLabelValueFromValue } from "./utils";
 
 export interface IUseRecipeDropdown {

@@ -1,9 +1,9 @@
+import { useRecipeStore } from "@entities";
+import { DeletableRecipeItem } from "@features";
 import { Loading } from "@shared";
+import { EmptyLayout } from "@widgets";
 import { useEffect } from "react";
 import { ScrollView } from "react-native";
-import { useRecipeStore } from "../../../entities";
-import { DeletableRecipeItem } from "../../../features";
-import { EmptyLayout } from "../../../widgets";
 
 export function RecipeListPage() {
   const isLoading = useRecipeStore((state) => state.isLoading);

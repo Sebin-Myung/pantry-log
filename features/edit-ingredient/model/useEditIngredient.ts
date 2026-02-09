@@ -1,5 +1,3 @@
-import { useRouterFunc } from "@shared";
-import { useEffect, useState } from "react";
 import {
   Ingredient,
   IngredientError,
@@ -7,7 +5,9 @@ import {
   IngredientSubmitItem,
   showIngredientError,
   useIngredientStore,
-} from "../../../entities";
+} from "@entities";
+import { useRouterFunc } from "@shared";
+import { useEffect, useState } from "react";
 
 export interface IUseEditIngredient extends Pick<Ingredient, "id"> {}
 

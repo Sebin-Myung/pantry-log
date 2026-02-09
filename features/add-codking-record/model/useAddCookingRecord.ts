@@ -1,11 +1,11 @@
-import { randomUUID } from "expo-crypto";
 import {
   CookingRecordError,
   cookingRecordRepository,
   CookingRecordSubmitItem,
   showCookingRecordError,
   useIngredientStore,
-} from "../../../entities";
+} from "@entities";
+import { randomUUID } from "expo-crypto";
 
 export function useAddCookingRecord() {
   const ingredients = useIngredientStore((state) => state.ingredients);

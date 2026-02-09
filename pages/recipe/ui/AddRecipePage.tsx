@@ -1,7 +1,7 @@
+import { useAddRecipe } from "@features";
 import { KeyboardAvoidingView, Notice } from "@shared";
+import { RecipeForm } from "@widgets";
 import { ScrollView, StyleSheet } from "react-native";
-import { useAddRecipe } from "../../../features";
-import { RecipeForm } from "../../../widgets";
 
 export function AddRecipePage() {
   const { onSubmit } = useAddRecipe();

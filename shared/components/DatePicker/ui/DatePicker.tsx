@@ -1,7 +1,7 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { useTheme } from "../../../providers/AppThemeProvider";
+import { useTheme } from "../../../providers";
 import { IconButton } from "../../Button/ui/IconButton";
 import { OverlayModal } from "../../Modal/ui/OverlayModal";
 import { IUseDatePicker, useDatePicker } from "../model/useDatePicker";

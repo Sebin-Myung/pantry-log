@@ -1,6 +1,6 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { useTheme } from "../../../providers/AppThemeProvider";
+import { useTheme } from "../../../providers";
 import { OverlayModal } from "../../Modal/ui/OverlayModal";
 import { DropdownContext, useDropdownContext } from "../model/context";
 import { DropdownContextProps, DropdownItemProps, DropdownProps } from "../model/types";

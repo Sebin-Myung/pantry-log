@@ -1,5 +1,5 @@
+import { Ingredient } from "@entities";
 import { Dropdown } from "@shared";
-import { Ingredient } from "../../../entities";
 import { IUseIngredientDropdown, useIngredientDropdown } from "../model/useIngredientDropdown";
 
 interface IngredientDropdownProps extends IUseIngredientDropdown {

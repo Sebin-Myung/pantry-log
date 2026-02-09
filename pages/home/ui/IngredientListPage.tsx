@@ -1,9 +1,9 @@
+import { StorageLocation, useIngredientStore } from "@entities";
+import { DeletableIngredientItem } from "@features";
 import { Loading } from "@shared";
+import { EmptyLayout } from "@widgets";
 import { useMemo } from "react";
 import { ScrollView } from "react-native";
-import { StorageLocation, useIngredientStore } from "../../../entities";
-import { DeletableIngredientItem } from "../../../features";
-import { EmptyLayout } from "../../../widgets";
 
 interface IngredientListPageProps {
   storageLocation?: StorageLocation;

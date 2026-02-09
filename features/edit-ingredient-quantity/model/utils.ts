@@ -1,4 +1,4 @@
-import { QuantityUnit } from "../../../entities";
+import { QuantityUnit } from "@entities";
 import { QUANTITY_UNIT_LABEL_VALUES } from "./constants";
 import { QuantityFieldType } from "./useQuantityField";
 

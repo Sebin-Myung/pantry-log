@@ -1,6 +1,6 @@
+import { Ingredient } from "@entities";
+import { QuantityFieldType } from "@features";
 import { LabelValue } from "@shared";
-import { Ingredient } from "../../../entities";
-import { QuantityFieldType } from "../../../features";
 
 export interface RecipeIngredientFieldType {
   name: string;

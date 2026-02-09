@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-import { useTheme } from "../../../providers/AppThemeProvider";
+import { useTheme } from "../../../providers";
 
 export function Notice({ lines }: { lines: string[] }) {
   const theme = useTheme();

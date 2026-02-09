@@ -1,4 +1,4 @@
-import { RecipeSubmitItem } from "../../../entities";
+import { RecipeSubmitItem } from "@entities";
 import { RecipeIngredientFieldType } from "../../recipe-ingredients";
 
 export interface RecipeFormState {

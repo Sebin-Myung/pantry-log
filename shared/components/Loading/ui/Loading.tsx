@@ -1,5 +1,5 @@
 import { ActivityIndicator, View } from "react-native";
-import { useTheme } from "../../../providers/AppThemeProvider";
+import { useTheme } from "../../../providers";
 
 export function Loading() {
   const theme = useTheme();

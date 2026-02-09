@@ -1,5 +1,5 @@
+import { IngredientError, IngredientSubmitItem, showIngredientError, useIngredientStore } from "@entities";
 import { randomUUID } from "expo-crypto";
-import { IngredientError, IngredientSubmitItem, showIngredientError, useIngredientStore } from "../../../entities";
 
 export function useAddIngredient() {
   const addIngredient = useIngredientStore((state) => state.add);

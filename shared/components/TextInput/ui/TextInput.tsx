@@ -1,5 +1,5 @@
 import { TextInput as BaseTextInput } from "react-native";
-import { useTheme } from "../../../providers/AppThemeProvider";
+import { useTheme } from "../../../providers";
 import { IUseTextInput, useTextInput } from "../model/useTextInput";
 
 export type BaseTextInputProps = React.ComponentProps<typeof BaseTextInput>;

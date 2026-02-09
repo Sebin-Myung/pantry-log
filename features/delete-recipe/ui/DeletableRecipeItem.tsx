@@ -1,7 +1,7 @@
+import { Recipe, RecipeListItem } from "@entities";
 import { hasBatchim, ROUTE_FACTORIES } from "@shared";
 import { useRouter } from "expo-router";
 import { Alert } from "react-native";
-import { Recipe, RecipeListItem } from "../../../entities";
 import { useDeleteRecipe } from "../model/useDeleteRecipe";
 
 export function DeletableRecipeItem(props: Recipe) {

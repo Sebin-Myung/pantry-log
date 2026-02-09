@@ -1,7 +1,7 @@
+import { Ingredient, IngredientListItem } from "@entities";
 import { hasBatchim, ROUTE_FACTORIES } from "@shared";
 import { useRouter } from "expo-router";
 import { Alert } from "react-native";
-import { Ingredient, IngredientListItem } from "../../../entities";
 import { useDeleteIngredient } from "../model/useDeleteIngredient";
 
 export function DeletableIngredientItem(props: Ingredient) {

@@ -1,6 +1,6 @@
+import { IngredientSubmitItem, StorageLocation } from "@entities";
+import { QuantityFieldType } from "@features";
 import { LabelValue } from "@shared";
-import { IngredientSubmitItem, StorageLocation } from "../../../entities";
-import { QuantityFieldType } from "../../../features";
 
 export interface IngredientFormState {
   location?: LabelValue<StorageLocation>;

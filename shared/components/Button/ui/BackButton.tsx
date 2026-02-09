@@ -1,5 +1,5 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { useRouterFunc } from "../../../lib/hooks/useRouterFunc";
+import { useRouterFunc } from "../../../lib/hooks";
 import { BasePressableProps } from "../model/types";
 import { IconButton } from "./IconButton";
 

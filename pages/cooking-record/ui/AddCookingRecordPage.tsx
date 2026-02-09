@@ -1,8 +1,8 @@
+import { useAddCookingRecord } from "@features";
 import { KeyboardAvoidingView, Notice } from "@shared";
+import { CookingRecordForm } from "@widgets";
 import { useLocalSearchParams } from "expo-router";
 import { ScrollView, StyleSheet } from "react-native";
-import { useAddCookingRecord } from "../../../features";
-import { CookingRecordForm } from "../../../widgets";
 
 export function AddCookingRecordPage() {
   const { onSubmit } = useAddCookingRecord();

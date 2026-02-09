@@ -1,7 +1,7 @@
+import { useAddIngredient } from "@features";
 import { KeyboardAvoidingView } from "@shared";
+import { IngredientForm } from "@widgets";
 import { ScrollView, StyleSheet } from "react-native";
-import { useAddIngredient } from "../../../features";
-import { IngredientForm } from "../../../widgets";
 
 export function AddIngredientPage() {
   const { onSubmit } = useAddIngredient();

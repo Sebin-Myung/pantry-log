@@ -1,8 +1,8 @@
+import { getQuantityString } from "@entities";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { RecipeDropdown } from "@features";
 import { Button, DatePicker, IconButton, Label, TextInput, useTheme } from "@shared";
 import { StyleSheet, Text, View } from "react-native";
-import { getQuantityString } from "../../../entities";
-import { RecipeDropdown } from "../../../features";
 import { RecipeIngredients } from "../../recipe-ingredients";
 import { IUseCookingRecordForm } from "../model/types";
 import { useCookingRecordForm } from "../model/useCookingRecordForm";

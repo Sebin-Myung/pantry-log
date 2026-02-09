@@ -1,5 +1,5 @@
+import { QuantityUnit } from "@entities";
 import { LabelValue, onlyPositiveFloat } from "@shared";
-import { QuantityUnit } from "../../../entities";
 import { QUANTITY_UNIT_LABEL_VALUES } from "./constants";
 import { getQuantityUnitLabelValueFromValue } from "./utils";
 
