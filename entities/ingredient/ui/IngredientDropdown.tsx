@@ -1,6 +1,6 @@
-import { Ingredient } from "@entities";
 import { Dropdown } from "@shared";
-import { IUseIngredientDropdown, useIngredientDropdown } from "../model/useIngredientDropdown";
+import { IUseIngredientDropdown, useIngredientDropdown } from "../model/selection";
+import { Ingredient } from "../model/types";
 
 interface IngredientDropdownProps extends IUseIngredientDropdown {
   disabledIngredientIds?: Ingredient["id"][];

@@ -1,7 +1,6 @@
-import { QuantityField } from "@entities";
+import { IngredientDropdown, QuantityField } from "@entities";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { IngredientDropdown } from "@features";
 import { Button, IconButton, Label, TextInput, useTheme } from "@shared";
 import { View } from "react-native";
 import { UseRecipeIngredientsProps } from "../model/types";

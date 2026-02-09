@@ -1,4 +1,3 @@
-export * from "./select-ingredient";
 export * from "./select-recipe";
 export * from "./select-storage-type";
 
