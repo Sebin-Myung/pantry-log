@@ -1,3 +1,4 @@
+export { RecipeDropdown } from "./ui/RecipeDropdown";
 export { RecipeListItem } from "./ui/RecipeListItem";
 export { showRecipeError } from "./ui/showRecipeError";
 

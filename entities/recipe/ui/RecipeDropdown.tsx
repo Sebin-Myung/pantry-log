@@ -1,5 +1,5 @@
 import { Dropdown } from "@shared";
-import { IUseRecipeDropdown, useRecipeDropdown } from "../model/useRecipeDropdown";
+import { IUseRecipeDropdown, useRecipeDropdown } from "../model/selection";
 
 export function RecipeDropdown(props: IUseRecipeDropdown) {
   const { isLoading, recipeLabelValues, selectedRecipe, onRecipeChange } = useRecipeDropdown(props);
