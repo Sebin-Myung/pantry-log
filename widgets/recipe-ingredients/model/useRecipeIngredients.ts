@@ -1,5 +1,4 @@
-import { Ingredient } from "@entities";
-import { getQuantityUnitLabelValueFromValue, QuantityFieldType } from "@features";
+import { getQuantityUnitLabelValueFromValue, Ingredient, QuantityFieldType } from "@entities";
 import { LabelValue } from "@shared";
 import { RecipeIngredientFieldType, RecipeIngredientsDropdownProps, UseRecipeIngredientsProps } from "./types";
 

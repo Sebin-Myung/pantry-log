@@ -1,5 +1,4 @@
-import { IngredientSubmitItem, StorageLocation } from "@entities";
-import { QuantityFieldType } from "@features";
+import { IngredientSubmitItem, QuantityFieldType, StorageLocation } from "@entities";
 import { LabelValue } from "@shared";
 
 export interface IngredientFormState {

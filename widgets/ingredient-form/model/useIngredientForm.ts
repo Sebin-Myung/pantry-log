@@ -1,10 +1,10 @@
-import { IngredientSubmitItem } from "@entities";
 import {
   getQuantityUnitLabelValueFromValue,
-  getStorageLocationLabelValueFromValue,
+  IngredientSubmitItem,
   isValidQuantity,
   QuantityFieldType,
-} from "@features";
+} from "@entities";
+import { getStorageLocationLabelValueFromValue } from "@features";
 import { ROUTES, useSubmit } from "@shared";
 import { useRouter } from "expo-router";
 import { useEffect, useMemo, useState } from "react";

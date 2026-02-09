@@ -1,6 +1,6 @@
 import { Dropdown, RadioButton, TextInput } from "@shared";
 import { View } from "react-native";
-import { IUseQuantityField, useQuantityField } from "../model/useQuantityField";
+import { IUseQuantityField, useQuantityField } from "../model/quantity";
 
 interface QuantityFieldProps extends IUseQuantityField {
   unitDisabled?: boolean;

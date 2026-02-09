@@ -1,7 +1,6 @@
-import { QuantityUnit } from "@entities";
 import { LabelValue, onlyPositiveFloat } from "@shared";
-import { QUANTITY_UNIT_LABEL_VALUES } from "./constants";
-import { getQuantityUnitLabelValueFromValue } from "./utils";
+import { QUANTITY_UNIT_LABEL_VALUES, getQuantityUnitLabelValueFromValue } from "../quantity";
+import { QuantityUnit } from "../types";
 
 export type QuantityFieldType = {
   amount?: string;

@@ -1,5 +1,4 @@
-import { Ingredient } from "@entities";
-import { QuantityFieldType } from "@features";
+import { Ingredient, QuantityFieldType } from "@entities";
 import { LabelValue } from "@shared";
 
 export interface RecipeIngredientFieldType {
