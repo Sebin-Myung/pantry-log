@@ -1,5 +1,5 @@
 import { RadioButton } from "@shared";
-import { IUseStorageLocationRadioButton, useStorageLocationRadioButton } from "../model/useStorageLocationRadioButton";
+import { IUseStorageLocationRadioButton, useStorageLocationRadioButton } from "../model/storage-location";
 
 export function StorageLocationRadioButton(props: IUseStorageLocationRadioButton) {
   const { items, selectedLocation, onValueChange } = useStorageLocationRadioButton(props);

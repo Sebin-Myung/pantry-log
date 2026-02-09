@@ -1,5 +1,5 @@
-import { StorageLocation } from "@entities";
 import { LabelValue } from "@shared";
+import { StorageLocation } from "../types";
 import { STORAGE_LOCATION_LABEL_VALUES } from "./constants";
 import { getStorageLocationLabelValueFromValue } from "./utils";
 

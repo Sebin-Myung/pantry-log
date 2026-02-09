@@ -1,5 +1,4 @@
-import { QuantityField } from "@entities";
-import { StorageLocationRadioButton } from "@features";
+import { QuantityField, StorageLocationRadioButton } from "@entities";
 import { Button, DatePicker, Label, TextInput } from "@shared";
 import { StyleSheet, View } from "react-native";
 import { IUseIngredientForm } from "../model/types";
