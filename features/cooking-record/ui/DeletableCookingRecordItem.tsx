@@ -2,7 +2,7 @@ import { CookingRecord, RecipeListItem } from "@entities";
 import { hasBatchim, ROUTE_FACTORIES } from "@shared";
 import { useRouter } from "expo-router";
 import { Alert } from "react-native";
-import { IUseDeleteCookingRecord, useDeleteCookingRecord } from "../model/useDeleteCookingRecord";
+import { IUseDeleteCookingRecord, useDeleteCookingRecord } from "../../cooking-record/model/useDeleteCookingRecord";
 
 interface DeletableCookingRecordItemProps extends CookingRecord, IUseDeleteCookingRecord {}
 
