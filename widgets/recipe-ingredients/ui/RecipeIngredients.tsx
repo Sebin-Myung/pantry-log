@@ -1,8 +1,8 @@
 import { IngredientDropdown, QuantityField } from "@entities";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { Button, IconButton, Label, TextInput, useTheme } from "@shared";
-import { View } from "react-native";
+import { Button, Checkbox, IconButton, Label, TextInput, useTheme } from "@shared";
+import { Text, View } from "react-native";
 import { UseRecipeIngredientsProps } from "../model/types";
 import { useRecipeIngredients } from "../model/useRecipeIngredients";
 
@@ -17,8 +17,17 @@ export function RecipeIngredients({ inputType, ...props }: UseRecipeIngredientsP
   return (
     <View style={{ gap: 10 }}>
       {ingredients.map((_, index) => {
-        const { name, quantity, setName, setQuantity, selectedIngredient, setSelectedIngredient, unitDisabled } =
-          getRowProps(index);
+        const {
+          name,
+          quantity,
+          setName,
+          setQuantity,
+          selectedIngredient,
+          setSelectedIngredient,
+          unitDisabled,
+          isChecked,
+          onCheckboxClick,
+        } = getRowProps(index);
 
         return (
           <View
@@ -66,6 +75,15 @@ export function RecipeIngredients({ inputType, ...props }: UseRecipeIngredientsP
             <Label text="재료 용량" required>
               <QuantityField value={quantity} setValue={setQuantity} unitDisabled={unitDisabled} />
             </Label>
+
+            {unitDisabled && quantity && (
+              <Checkbox value={isChecked} onValueChange={onCheckboxClick}>
+                <Text style={{ fontSize: 16, color: theme.colors.text }}>
+                  모두 사용
+                  <Text style={{ color: theme.colors.accentDark }}>(재고에서 완전히 제거됩니다.)</Text>
+                </Text>
+              </Checkbox>
+            )}
           </View>
         );
       })}

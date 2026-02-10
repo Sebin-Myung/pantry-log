@@ -37,8 +37,7 @@ export function useRecipeIngredients(props: UseRecipeIngredientsProps) {
       return { name: row.name, quantity: row.quantity, setName: setField("name"), setQuantity };
 
     const selectedIngredient = props.ingredients[index].selectedIngredient;
-    const existedAmount = selectedIngredient?.value.quantity?.amount;
-    const existedUnit = selectedIngredient?.value.quantity?.unit;
+    const existedQuantity = selectedIngredient?.value.quantity;
 
     const setSelectedIngredient = (ingredient?: LabelValue<Ingredient>) => {
       props.setIngredients((prev) =>
@@ -64,12 +63,23 @@ export function useRecipeIngredients(props: UseRecipeIngredientsProps) {
 
           let quantity = { ...item.quantity, ...value };
 
-          if (existedAmount) quantity.amount = Math.min(Number(quantity.amount), existedAmount).toString();
-          if (existedUnit) quantity.unit = getQuantityUnitLabelValueFromValue(existedUnit);
+          if (existedQuantity) {
+            quantity.amount = Math.min(Number(quantity.amount), existedQuantity.amount).toString();
+            quantity.unit = getQuantityUnitLabelValueFromValue(existedQuantity.unit);
+          }
 
           return { ...item, quantity };
         }),
       );
+    };
+
+    const isChecked =
+      !!existedQuantity?.amount && !!row.quantity?.amount && existedQuantity.amount.toString() === row.quantity.amount;
+
+    const onCheckboxClick = (value: boolean) => {
+      if (!existedQuantity) return;
+
+      setRestrictedQuantity({ amount: value ? existedQuantity.amount.toString() : "0" });
     };
 
     return {
@@ -77,7 +87,9 @@ export function useRecipeIngredients(props: UseRecipeIngredientsProps) {
       setSelectedIngredient,
       quantity: row.quantity,
       setQuantity: setRestrictedQuantity,
-      unitDisabled: !!existedUnit,
+      unitDisabled: !!existedQuantity,
+      isChecked,
+      onCheckboxClick,
     };
   };
 
