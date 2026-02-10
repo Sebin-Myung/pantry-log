@@ -12,7 +12,8 @@ export function useEditRecipe({ id }: IUseEditRecipe) {
 
   const onSubmit = (item: RecipeSubmitItem) => {
     try {
-      updateRecipe(id, item);
+      const updatedAt = new Date().toISOString();
+      updateRecipe(id, { updatedAt, ...item });
     } catch (error) {
       if (error instanceof RecipeError) {
         showRecipeError({ error });
