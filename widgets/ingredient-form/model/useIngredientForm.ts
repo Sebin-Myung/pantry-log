@@ -85,16 +85,17 @@ export function useIngredientForm({ initialState, onSubmit: onSubmitItem }: IUse
       name: initialState.name,
       purchaseDate: new Date(initialState.purchaseDate),
       location: getStorageLocationLabelValueFromValue(initialState.storageLocation),
+      quantity: initialState.quantity
+        ? {
+            amount: initialState.quantity.amount.toString(),
+            unit: getQuantityUnitLabelValueFromValue(initialState.quantity.unit),
+          }
+        : undefined,
     };
     if (initialState.brand) existedState.brand = initialState.brand;
     if (initialState.purchaseSource) existedState.purchaseSource = initialState.purchaseSource;
     if (initialState.productionDate) existedState.productionDate = new Date(initialState.productionDate);
     if (initialState.expirationDate) existedState.expirationDate = new Date(initialState.expirationDate);
-    if (initialState.quantity)
-      existedState.quantity = {
-        amount: initialState.quantity.amount.toString(),
-        unit: getQuantityUnitLabelValueFromValue(initialState.quantity.unit),
-      };
 
     setFormState((prev) => ({ ...prev, ...existedState }));
   }, [initialState]);
