@@ -1,5 +1,6 @@
 import { DateTimePickerEvent } from "@react-native-community/datetimepicker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getDateFormat } from "../../../lib";
 
 export interface IUseDatePicker {
   date?: Date;
@@ -36,6 +37,14 @@ export function useDatePicker({ date, setDate }: IUseDatePicker) {
     setDate(undefined);
     setTempDate(defaultDate);
   };
+
+  useEffect(() => {
+    if (!date) return;
+
+    if (getDateFormat(date) === getDateFormat(tempDate)) return;
+
+    setTempDate(date);
+  }, [date]);
 
   return { date, tempDate, isOpen, openModal, cancelModal, confirmModal, onDateChange, resetDate };
 }
