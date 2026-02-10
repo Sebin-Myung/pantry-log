@@ -1,4 +1,5 @@
-export { CookingRecordForm } from "./ui/CookingRecordForm";
+export { AddCookingRecordForm } from "./ui/AddCookingRecordForm";
+export { CookingRecordBaseForm } from "./ui/CookingRecordBaseForm";
 
-export { CookingRecordFormState, IUseCookingRecordForm } from "./model/types";
-export { useCookingRecordForm } from "./model/useCookingRecordForm";
+export { CookingRecordFormState, IUseCookingRecordBaseForm } from "./model/types";
+export { useCookingRecordBaseForm } from "./model/useCookingRecordBaseForm";

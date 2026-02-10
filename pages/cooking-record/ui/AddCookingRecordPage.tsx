@@ -1,11 +1,9 @@
-import { useAddCookingRecord } from "@features";
 import { KeyboardAvoidingView, Notice } from "@shared";
-import { CookingRecordForm } from "@widgets";
+import { AddCookingRecordForm } from "@widgets";
 import { useLocalSearchParams } from "expo-router";
 import { ScrollView, StyleSheet } from "react-native";
 
 export function AddCookingRecordPage() {
-  const { onSubmit } = useAddCookingRecord();
   const { date } = useLocalSearchParams<{ date?: string }>();
 
   return (
@@ -19,7 +17,7 @@ export function AddCookingRecordPage() {
             "* 전량 사용된 재료는 재고에서 삭제됩니다.",
           ]}
         />
-        <CookingRecordForm initialState={{ cookedAt: date }} onSubmit={onSubmit} />
+        <AddCookingRecordForm initialState={{ cookedAt: date }} />
       </ScrollView>
     </KeyboardAvoidingView>
   );

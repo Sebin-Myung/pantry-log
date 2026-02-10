@@ -1,38 +1,27 @@
 import { getQuantityString, RecipeDropdown } from "@entities";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Button, DatePicker, IconButton, Label, TextInput, useTheme } from "@shared";
+import { IconButton, Label, useTheme } from "@shared";
 import { StyleSheet, Text, View } from "react-native";
 import { RecipeIngredients } from "../../recipe-ingredients";
-import { IUseCookingRecordForm } from "../model/types";
-import { useCookingRecordForm } from "../model/useCookingRecordForm";
+import { IUseCookingRecordBaseForm } from "../model/types";
+import { useAddCookingRecordForm } from "../model/useAddCookingRecordForm";
+import { CookingRecordBaseForm } from "./CookingRecordBaseForm";
 
-export function CookingRecordForm(props: IUseCookingRecordForm) {
+export function AddCookingRecordForm({ initialState }: Pick<IUseCookingRecordBaseForm, "initialState">) {
   const theme = useTheme();
 
   const {
-    name,
-    setName,
-    cookedAt,
-    setCookedAt,
     selectedRecipe,
     onRecipeItemClick,
     ingredients,
     setIngredients,
     unappliedIngredients,
     onUnappliedIngredientDelete,
-    isValid,
-    isSubmitting,
     onSubmit,
-  } = useCookingRecordForm(props);
+  } = useAddCookingRecordForm();
 
   return (
-    <View style={styles.container}>
-      <Label text="이름" required>
-        <TextInput value={name} setValue={setName} placeholder="요리의 이름을 입력해주세요." />
-      </Label>
-      <Label text="만든 날" required>
-        <DatePicker date={cookedAt} setDate={setCookedAt} />
-      </Label>
+    <CookingRecordBaseForm initialState={initialState} ingredients={ingredients} onSubmit={onSubmit}>
       <Label text="레시피 불러오기">
         <RecipeDropdown selectedRecipe={selectedRecipe} setSelectedRecipe={onRecipeItemClick} />
       </Label>
@@ -62,15 +51,11 @@ export function CookingRecordForm(props: IUseCookingRecordForm) {
 
         <RecipeIngredients inputType="dropdown" ingredients={ingredients} setIngredients={setIngredients} />
       </Label>
-      <Button disabled={!isValid} isSubmitting={isSubmitting} onPress={onSubmit}>
-        <Button.Text>확인</Button.Text>
-      </Button>
-    </View>
+    </CookingRecordBaseForm>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { gap: 20 },
   unapplidedIngredientsContainer: { marginBottom: 12, gap: 4 },
   unappliedIngredientItem: {
     padding: 12,

@@ -1,5 +1,5 @@
 import { CookingRecordSubmitItem } from "@entities";
-import { RecipeIngredientFieldType } from "../../recipe-ingredients";
+import { RecipeIngredientDropdownType, RecipeIngredientFieldType } from "../../recipe-ingredients";
 
 export interface CookingRecordFormState {
   name: string;
@@ -7,7 +7,8 @@ export interface CookingRecordFormState {
   ingredients: RecipeIngredientFieldType[];
 }
 
-export interface IUseCookingRecordForm {
+export interface IUseCookingRecordBaseForm {
   initialState?: Partial<CookingRecordSubmitItem>;
+  ingredients: RecipeIngredientDropdownType[];
   onSubmit: (item: CookingRecordSubmitItem) => void;
 }
