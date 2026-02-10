@@ -9,7 +9,9 @@ import {
 import { useRouterFunc } from "@shared";
 import { useEffect, useState } from "react";
 
-export function useEditCookingRecord({ id }: Pick<CookingRecord, "id">) {
+export interface IUseEditCookingRecord extends Pick<CookingRecord, "id"> {}
+
+export function useEditCookingRecord({ id }: IUseEditCookingRecord) {
   const { goBack } = useRouterFunc();
 
   const [item, setItem] = useState<CookingRecord>();
