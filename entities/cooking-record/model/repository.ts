@@ -49,7 +49,7 @@ const updateCookingRecord = (id: string, partial: Partial<CookingRecord>) => {
     const newCookedDate = new Date(newRecord.cookedAt);
     const { year: nYear, month: nMonth, date: nDate } = getYearMonthDate(newCookedDate);
 
-    const currentRecordsByDate = getAllCookingRecordsByDate(currentCookedDate).filter((record) => record.id === id);
+    const currentRecordsByDate = getAllCookingRecordsByDate(currentCookedDate).filter((record) => record.id !== id);
     const newRecordsByDate = sortCookingRecords([...getAllCookingRecordsByDate(newCookedDate), newRecord]);
 
     // ids 동기화
