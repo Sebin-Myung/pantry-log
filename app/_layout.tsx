@@ -21,8 +21,13 @@ export default function RootLayout() {
 
   const createHeaderRight = () => {
     if (["/", "/fridge", "/frozen", "/pantry", "/records/recipe"].includes(pathname)) {
+      let href: any = ROUTES.addIngredient;
+
+      if (pathname === "/records/recipe") href = ROUTES.addRecipe;
+      else if (pathname !== "/") href = `${ROUTES.addIngredient}?location=${pathname.slice(1)}`;
+
       return (
-        <Link href={pathname === "/records/recipe" ? ROUTES.addRecipe : ROUTES.addIngredient} asChild>
+        <Link href={href} asChild>
           <IconButton>
             <MaterialCommunityIcons name="plus" size={24} color="black" />
           </IconButton>
