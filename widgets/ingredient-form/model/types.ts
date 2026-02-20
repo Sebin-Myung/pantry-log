@@ -13,6 +13,6 @@ export interface IngredientFormState {
 }
 
 export interface IUseIngredientForm {
-  initialState?: IngredientSubmitItem;
+  initialState?: Partial<IngredientSubmitItem>;
   onSubmit: (item: IngredientSubmitItem) => void;
 }

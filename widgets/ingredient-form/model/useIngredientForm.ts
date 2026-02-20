@@ -81,19 +81,19 @@ export function useIngredientForm({ initialState, onSubmit: onSubmitItem }: IUse
   useEffect(() => {
     if (!initialState) return;
 
-    const existedState: Partial<IngredientFormState> = {
-      name: initialState.name,
-      purchaseDate: new Date(initialState.purchaseDate),
-      location: getStorageLocationLabelValueFromValue(initialState.storageLocation),
-      quantity: initialState.quantity
-        ? {
-            amount: initialState.quantity.amount.toString(),
-            unit: getQuantityUnitLabelValueFromValue(initialState.quantity.unit),
-          }
-        : undefined,
-    };
+    const existedState: Partial<IngredientFormState> = {};
+
+    if (initialState.storageLocation)
+      existedState.location = getStorageLocationLabelValueFromValue(initialState.storageLocation);
+    if (initialState.name) existedState.name = initialState.name;
+    if (initialState.quantity)
+      existedState.quantity = {
+        amount: initialState.quantity.amount.toString(),
+        unit: getQuantityUnitLabelValueFromValue(initialState.quantity.unit),
+      };
     if (initialState.brand) existedState.brand = initialState.brand;
     if (initialState.purchaseSource) existedState.purchaseSource = initialState.purchaseSource;
+    if (initialState.purchaseDate) existedState.purchaseDate = new Date(initialState.purchaseDate);
     if (initialState.productionDate) existedState.productionDate = new Date(initialState.productionDate);
     if (initialState.expirationDate) existedState.expirationDate = new Date(initialState.expirationDate);
 
