@@ -1,5 +1,5 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import { applyAlpha, getDateFormat, isSameDate, padZero } from "../../../lib/utils";
 import { useTheme } from "../../../providers";
 import { IconButton } from "../../Button/ui/IconButton";
@@ -24,18 +24,22 @@ export function Calendar({ highlightDays = [], ...props }: CalendarProps) {
           <MaterialCommunityIcons name="chevron-right" size={24} color="black" />
         </IconButton>
       </View>
-      <View style={styles.grid}>
-        {calendarCells.map((cell, i) => {
-          const isToday = isSameDate(today, cell.date);
-          const isSelected = isSameDate(props.selectedDate, cell.date);
-          const isSunday = cell.date.getDay() === 0;
-          const isSaturday = cell.date.getDay() === 6;
+      <FlatList
+        data={calendarCells}
+        keyExtractor={(item) => item.date.toISOString()}
+        numColumns={7}
+        scrollEnabled={false}
+        renderItem={({ item }) => {
+          const isToday = isSameDate(today, item.date);
+          const isSelected = isSameDate(props.selectedDate, item.date);
+          const isSunday = item.date.getDay() === 0;
+          const isSaturday = item.date.getDay() === 6;
 
-          const formattedDate = getDateFormat(cell.date);
+          const formattedDate = getDateFormat(item.date);
           const isHighlighted = highlightDays.some((day) => day === formattedDate);
 
           return (
-            <Pressable key={i} style={styles.cell} onPress={() => onDateClick(cell.date)}>
+            <Pressable style={styles.cell} onPress={() => onDateClick(item.date)}>
               <View
                 style={[
                   styles.cellBox,
@@ -58,16 +62,16 @@ export function Calendar({ highlightDays = [], ...props }: CalendarProps) {
                       isSaturday && { color: "blue" },
                       isSelected && { fontWeight: "bold" },
                       isToday && { color: theme.colors.white, fontWeight: "bold" },
-                      !cell.isCurrentMonth && { opacity: 0.3 },
+                      !item.isCurrentMonth && { opacity: 0.3 },
                     ]}>
-                    {cell.date.getDate()}
+                    {item.date.getDate()}
                   </Text>
                 </View>
               </View>
             </Pressable>
           );
-        })}
-      </View>
+        }}
+      />
     </View>
   );
 }
@@ -76,8 +80,7 @@ const styles = StyleSheet.create({
   container: { padding: 10 },
   header: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 10 },
   month: { fontSize: 24, fontWeight: "bold" },
-  grid: { flexDirection: "row", flexWrap: "wrap" },
-  cell: { width: `${100 / 7}%` },
+  cell: { flex: 1 },
   cellBox: { width: "100%", aspectRatio: 1, justifyContent: "center", alignItems: "center" },
   cellCircle: { width: 32, height: 32, justifyContent: "center", alignItems: "center", borderRadius: "100%" },
 });
