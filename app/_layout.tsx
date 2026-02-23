@@ -1,9 +1,9 @@
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { IconButton, ROUTES } from "@shared";
+import { useIngredientStore } from "@entities";
+import { useTheme } from "@shared";
 import { useFonts } from "expo-font";
-import { Link, SplashScreen, Stack, usePathname } from "expo-router";
+import { SplashScreen } from "expo-router";
+import { Drawer } from "expo-router/drawer";
 import { useEffect } from "react";
-import { useIngredientStore } from "../entities";
 import { Providers } from "./_providers";
 
 SplashScreen.preventAutoHideAsync();
@@ -17,25 +17,7 @@ export default function RootLayout() {
   });
   const hydrate = useIngredientStore((state) => state.hydrate);
 
-  const pathname = usePathname();
-
-  const createHeaderRight = () => {
-    if (["/", "/fridge", "/frozen", "/pantry", "/records/recipe"].includes(pathname)) {
-      let href: any = ROUTES.addIngredient;
-
-      if (pathname === "/records/recipe") href = ROUTES.addRecipe;
-      else if (pathname !== "/") href = `${ROUTES.addIngredient}?location=${pathname.slice(1)}`;
-
-      return (
-        <Link href={href} asChild>
-          <IconButton>
-            <MaterialCommunityIcons name="plus" size={24} color="black" />
-          </IconButton>
-        </Link>
-      );
-    }
-    return null;
-  };
+  const theme = useTheme();
 
   useEffect(() => {
     hydrate();
@@ -53,19 +35,9 @@ export default function RootLayout() {
 
   return (
     <Providers>
-      <Stack
-        screenOptions={{
-          headerShown: false,
-          headerTitle: "PantryLog",
-          headerTitleAlign: "center",
-          headerBackVisible: false,
-          headerRight: createHeaderRight,
-        }}>
-        <Stack.Screen name="(main-tabs)" options={{ headerShown: true }} />
-        <Stack.Screen name="ingredient" />
-        <Stack.Screen name="recipe" />
-        <Stack.Screen name="cooking-record" />
-      </Stack>
+      <Drawer screenOptions={{ headerShown: false, drawerStyle: { backgroundColor: theme.colors.background } }}>
+        <Drawer.Screen name="(main-stack)" options={{ drawerLabel: "홈" }} />
+      </Drawer>
     </Providers>
   );
 }
