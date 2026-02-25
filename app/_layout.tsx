@@ -35,7 +35,8 @@ export default function RootLayout() {
 
   return (
     <Providers>
-      <Drawer screenOptions={{ headerShown: false, drawerStyle: { backgroundColor: theme.colors.background } }}>
+      <Drawer
+        screenOptions={{ headerShown: false, drawerStyle: { backgroundColor: theme.colors.background, width: 200 } }}>
         <Drawer.Screen name="(main-stack)" options={{ drawerLabel: "홈" }} />
         <Drawer.Screen name="settings" options={{ drawerLabel: "설정" }} />
       </Drawer>
