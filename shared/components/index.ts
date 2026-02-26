@@ -10,4 +10,6 @@ export * from "./Loading";
 export * from "./Modal";
 export * from "./Notice";
 export * from "./RadioButton";
+export * from "./Switch";
 export * from "./TextInput";
+
