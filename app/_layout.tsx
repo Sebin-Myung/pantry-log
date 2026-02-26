@@ -1,4 +1,5 @@
 import { useIngredientStore } from "@entities";
+import { PushNotificationSync } from "@features";
 import { useTheme } from "@shared";
 import { useFonts } from "expo-font";
 import { SplashScreen } from "expo-router";
@@ -35,6 +36,7 @@ export default function RootLayout() {
 
   return (
     <Providers>
+      <PushNotificationSync />
       <Drawer
         screenOptions={{ headerShown: false, drawerStyle: { backgroundColor: theme.colors.background, width: 200 } }}>
         <Drawer.Screen name="(main-stack)" options={{ drawerLabel: "홈" }} />
