@@ -31,8 +31,8 @@ export const scheduleExpirationNotifications = async (ingredients: Ingredient[])
     });
 
     if (imminentIngredients.length > 0) {
-      const ingredientNamesList = imminentIngredients.map((i) => `- ${i.name}`).join('\n');
-      const bodyMessage = `유통기한이 임박한 재료가 있습니다!\n${ingredientNamesList}`;
+      const ingredientNamesList = imminentIngredients.map((i) => `- ${i.name}`).join("\n");
+      const bodyMessage = `유통기한이 임박한 재료가 있습니다! 😱\n${ingredientNamesList}`;
 
       // targetDate (오전 8시)에 알림 예약
       await scheduleLocalNotification("유통기한 알림", bodyMessage, targetDate);
