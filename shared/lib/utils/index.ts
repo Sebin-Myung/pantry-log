@@ -6,8 +6,10 @@ export {
   getLastDayOfMonth,
   getYearMonthDate,
   isSameDate,
-  normalizeDate,
+  normalizeDate
 } from "./date";
+export { cancelAllLocalNotifications, getNotificationPermissions, requestNotificationPermissions, scheduleLocalNotification } from "./notifications";
 export { onlyPositiveFloat, padZero } from "./number";
 export { hasBatchim, hasFinalConsonant } from "./string";
 export { applyAlpha, debounce } from "./utils";
+
