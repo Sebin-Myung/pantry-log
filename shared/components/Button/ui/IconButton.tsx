@@ -4,6 +4,7 @@ import { BasePressableProps } from "../model/types";
 export function IconButton({ style, ...props }: BasePressableProps) {
   return (
     <Pressable
+      accessibilityRole="button"
       hitSlop={8}
       style={({ pressed }) => [
         {

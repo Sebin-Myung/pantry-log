@@ -39,8 +39,9 @@ export function Calendar({ highlightDays = [], ...props }: CalendarProps) {
           const isHighlighted = highlightDays.some((day) => day === formattedDate);
 
           return (
-            <Pressable style={styles.cell} onPress={() => onDateClick(item.date)}>
+            <Pressable testID={`cell-${formattedDate}`} style={styles.cell} onPress={() => onDateClick(item.date)}>
               <View
+                testID={`cell-box-${formattedDate}`}
                 style={[
                   styles.cellBox,
                   isSelected && {
@@ -50,12 +51,14 @@ export function Calendar({ highlightDays = [], ...props }: CalendarProps) {
                   },
                 ]}>
                 <View
+                  testID={`cell-circle-${formattedDate}`}
                   style={[
                     styles.cellCircle,
                     isToday && { backgroundColor: theme.colors.text },
                     isHighlighted && { borderWidth: 3, borderColor: theme.colors.accentDark },
                   ]}>
                   <Text
+                    testID={`cell-text-${formattedDate}`}
                     style={[
                       { fontSize: 16, color: theme.colors.text },
                       isSunday && { color: "red" },

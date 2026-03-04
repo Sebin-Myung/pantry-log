@@ -6,6 +6,7 @@ function OverlayModal({ onRequestClose, children, ...props }: BaseModalProps) {
   return (
     <Modal transparent animationType="fade" onRequestClose={onRequestClose} {...props}>
       <Pressable
+        testID="overlay-backdrop"
         style={{
           flex: 1,
           backgroundColor: "rgba(0,0,0,0.25)",
