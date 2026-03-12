@@ -1,13 +1,16 @@
 import { useIngredientStore } from "@entities";
 import { PushNotificationSync } from "@features";
-import { useTheme } from "@shared";
+import { AppThemeProvider, useTheme } from "@shared";
 import { useFonts } from "expo-font";
 import { SplashScreen } from "expo-router";
 import { Drawer } from "expo-router/drawer";
 import { useEffect } from "react";
-import { Providers } from "./_providers";
 
 SplashScreen.preventAutoHideAsync();
+
+function Providers({ children }: { children: React.ReactNode }) {
+  return <AppThemeProvider>{children}</AppThemeProvider>;
+}
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
