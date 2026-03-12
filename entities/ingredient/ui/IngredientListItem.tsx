@@ -39,6 +39,7 @@ export function IngredientListItem({
 
   return (
     <Pressable
+      testID="ingredient-list-item"
       style={[
         styles.container,
         expiryStatus !== null && {

@@ -11,7 +11,7 @@ export function RecipeListItem({ id, name, ingredients, onPress, onLongPress }: 
   const theme = useTheme();
 
   return (
-    <Pressable style={styles.container} onPress={onPress} onLongPress={onLongPress}>
+    <Pressable testID="recipe-list-item" style={styles.container} onPress={onPress} onLongPress={onLongPress}>
       <Text style={styles.title}>{name}</Text>
 
       <View style={{ ...styles.divider, backgroundColor: theme.colors.gray }} />

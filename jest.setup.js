@@ -48,3 +48,16 @@ jest.mock("expo-notifications", () => ({
   cancelAllScheduledNotificationsAsync: jest.fn(),
   getAllScheduledNotificationsAsync: jest.fn(() => Promise.resolve([])),
 }));
+
+jest.mock("react-native-mmkv", () => ({
+  createMMKV: jest.fn(() => ({
+    set: jest.fn(),
+    getString: jest.fn(),
+    getNumber: jest.fn(),
+    getBoolean: jest.fn(),
+    contains: jest.fn(),
+    delete: jest.fn(),
+    clearAll: jest.fn(),
+    addOnValueChangedListener: jest.fn(),
+  })),
+}));
